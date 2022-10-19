@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <section class="overlay">
+        <img src="./assets/img/logo.svg" alt="Logo" class="logo" draggable="false">
+    </section>
+
+    <header class="d-flex-row" id="header">
+        <div class="sign-up">
+            <span class="txt-h5 m-right-md">Not a Join user?</span>
+            <button class="btn btn-primary">Sign up</button>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="login-section d-flex-col">
+            <div class="d-flex-col m-bottom-md">
+                <h1 class="txt-h1 user-select m-bottom-md">Log in</h1>
+                <hr class="line">
+            </div>
+            <form class="login-form d-flex-col">
+                <input type="email" name="email" placeholder="Email" required class="email input-text" id="user-email">
+                <input type="password" name="password" placeholder="Password" required class="input-text m-bottom-md" id="user-password">
+                <div class="m-bottom-md">
+                    <label for="remember-me">
+                        <input type="checkbox" name="remember-me" class="input-checkbox" id="remember-me" checked="true">
+                        <span class="custom-checkbox"></span>
+                        <span class="remember-me txt-h6 m-right-md">Remember me</span>
+                    </label>
+                    <a href="#" class="link txt-h6" draggable="false">Forgot my password</a>
+                </div>
+                <div class="d-flex-row">
+                    <button class="login-btn btn btn-primary txt-bold m-right-md">Log in</button>
+                    <button class="btn btn-secondary txt-bold">Guest Log in</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
