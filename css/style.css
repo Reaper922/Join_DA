@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'Inter';
-    src: url('./assets/fonts/inter/Inter-Regular.ttf');
+    src: url('../assets/fonts/inter/Inter-Regular.ttf');
     font-style: normal;
     font-weight: 400;
 }
 
 @font-face {
     font-family: 'Inter';
-    src: url('./assets/fonts/inter/Inter-Medium.ttf');
+    src: url('../assets/fonts/inter/Inter-Medium.ttf');
     font-style: medium;
     font-weight: 700;
 }
 
 @font-face {
     font-family: 'Inter';
-    src: url('./assets/fonts/inter/Inter-Bold.ttf');
+    src: url('../assets/fonts/inter/Inter-Bold.ttf');
     font-style: bold;
     font-weight: 700;
 }
@@ -23,6 +23,7 @@
 :root {
     --primary: #2A3647;
     --secondary: #29ABE2;
+    --active: #091931;
     --light-gray: #D1D1D1;
     --white: #FFFFFF;
     --background: #F6F7F8;
@@ -56,12 +57,12 @@ body {
     background: var(--background);
 }
 
-main {
+/* main {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-}
+} */
 
 
 /* Helper */
@@ -88,6 +89,18 @@ main {
 
 .m-bottom-md {
     margin-bottom: 35px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.of-auto {
+    overflow: auto;
+}
+
+.container {
+    display: flex;
 }
 
 
@@ -146,6 +159,7 @@ main {
     border-radius: 8px;
     outline: none;
     cursor: pointer;
+    white-space: nowrap;
     transition: all 0.14s ease-in-out;
 }
 
@@ -173,7 +187,8 @@ main {
 }
 
 .input-text {
-    width: 422px;
+    width: 100%;
+    max-width: 422px;
     height: 51px;
     font-size: var(--h5-font-size);
     border: 1px solid var(--light-gray);
@@ -223,13 +238,14 @@ label:hover .custom-checkbox {
     transform: rotate(40deg);
 }
 
-.input-checkbox:checked ~ .custom-checkbox:after {
+.input-checkbox:checked~.custom-checkbox:after {
     display: block;
 }
 
 .link {
     color: var(--secondary);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .link:hover {
@@ -248,8 +264,9 @@ label:hover .custom-checkbox {
 .login-section {
     width: 100%;
     max-width: 652px;
-    height: 513px;
-    margin: 32px;
+    /* max-height: 513px; */
+    margin: 28px;
+    padding: 35px 22px;
     background: var(--white);
     border-radius: 30px;
     box-shadow: var(--shadow-md);
@@ -264,14 +281,19 @@ label:hover .custom-checkbox {
     border-radius: 3px;
 }
 
+.login-form {
+    width: 100%;
+    padding: 0 22px;
+}
+
 .email {
     margin-bottom: 49px;
-    background: url('./assets/icons/mail.svg') no-repeat 380px center;
+    background: url('./assets/icons/mail.svg') no-repeat right 25px center;
     background-size: 18px 20px;
 }
 
 .password {
-    background: url('./assets/icons/lock.svg') no-repeat 380px center;
+    background: url('./assets/icons/lock.svg') no-repeat right 25px center;
     background-size: 21px 20px;
 }
 
@@ -304,6 +326,21 @@ label:hover .custom-checkbox {
     }
 }
 
+@keyframes logo-scale-sm {
+    from {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+    }
+
+    to {
+        top: 40px;
+        left: 40px;
+        width: 64px;
+    }
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -311,5 +348,108 @@ label:hover .custom-checkbox {
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes bg-color-change {
+    from {
+        background: var(--primary);
+    }
+
+    to {
+        background: var(--light-gray);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .sign-up {
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: 30px;
+    }
+
+    .login-btn-wrapper {
+        flex-direction: column;
+    }
+
+    .login-btn {
+        width: 180px;
+        margin-right: 0;
+        margin-bottom: 21px;
+    }
+
+    .guest-login-btn {
+        width: 180px;
+    }
+
+    .input-text {
+        height: 41px;
+    }
+
+    .m-bottom-md {
+        margin-bottom: 24px;
+    }
+
+    .btn {
+        font-size: var(--h6-font-size);
+    }
+
+    .txt-h1 {
+        font-size: var(--h2-font-size);
+    }
+
+    .sign-up {
+        margin: 16px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo {
+        width: 64px;
+        animation: logo-scale-sm 1s ease-in-out
+    }
+
+    .body {
+        animation: bg-color-change 1s linear;
+    }
+}
+
+
+
+.content {
+    margin: 80px 100px;
+}
+
+.content h1 {
+    font-size: var(--h1-font-size);
+    margin-bottom: 48px;
+}
+
+.content h4 {
+    font-size: var(--h4-font-size);
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: var(--h6-font-size);
+    margin-bottom: 35px;
+    text-align: justify;
+}
+
+.content li {
+    margin-bottom: 10px;
+}
+
+.content li::marker {
+    font-size: var(--h5-font-size);
+    font-weight: bold;
+}
+
+@media screen and (max-width: 850px) {
+    header span {
+        display: none;
     }
 }
