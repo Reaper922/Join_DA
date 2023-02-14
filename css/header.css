@@ -1,4 +1,4 @@
-header>div {
+.header-template {
     display: flex;
     align-items: center;
     width: 100%;
@@ -9,7 +9,7 @@ header>div {
     box-shadow: var(--shadow-sm);
 }
 
-header>div>div {
+.header-template>.topbar-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +17,7 @@ header>div>div {
     margin-left: auto;
 }
 
-header span {
+.header-template span {
     font-size: var(--h5-font-size);
     white-space: nowrap;
 }
@@ -28,4 +28,11 @@ header span {
     padding: 2px;
     border: 3px solid var(--primary);
     border-radius: 100%;
+}
+
+
+@media screen and (max-width: 850px) {
+    .header-template span {
+        display: none;
+    }
 }
