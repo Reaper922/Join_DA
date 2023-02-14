@@ -9,7 +9,7 @@
     font-family: 'Inter';
     src: url('../assets/fonts/inter/Inter-Medium.ttf');
     font-style: medium;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 @font-face {
@@ -57,6 +57,10 @@ body {
     background: var(--background);
 }
 
+main {
+    height: calc(100% - 89px);
+}
+
 
 /* Helper */
 .w-100 {
@@ -71,47 +75,10 @@ body {
     overflow: auto;
 }
 
-
-
 .container {
     display: flex;
 }
 
 .content {
     margin: 80px 100px;
-}
-
-
-/* Legal & Help Page */
-.content h1 {
-    font-size: var(--h1-font-size);
-    margin-bottom: 48px;
-}
-
-.content h4 {
-    font-size: var(--h4-font-size);
-    margin-bottom: 10px;
-}
-
-.content p {
-    font-size: var(--h6-font-size);
-    margin-bottom: 35px;
-    text-align: justify;
-}
-
-.content li {
-    margin-bottom: 10px;
-}
-
-.content li::marker {
-    font-size: var(--h5-font-size);
-    font-weight: bold;
-}
-
-
-/* Media Queries */
-@media screen and (max-width: 850px) {
-    header span {
-        display: none;
-    }
 }
