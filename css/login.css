@@ -15,6 +15,7 @@ main {
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
     background: var(--white);
+    z-index: 1;
 }
 
 .line {
@@ -135,12 +136,14 @@ p {
         left: 50%;
         width: 274px;
         transform: translate(-50%, -50%);
+        z-index: 100;
     }
 
     to {
         top: 60px;
         left: 80px;
         width: 100px;
+        z-index: -1;
     }
 }
 
