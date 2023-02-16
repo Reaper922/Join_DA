@@ -1,17 +1,17 @@
-.login {
+main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 32px;
-    animation: fade-in 1s ease-in-out;
+    padding: 0 32px;
 }
 
-.login-box {
+.content-box {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 652px;
-    padding: 35px 115px;
+    padding: 35px 100px;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
     background: var(--white);
@@ -27,44 +27,48 @@
     border-radius: 3px;
 }
 
-.login-form {
+.input {
     display: flex;
     flex-direction: column;
 }
 
-.login-input {
-    display: flex;
-    flex-direction: column;
+.inp-user {
     margin-bottom: 35px;
+    background: url('./../assets/icons/user.svg') no-repeat right 25px center;
+    background-size: 21px 20px;
 }
 
-.login-email {
-    margin-bottom: 50px;
+.inp-email {
+    margin-bottom: 35px;
     background: url('./../assets/icons/mail.svg') no-repeat right 25px center;
     background-size: 18px 20px;
 }
 
-.login-password {
-    margin-bottom: 50px;
+.inp-password {
+    margin-bottom: 35px;
     background: url('./../assets/icons/lock.svg') no-repeat right 25px center;
     background-size: 21px 20px;
 }
 
-.spacing {
-    display: flex;
-    justify-content: center;
-    gap: 35px;
+.btn-emph {
+    font-size: var(--h5-font-size);
+    font-weight: 700;
 }
 
 .btn-login {
-    font-size: var(--h5-font-size);
-    font-weight: 700;
     width: 145px;
 }
 
-.btn-guest {
-    font-size: var(--h5-font-size);
-    font-weight: 700;
+.btn-back {
+    position: absolute;
+    top: 35px;
+    left: 32px;
+    cursor: pointer;
+    transition: transform 0.15s ease-in-out;
+}
+
+.btn-back:hover {
+    transform: scale(110%);
 }
 
 .sign-up {
@@ -77,15 +81,40 @@
     white-space: nowrap;
 }
 
-label {
-    cursor: pointer;
-}
-
-.anim-logo {
+.logo {
     position: absolute;
     top: 60px;
     left: 80px;
     width: 100px;
+}
+
+.spacing {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+}
+
+.mb-35 {
+    margin-bottom: 35px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+label {
+    cursor: pointer;
+}
+
+p {
+    text-align: justify;
+}
+
+.fade-in {
+    animation: fade-in 1s ease-in-out;
+}
+
+.anim-logo {
     animation: logo-animation 1s ease-in-out;
 }
 
@@ -117,43 +146,41 @@ label {
 
 
 @media screen and (max-width: 576px) {
-    .login {
-        padding: 28px;
+    .main {
+        padding: 0 28px;
     }
 
-    .login-box {
+    .content-box {
         padding: 22.5px 35px;
-        margin: 28px;
-        min-width: 95%;
+        width: 100%;
         min-height: auto;
     }
 
     .line {
+        width: 88px;
         margin-top: 24px;
     }
 
-    .login-email {
+    .inp-user {
         margin-bottom: 30px;
     }
 
-    .login-password {
+    .inp-email {
         margin-bottom: 30px;
     }
 
-    .spacing {
-        align-items: center;
-        flex-direction: column;
-        gap: 21px;
+    .inp-password {
+        margin-bottom: 30px;
     }
 
-    .btn-login {
+    .btn-emph {
         font-size: var(--h6-font-size);
-        width: 180px;
+        width: 100%;
     }
 
-    .btn-guest {
-        font-size: var(--h6-font-size);
-        width: 180px;
+    .btn-back {
+        top: 24px;
+        left: 20px;
     }
 
     .sign-up {
@@ -161,15 +188,27 @@ label {
         right: auto;
         gap: 21px;
         left: 50%;
-        bottom: 30px;
+        bottom: 10px;
+        width: 242px;
         transform: translate(-50%, -50%);
     }
 
-    .anim-logo {
-        top: 36px;
-        left: 36px;
-        width: 64px;
+    .logo {
+        top: 24px;
+        left: 32px;
+        width: 40px;
     }
+
+    .spacing {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 21px;
+    }
+
+    .btn {
+        white-space: normal;
+    }
+
 
     @keyframes logo-animation {
         from {
@@ -180,9 +219,9 @@ label {
         }
 
         to {
-            top: 36px;
-            left: 36px;
-            width: 64px;
+            top: 24px;
+            left: 32px;
+            width: 40px;
         }
     }
 }
