@@ -6,48 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Join</title>
+    <title>Join | Login</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="./css/login.css">
+    <script defer src="./js/script.js"></script>
 </head>
 
-<body>
-    <section class="overlay">
-        <img src="./assets/img/logo.svg" alt="Logo" class="logo" draggable="false">
-    </section>
-
-    <header class="d-flex-row" id="header">
+<body class="container">
+    <section class="login w-100 h-100">
         <div class="sign-up">
-            <span class="txt-h5 m-right-md">Not a Join user?</span>
+            <p>Not a Join user?</p>
             <button class="btn btn-primary">Sign up</button>
         </div>
-    </header>
-
-    <main id="main">
-        <section class="login-section d-flex-col">
-            <div class="d-flex-col m-bottom-md">
-                <h1 class="txt-h1 user-select m-bottom-md">Log in</h1>
-                <hr class="line">
-            </div>
-            <form class="login-form d-flex-col">
-                <input type="email" name="email" placeholder="Email" required class="email input-text" id="user-email">
-                <input type="password" name="password" placeholder="Password" required class="password input-text m-bottom-md" id="user-password">
-                <div class="m-bottom-md">
-                    <label for="remember-me">
-                        <input type="checkbox" name="remember-me" class="input-checkbox" id="remember-me" checked="true">
-                        <span class="custom-checkbox"></span>
-                        <span class="remember-me txt-h6 m-right-md">Remember me</span>
-                    </label>
-                    <a href="#" class="link txt-h6" draggable="false">Forgot my password</a>
+        <div class="login-box">
+            <h1 class="txt-h1">Log in</h1>
+            <hr class="line">
+            <form action="" class="login-form w-100 h-100">
+                <div class="login-input">
+                    <input type="email" name="email" class="login-email text-input" id="login-email" placeholder="Email">
+                    <input type="password" name="password" class="login-password text-input" id="login-password" placeholder="Password">
+                    <div class="spacing">
+                        <label ><input type="checkbox" name="remember-me" value="remember" class="checkbox" id="login-remember-me">Remember me</label>
+                        <a href="./summary.html" class="link">Forgot my password</a>
+                    </div>
                 </div>
-                <div class="login-btn-wrapper d-flex-row">
-                    <button class="login-btn btn btn-primary txt-bold m-right-md">Log in</button>
-                    <button class="guest-login-btn btn btn-secondary txt-bold">Guest Log in</button>
+                <div class="spacing">
+                    <button class="btn btn-primary btn-login">Log in</button>
+                    <button class="btn btn-secondary btn-guest">Guest Log in</button>
                 </div>
             </form>
-        </section>
-    </main>
+        </div>
+    </section>
+    <img src="./assets/img/logo_blue.svg" alt="Logo" class="anim-logo">
 </body>
 
 </html>
