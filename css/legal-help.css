@@ -1,12 +1,10 @@
 .legal h1,
 .help h1 {
-    font-size: var(--h1-font-size);
     margin-bottom: 48px;
 }
 
 .legal h4,
 .help h4 {
-    font-size: var(--h4-font-size);
     margin-bottom: 20px;
 }
 
