@@ -15,7 +15,7 @@ main {
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
     background: var(--white);
-    z-index: 1;
+    z-index: 0;
 }
 
 .line {
@@ -87,6 +87,7 @@ main {
     top: 60px;
     left: 80px;
     width: 100px;
+    z-index: -1;
 }
 
 .spacing {
@@ -131,15 +132,19 @@ p {
 }
 
 @keyframes logo-animation {
-    from {
+    0% {
         top: 50%;
         left: 50%;
         width: 274px;
         transform: translate(-50%, -50%);
-        z-index: 100;
+        z-index: 1;
     }
 
-    to {
+    99% {
+        z-index: 1;
+    }
+
+    100% {
         top: 60px;
         left: 80px;
         width: 100px;
@@ -214,17 +219,23 @@ p {
 
 
     @keyframes logo-animation {
-        from {
+        0% {
             top: 50%;
             left: 50%;
             width: 100px;
             transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
-        to {
+        99% {
+            z-index: 1;
+        }
+
+        100% {
             top: 24px;
             left: 32px;
             width: 40px;
+            z-index: -1;
         }
     }
 }
