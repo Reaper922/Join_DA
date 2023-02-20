@@ -175,6 +175,15 @@ body {
     display: none;
 }
 
+.d-flex {
+    display: flex;
+}
+
+.d-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
 .w-100 {
     width: 100%;
 }
