@@ -106,12 +106,13 @@
 }
 
 .nav-menu-item-mobile a > img {
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
     margin-bottom: 10px;
 }
 
 .nav-menu-item-mobile a > span {
+    font-size: 14px;
     white-space: nowrap;
 }
 

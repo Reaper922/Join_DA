@@ -167,7 +167,7 @@ body {
 /* Helper */
 .content {
     height: calc(100% - 89px);
-    padding: 80px 100px;
+    padding: 80px 100px 40px 100px;
     overflow: auto;
 }
 
@@ -189,8 +189,16 @@ body {
         font-size: var(--h3-font-size);
     }
 
+    .txt-h2 {
+        font-size: var(--h3-font-size);
+    }
+
     .txt-h4 {
         font-size: var(--h5-font-size);
+    }
+
+    .txt-h5 {
+        font-size: var(--h6-font-size);
     }
 
     .text-input {
