@@ -19,4 +19,4 @@ function buttonEventListener() {
 }
 
 
-if (location.pathname === '/index.html') { buttonEventListener() }
+if (location.pathname === '/index.html' || location.pathname === '/') { buttonEventListener() }
