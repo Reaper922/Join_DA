@@ -123,11 +123,6 @@
     cursor: pointer;
 }
 
-.contact-actions>div:hover {
-    border-radius: var(--border-radius-sm);
-    background: var(--light-gray);
-}
-
 .details {
     display: flex;
     flex-direction: column;
