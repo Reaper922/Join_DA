@@ -24,11 +24,68 @@
         <header template-html="./assets/templates/header.html"></header>
 
         <!-- Content -->
-        <div class="content">
-            <main class="contacts">
-                <h1>Contacts</h1>
-            </main>
-        </div>
+        <main class="contacts">
+            <!-- Contact List -->
+            <section class="contacts-container h-100">
+
+                <div class="contact-separator">
+                    <h5 class="character">A</h5>
+                    <div class="separator-line"></div>
+                </div>
+
+                <div class="contact">
+                    <div class="contact-bubble">
+                        <p class="contact-initials txt-h7">AM</p>
+                    </div>
+                    <div>
+                        <h5 class="contact-full-name txt-h5">Anton Mayer</h5>
+                        <p class="contact-email">anton@gmail.com</p>
+                    </div>
+                </div>
+
+            </section>
+            <!-- Contact Details -->
+            <section class="contact-details content h-100">
+                <!-- Header -->
+                <div class="contact-details-header">
+                    <h1 class="txt-h1">Contacts</h1>
+                    <div class="line"></div>
+                    <p class="txt-h5">Better with a team</p>
+                </div>
+                <!-- Details -->
+                <div class="contact-details-body">
+                    <div class="d-flex">
+                        <div class="contact-details-bubble">
+                            <p class="txt-h2">AM</p>
+                        </div>
+                        <div>
+                            <h2 class="contact-details-name txt-h2">Anton Mayer</h2>
+                            <div class="contact-actions d-flex">
+                                <div class="d-flex">
+                                    <img src="./assets/icons/add.svg" alt="" draggable="false">
+                                    <p class="edit">Edit Contact</p>
+                                </div>
+                                <div class="d-flex">
+                                    <img src="./assets/icons/trash.svg" alt="" draggable="false">
+                                    <p class="delete">Delete Contact</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="txt-h4">Contact Information</div>
+                        <div>
+                            <h5 class="txt-h5 details-label">Email:</h5>
+                            <a href="mailto:anton@gmail.com" class="email">anton@gmail.com</a>
+                        </div>
+                        <div>
+                            <h5 class="txt-h5 details-label">Phone:</h5>
+                            <a href="tel:+491734545623" class="phone">+491734545623</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </section>
 </body>
 
