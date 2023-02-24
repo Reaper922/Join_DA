@@ -18,7 +18,8 @@ async function includeHTML() {
     const includeElements = document.querySelectorAll('[template-html]');
     for (let i = 0; i < includeElements.length; i++) {
         const element = includeElements[i];
-        const file = element.getAttribute("template-html");
+        const file = element?.getAttribute("template-html");
+
         const resp = await fetch(file);
         if (resp.ok) {
             element.innerHTML = await resp.text();
@@ -30,7 +31,7 @@ async function includeHTML() {
 
 
 /**
- * Highlights the active menu item after the page is loaded. The marking takes place on the basis of the path.
+ * Highlights the active menu item after the page is loaded. The marking takes place on the basis of the current path.
  */
 function highlightActiveMenuItem() {
     const currentPath = location.pathname;
@@ -50,7 +51,7 @@ function highlightActiveMenuItem() {
             addActiveClass('contacts');
             break;
         case '/legal.html':
-            legalEl.classList.add('active');
+            legalEl?.classList.add('active');
             break;
         default:
             break;
@@ -60,14 +61,14 @@ function highlightActiveMenuItem() {
 
 /**
  * Adds the class .active to the given element.
- * @param {String} item String of the item
+ * @param {string} elem String of the item
  */
-function addActiveClass(item) {
-    const desktopEl = document.getElementById(`${item}-desktop`);
-    const mobileEl = document.getElementById(`${item}-mobile`);
+function addActiveClass(elem) {
+    const desktopEl = document.getElementById(`${elem}-desktop`);
+    const mobileEl = document.getElementById(`${elem}-mobile`);
 
-    desktopEl.classList.add('active');
-    mobileEl.classList.add('active');
+    desktopEl?.classList.add('active');
+    mobileEl?.classList.add('active');
 }
 
 
@@ -78,9 +79,29 @@ function logoutModalEventListener() {
     const profilePicture = document.getElementById('profile-picture');
     const logoutModal = document.getElementById('logout-modal');
 
-    profilePicture.addEventListener('click', () => {
-        logoutModal.classList.toggle('d-none');
+    profilePicture?.addEventListener('click', () => {
+        logoutModal?.classList.toggle('d-none');
     });
+}
+
+
+/**
+ * Loads the items to the given key from the backend. If no items are available an empty array is returned.
+ * @param {string} key Key of the item that should be loaded.
+ * @returns Array of items.
+ */
+async function loadItem(key) {
+    return await JSON.parse(backend.getItem(key)) || [];
+}
+
+
+/**
+ * 
+ * @param {string} key Name of the key under which the items should be stored.
+ * @param {string[]} content Array of items that should be stored.
+ */
+async function storeItem(key, content) {
+    await backend.setItem(key, JSON.stringify(content));
 }
 
 
