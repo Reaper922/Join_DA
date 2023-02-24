@@ -59,7 +59,8 @@
 }
 
 .contact-email,
-.edit, .delete {
+.edit,
+.delete {
     color: var(--secondary);
 }
 
@@ -101,8 +102,11 @@
     border: 3px solid white;
 }
 
+.contact-details-bubble p {
+    font-size: 47px;
+}
+
 .contact-details-body {
-    display: flex;
     flex-direction: column;
     gap: 35px;
 }
@@ -140,4 +144,151 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 380px;
+    height: 600px;
+    padding: 0;
+    border: none;
+    border-radius: var(--border-radius-md);
+    transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+}
+
+.modal-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    color: var(--white);
+    background: var(--primary);
+}
+
+.modal-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    padding: 50px 24px 0 24px;
+}
+
+.btn-submit {
+    margin-top: 24px;
+}
+
+.close-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.new-contact {
+    position: absolute;
+    margin-bottom: 24px;
+    right: 64px;
+    bottom: 50px;
+}
+
+
+@media screen and (max-width: 576px) {
+    .contact-details-header {
+        align-items: start;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .contact-details-body {
+        position: relative;
+        gap: 24px;
+    }
+
+    .line {
+        height: auto;
+        width: 90px;
+        border-left: 3px solid var(--secondary);
+        border-top: 3px solid var(--secondary);
+    }
+
+    .contacts {
+        position: relative;
+        height: calc(100% - 70px - 80px);
+    }
+
+    .contacts-container {
+        width: 100%;
+        min-width: auto;
+        padding: 30px;
+    }
+
+    .contact-details {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+    }
+
+    .contact-details-bubble {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+    }
+    
+    .contact-details-bubble p {
+        font-size: var(--h5-font-size);
+    }
+
+    .contact-details-name {
+        white-space: normal;
+    }
+
+    .contact {
+        gap: 16px;
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .contact-actions {
+        position: relative;
+        top: 10px;
+        left: -80px;
+    }
+
+    .details-label {
+        margin-bottom: 0;
+    }
+
+    dialog {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        transform: translate(0%, 0%);
+    }
+
+    .new-contact {
+        position: relative;
+        right: 0;
+        bottom: 0;
+    }
 }
