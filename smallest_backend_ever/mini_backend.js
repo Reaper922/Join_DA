@@ -1,3 +1,5 @@
+// @ts-check
+
 let jsonFromServer = {};
 let BASE_SERVER_URL = 'https://dennis-ammen.developerakademie.net/join/smallest_backend_ever';
 
@@ -19,15 +21,10 @@ const backend = {
 };
 
 
-window.onload = async function() {
-    downloadFromServer();
-}
-
-
 async function downloadFromServer() {
     let result = await loadJSONFromServer();
     jsonFromServer = JSON.parse(result);
-    console.log('Loaded');
+    console.log('Loaded Items');
 }
 
 

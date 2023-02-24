@@ -1,4 +1,5 @@
-// @ts-check
+'use strict';
+
 
 function buttonEventListener() {
     const signupBtn = document.getElementById('signup');
