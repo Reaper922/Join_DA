@@ -1,8 +1,12 @@
 'use strict';
 
 
-let contacts = []
+let contacts = [];
 
+
+/**
+ * Initial function that gets executed after the document is loaded.
+ */
 async function init() {
     await downloadFromServer();
     contacts = await loadItem('contacts');
@@ -11,26 +15,42 @@ async function init() {
 }
 
 
+/**
+ * Adds click event listeners to all listed elements
+ */
 function buttonEventListener() {
-    const newContactBtn = document.getElementById('new-contact');
     const modal = document.getElementById('modal');
-    const modalSubmitBtn = document.getElementById('modal-submit');
+    const newContactBtn = document.getElementById('new-contact');
     const closeModalBtn = document.getElementById('close-modal');
 
     newContactBtn?.addEventListener('click', () => {
-        modal?.showModal();
+        addContactEventListener();
     })
 
     closeModalBtn?.addEventListener('click', () => {
         modal?.close();
     })
-
-    modalSubmitBtn?.addEventListener('click', () => {
-        addContact();
-    })
 }
 
 
+/**
+ * Event listener to set the correct data for the modal when creating a new contact.
+ */
+function addContactEventListener() {
+    const modalHeader = document.getElementById('modal-header');
+    const modalSubmitBtn = document.getElementById('modal-submit');
+
+    modalHeader.innerHTML = 'Add Contact';
+    modalSubmitBtn.innerHTML = 'Create Contact';
+    modalSubmitBtn.onclick = addContact;
+    clearInputFields();
+    modal?.showModal();
+}
+
+
+/**
+ * Adds a contact to the contact list with the data from the modal input fields. 
+ */
 function addContact() {
     const firstnameInp = document.getElementById('new-firstname');
     const lastnameInp = document.getElementById('new-lastname');
@@ -41,7 +61,6 @@ function addContact() {
         const { id } = createContact(firstnameInp, lastnameInp, emailInp, phoneInp);
         sortContacts();
         storeItem('contacts', contacts);
-        clearInputFields(firstnameInp, lastnameInp, emailInp, phoneInp);
         renderContactList();
         showContactDetails(id);
         notify();
@@ -49,6 +68,13 @@ function addContact() {
 }
 
 
+/**
+ * Creates a contact from the given data.
+ * @param {HTMLElement} firstnameInp Contact firstname.
+ * @param {HTMLElement} lastnameInp Contact lastnam.
+ * @param {HTMLElement} emailInp Contact email.
+ * @param {HTMLElement} phoneInp contact phone.
+ */ 
 function createContact(firstnameInp, lastnameInp, emailInp, phoneInp) {
     const id = Date.now().toString(36);
     const color = Math.floor(Math.random() * 355);
@@ -67,7 +93,117 @@ function createContact(firstnameInp, lastnameInp, emailInp, phoneInp) {
 }
 
 
-function clearInputFields(firstnameInp, lastnameInp, emailInp, phoneInp) {
+/**
+ * Event listener to set the correct data for the modal when editing an existing contact.
+ */
+function editContactEventListener(id) {
+    const modal = document.getElementById('modal');
+    const modalSubmitBtn = document.getElementById('modal-submit');
+    const modalHeader = document.getElementById('modal-header');
+    const contact = contacts.find(contact => contact.id === id);
+
+    modalHeader.innerHTML = 'Edit Contact';
+    modalSubmitBtn.innerHTML = 'Save Contact';
+    modalSubmitBtn.onclick = () => editContact(id);
+    prefillInputFields(contact);
+    modal?.showModal();
+}
+
+
+/**
+ * Updates the contact from the contact list with the given data from the modal input fields. 
+ * @param {string} id Unique id of the contact.
+ */
+function editContact(id) {
+    const firstnameInp = document.getElementById('new-firstname');
+    const lastnameInp = document.getElementById('new-lastname');
+    const emailInp = document.getElementById('new-email');
+    const phoneInp = document.getElementById('new-phone');
+    const contact = contacts.find(contact => contact.id === id);
+
+    if (firstnameInp.checkValidity() && lastnameInp.checkValidity() && emailInp.checkValidity() && phoneInp.checkValidity()) {
+        contact.firstname = firstnameInp.value;
+        contact.lastname = lastnameInp.value;
+        contact.email = emailInp.value;
+        contact.phone = phoneInp.value;
+
+        sortContacts();
+        storeItem('contacts', contacts);
+        renderContactList();
+        showContactDetails(id);
+        notify('Succesfully saved!');
+    }
+}
+
+
+/**
+ * Deletes the contact from the contact list. 
+ * @param {String} id Unique id of the contact
+ */
+function deleteContact(id) {
+    const contactDetailsEl = document.getElementById('contact-details-body');
+    const contact = contacts.find(contact => contact.id === id);
+    const index = contacts.indexOf(contact);
+
+    contacts.splice(index, 1);
+    contactDetailsEl.classList.add('d-none');
+    storeItem('contacts', contacts);
+    renderContactList();
+    notify('Succesfully deleted!');
+    if (window.matchMedia("(max-width: 576px)")) { 
+        const contactDetails = document.getElementById('contact-details');
+        
+        contactDetails.style.display = 'none';
+    }
+}
+
+
+/**
+ * Shows the details of the contact.
+ * @param {string} id Unique id of the contact.
+ */
+function showContactDetails(id) {
+    const contactDetailsEl = document.getElementById('contact-details-body');
+    const bubbleEl = document.getElementById('contact-details-bubble');
+    const initialsEl = document.getElementById('contact-details-initials');
+    const nameEl = document.getElementById('contact-details-name');
+    const emailEl = document.getElementById('contact-details-email');
+    const phoneEl = document.getElementById('contact-details-phone');
+    const editBtn = document.getElementById('edit-contact');
+    const deleteBtn = document.getElementById('delete-contact');
+    const contact = contacts.find(contact => contact.id === id);
+
+    contactDetailsEl.style.display = 'flex';
+    bubbleEl.style = `background: hsl(${contact.color}, 100%, 30%)`;
+    initialsEl.innerHTML = `${contact.firstname.charAt(0).toUpperCase()}${contact.lastname.charAt(0).toUpperCase()}`
+    nameEl.innerHTML = `${contact.firstname} ${contact.lastname}`;
+    emailEl.innerHTML = contact.email;
+    emailEl.href = `mailto:${contact.email}`;
+    phoneEl.innerHTML = contact.phone;
+    phoneEl.href = `tel:${contact.phone}`;
+    editBtn.onclick = () => editContactEventListener(id);
+    deleteBtn.onclick = () => deleteContact(id);
+    if (window.matchMedia("(max-width: 576px)")) { 
+        const contactDetails = document.getElementById('contact-details');
+        const hideDetailsBtn = document.getElementById('hide-details');
+        
+        contactDetails.style.display = 'block';
+        hideDetailsBtn.addEventListener('click', () => {
+            contactDetails.style.display = 'none';
+        })
+    }
+}
+
+
+/**
+ * Clears the input fields of the modal.
+ */
+function clearInputFields() {
+    const firstnameInp = document.getElementById('new-firstname');
+    const lastnameInp = document.getElementById('new-lastname');
+    const emailInp = document.getElementById('new-email');
+    const phoneInp = document.getElementById('new-phone');
+
     firstnameInp.value = '';
     lastnameInp.value = '';
     emailInp.value = '';
@@ -75,15 +211,20 @@ function clearInputFields(firstnameInp, lastnameInp, emailInp, phoneInp) {
 }
 
 
-function renderContactList() {
-    const contactListEl = document.getElementById('contact-list')
-    let contactList = '';
+/**
+ * Prefills the input fields of the modal if the contact gets edited.
+ * @param {object} contact Object of the contact.
+ */
+function prefillInputFields(contact) {
+    const firstnameInp = document.getElementById('new-firstname');
+    const lastnameInp = document.getElementById('new-lastname');
+    const emailInp = document.getElementById('new-email');
+    const phoneInp = document.getElementById('new-phone');
 
-    for (let contact of contacts) {
-        contactList += contactTemp(contact);
-    }
-
-    contactListEl.innerHTML = contactList;
+    firstnameInp.value = contact.firstname;
+    lastnameInp.value = contact.lastname;
+    emailInp.value = contact.email;
+    phoneInp.value = contact.phone;
 }
 
 
@@ -98,56 +239,44 @@ function sortContacts() {
 }
 
 
-function showContactDetails(id) {
-    const contact = contacts.find(contact => contact.id === id);
-    const contactDetailsEl = document.getElementById('contact-details-body');
-    const bubbleEl = document.getElementById('contact-details-bubble');
-    const initialsEl = document.getElementById('contact-details-initials');
-    const nameEl = document.getElementById('contact-details-name');
-    const emailEl = document.getElementById('contact-details-email');
-    const phoneEl = document.getElementById('contact-details-phone');
-    const editBtn = document.getElementById('edit-contact');
-    const deleteBtn = document.getElementById('delete-contact');
+/**
+ * Renders the complete contact list including contact seperators.
+ */
+function renderContactList() {
+    const contactListEl = document.getElementById('contact-list')
+    let contactList = '';
+    let char = '';
 
-    contactDetailsEl?.classList.remove('d-none');
-    bubbleEl.style = `background: hsl(${contact.color}, 100%, 30%)`;
-    initialsEl.innerHTML = `${contact.firstname.charAt(0).toUpperCase()}${contact.lastname.charAt(0).toUpperCase()}`
-    nameEl.innerHTML = contact.firstname + ' ' + contact.lastname;
-    emailEl.innerHTML = contact.email;
-    emailEl.href = `mailto:${contact.email}`;
-    phoneEl.innerHTML = contact.phone;
-    phoneEl.href = `tel:${contact.phone}`;
-    editBtn.onclick = () => 
-    deleteBtn.onclick = () => deleteContact(id);
+    for (let contact of contacts) {
+        const lastnameChar = contact.lastname.toUpperCase().charAt(0);
+
+        if (lastnameChar != char) {
+            char = lastnameChar;
+            contactList += contactSeparatorTemp(lastnameChar);
+        }
+        contactList += contactTemp(contact);
+    }
+    contactListEl.innerHTML = contactList;
 }
 
+
+// -------------------
+// Templates
+// -------------------
 
 /**
- * Deletes the contact from the contact list. 
- * @param {String} id Unique id of the contact
+ * Returns the HTML template for the contact card.
+ * @param {string} id Unique id of the contact.
+ * @returns HTML contact card template.
  */
-function deleteContact(id) {
-    const contactDetailsEl = document.getElementById('contact-details-body');
-    const contact = contacts.find(contact => contact.id === id);
-    const index = contacts.indexOf(contact);
-    contacts.splice(index, 1);
-
-    contactDetailsEl.classList.add('d-none');
-
-    renderContactList();
-    storeItem('contacts', contacts);
-    notify('Succesfully deleted!');
-}
-
-
 function contactTemp({ firstname, lastname, email, color, id }) {
     return (`
         <div class="contact" onclick="showContactDetails('${id}')">
             <div class="contact-bubble" style="background: hsl(${color}, 100%, 30%);">
-                <p class="contact-initials txt-h7">${firstname.charAt(0).toUpperCase() + lastname.charAt(0).toUpperCase()}</p>
+                <p class="contact-initials txt-h7">${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}</p>
             </div>
             <div>
-                <h5 class="contact-full-name txt-h5">${firstname + " " + lastname}</h5>
+                <h5 class="contact-full-name txt-h5">${firstname} ${lastname}</h5>
                 <p class="contact-email">${email}</p>
             </div>
         </div>
@@ -155,10 +284,15 @@ function contactTemp({ firstname, lastname, email, color, id }) {
 }
 
 
-function contactSeparatorTemp() {
+/**
+ * Returns the HTML template for the contact separator.
+ * @param {string} character Character that will be rendered in the separator
+ * @returns HTML separator template
+ */
+function contactSeparatorTemp(character) {
     return (`
         <div class="contact-separator">
-            <h5 class="character">A</h5>
+            <h5 class="character">${character}</h5>
             <div class="separator-line"></div>
         </div>
     `);

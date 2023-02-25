@@ -36,15 +36,16 @@
 
             </section>
             <!-- Contact Details -->
-            <section class="contact-details content h-100">
+            <section class="contact-details content h-100" id="contact-details">
                 <!-- Header -->
                 <div class="contact-details-header">
                     <h1 class="txt-h1">Contacts</h1>
                     <div class="line"></div>
                     <p class="txt-h5">Better with a team</p>
+                    <img src="./assets/icons/arrow_black.svg" alt="Back Icon" id="hide-details">
                 </div>
                 <!-- Details -->
-                <div class="contact-details-body d-none" id="contact-details-body">
+                <div class="contact-details-body" id="contact-details-body">
                     <div class="d-flex">
                         <div class="contact-details-bubble" id="contact-details-bubble">
                             <p id="contact-details-initials"></p>
@@ -79,12 +80,12 @@
             <!-- Modal -->
             <dialog id="modal">
                 <div class="modal-top">
-                    <h2 class="txt-h2">Add Contact</h2>
+                    <h2 class="txt-h2" id="modal-header">Add Contact</h2>
                     <img src="./assets/icons/close.svg" alt="Close Icon" class="close-icon" id="close-modal" draggable="false">
                 </div>
                 <form method="dialog" class="modal-form">
-                    <input type="text" name="new-firstname" id="new-firstname" class="text-input" placeholder="Firstname">
-                    <input type="text" name="new-lastname" id="new-lastname" class="text-input" placeholder="Lastname">
+                    <input type="text" name="new-firstname" id="new-firstname" class="text-input" placeholder="Firstname*" required>
+                    <input type="text" name="new-lastname" id="new-lastname" class="text-input" placeholder="Lastname*" required>
                     <input type="email" name="new-email" id="new-email" class="text-input" placeholder="Email">
                     <input type="text" name="new-phone" id="new-phone" class="text-input" placeholder="Phone">
                     <button class="btn btn-primary btn-submit" id="modal-submit">Create Contact</button>
