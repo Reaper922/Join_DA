@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/task.css">
     <script defer src="./smallest_backend_ever/mini_backend.js"></script>
+    <script defer src="./js/notification.js"></script>
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/task.js"></script>
 </head>
 
 <body>
@@ -27,7 +29,93 @@
         <!-- Content -->
         <div class=" content">
             <main class="task">
-                <h1>Task</h1>
+                <!-- Header -->
+                <div class="task-header">
+                    <h1 class="txt-h1">Add Task</h1>
+                </div>
+                <form>
+                    <div>
+                        <!-- Title -->
+                        <div class="d-flex-col">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="text-input" id="title" placeholder="Enter a title" required>
+                        </div>
+                        <!-- Desctiption -->
+                        <div class="d-flex-col">
+                            <label for="description">Description</label>
+                            <textarea name="description" class="text-input" id="description" cols="1" rows="3"
+                                placeholder="Enter a description" style="resize: none;"></textarea>
+                        </div>
+                        <!-- Category -->
+                        <div class="d-flex-col">
+                            <label for="category">Category</label>
+                            <select name="category" id="category" required>
+                                <option value="" disabled selected hidden>Select task category</option>
+                                <option value="Accounting and Finance">Accounting and Finance</option>
+                                <option value="Research and Development">Research and Development</option>
+                                <option value="Management">Management</option>
+                                <option value="IT and EDP">IT and EDP</option>
+                                <option value="Customer Service">Customer Service</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Human Resource">Human Resource</option>
+                                <option value="Production">Production</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Legal">Legal</option>
+                                <option value="Backoffice">Backoffice</option>
+                            </select>
+                        </div>
+                        <!-- Assignee -->
+                        <div>
+                            <label for="assignee-check">Assigned to</label>
+                            <div name="assignee" id="assignee">
+                                <input type="checkbox" id="assignee-check" required>
+                                <span>Select contacts to assign</span>
+                                <div>
+                                    <div class="assignee-background" id="assignee-background"></div>
+                                    <div class="assignee-container" id="assignee-container">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dividing-line"></div>
+                    <div>
+                        <!-- Due Date -->
+                        <div class="d-flex-col">
+                            <label for="date">Due date</label>
+                            <input type="date" name="date" id="date" required>
+                        </div>
+                        <!-- Priority -->
+                        <div id="priority">
+                            <input type="radio" name="priority" id="urgent" value="urgent" required>
+                            <label for="urgent">
+                                <span class="checkmark">Urgent</span>
+                                <i class="icon icon-urgent"></i>
+                            </label>
+                            <input type="radio" name="priority" id="medium" value="medium" required>
+                            <label for="medium">
+                                <span class="checkmark">Medium</span>
+                                <i class="icon icon-medium"></i>
+                            </label>
+                            <input type="radio" name="priority" id="low" value="low" required>
+                            <label for="low">
+                                <span class="checkmark">Low</span>
+                                <i class="icon icon-low"></i>
+                            </label>
+                        </div>
+                        <!-- Subtasks -->
+                        <div>
+                        </div>
+
+                        <button class="add-task btn btn-primary" id="add-task">
+                            Add Task
+                            <img src="">
+                        </button>
+                        <button class="clear-task btn btn-secondary" id="clear-task">
+                            Clear
+                        </button>
+                    </div>
+                </form>
             </main>
         </div>
     </section>
