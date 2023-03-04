@@ -68,7 +68,6 @@ body {
 .txt-h1 {
     font-size: var(--h1-font-size);
     font-weight: 700;
-    text-align: center;
 }
 
 .txt-h2 {
@@ -155,6 +154,7 @@ body {
     padding: 13px 21px;
     border: 1px solid var(--light-gray);
     border-radius: var(--border-radius-sm);
+    background: white;
 }
 
 .text-input::placeholder {
