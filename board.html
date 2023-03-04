@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/board.css">
     <script defer src="./smallest_backend_ever/mini_backend.js"></script>
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/board.js"></script>
 </head>
 
 <body>
@@ -27,8 +28,29 @@
         <!-- Content -->
         <div class="content">
             <main class="board">
-                <h1>Board</h1>
+                <!-- Header -->
+                <div class="board-header">
+                    <h1 class="txt-h1">Board</h1>
+                    <div class="search-container">
+                        <input type="text" name="search-task" id="search-task" class="text-input" placeholder="Find Task">
+                        <button class="btn btn-primary">Add Task
+                            <img src="./assets/icons/add_white.svg">
+                        </button>
+                    </div>
+                </div>
+                <!-- Board -->
+                <div class="board-container">
+                    <div class="task-col" id="todo" data-category="todo"></div>
+                    <div class="task-col" id="in-progress" data-category="progress"></div>
+                    <div class="task-col" id="awaiting-feedback" data-category="awaiting"></div>
+                    <div class="task-col" id="done" data-category="done"></div>
+                </div>
             </main>
+            <!-- Modal -->
+            <dialog id="modal">
+                <div class="modal-content" id="modal-content"></div>
+                <img src="./assets/icons/close_black.svg" alt="Close Icon" id="modal-close">
+            </dialog>
         </div>
     </section>
 </body>
