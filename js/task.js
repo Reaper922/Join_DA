@@ -27,7 +27,6 @@ function buttonEventListener() {
     const assigneeMenu = document.getElementById('assignee');
 
     addTaskBtn?.addEventListener('click', (e) => {
-        // e.preventDefault();
         addTask();
     })
 
@@ -46,15 +45,20 @@ async function addTask() {
     const categoryInp = document.getElementById('category');
     const dateInp = document.getElementById('date');
     const id = Date.now().toString(36);
+    const priorityInp = document.querySelector('input[name="priority"]:checked');
+    const priority = priorityInp != null ? priorityInp.value : 'low';
+    const assignees = [];
+    const assigneeInp = document.querySelectorAll('input[type="checkbox"]:checked');
+    assigneeInp.forEach(assignee => assignees.push(assignee.value));
 
     const task = {
         id: id,
         title: titleInp.value,
         description: descriptionInp.value,
         category: categoryInp.value,
-        assignees: [],
+        assignees: assignees,
         date: dateInp.value,
-        priority: 'low',
+        priority: priority,
         status: 'todo',
     }
 
@@ -62,7 +66,7 @@ async function addTask() {
     await storeItem('tasks', tasks);
     clearInputFields();
     console.log(tasks);
-    // window.location.pathname = '/board.html';
+    window.location.pathname = '/board.html';
 }
 
 
@@ -74,11 +78,18 @@ function clearInputFields() {
     const descriptionInp = document.getElementById('description');
     const categoryInp = document.getElementById('category');
     const dateInp = document.getElementById('date');
+    const assigneeInp = document.querySelectorAll('input[type="checkbox"]:checked');
+    const priority = document.querySelector('input[name="priority"]:checked');
 
     titleInp.value = '';
     descriptionInp.value = '';
     categoryInp.value = '';
+    assigneeInp.forEach(assignee => assignee.checked = false);
     dateInp.value = '';
+
+    if (priority) {
+        priority.checked = false;
+    }
 }
 
 
