@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/summary.css">
     <script defer src="./smallest_backend_ever/mini_backend.js"></script>
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/summary.js"></script>
 </head>
 
 <body>
@@ -41,28 +42,28 @@
                 <!-- Summary -->
                 <div class="grid">
                     <div class="box box-small">
-                        <h2 class="txt-h2">5</h2>
-                        <p>Task in<br>Board</p>
+                        <h2 class="txt-h2" id="tasks">0</h2>
+                        <p>Task&nbsp;in<br>Board</p>
                     </div>
                     <div class="box box-small">
-                        <h2 class="txt-h2">2</h2>
+                        <h2 class="txt-h2" id="in-progress">0</h2>
                         <p>Task in<br>Progress</p>
                     </div>
                     <div class="box box-small">
-                        <h2 class="txt-h2">4</h2>
+                        <h2 class="txt-h2" id="awaiting">0</h2>
                         <p>Awaiting<br>Feedback</p>
                     </div>
                     <div class="box box-large">
                         <div class="d-flex gap-18">
                             <img src="./assets/icons/urgent_circle.svg" alt="Urgent" draggable="false">
                             <div class="d-flex-col">
-                                <h2 class="txt-h2">1</h2>
+                                <h2 class="txt-h2" id="urgent">0</h2>
                                 <p>Urgent</p>
                             </div>
                         </div>
                         <div class="line-gray"></div>
                         <div class="deadline">
-                            <h5 class="txt-h5">March 16, 2023</h5>
+                            <h5 class="txt-h5" id="urgent-date">No urgent tasks.</h5>
                             <p>Upcoming Deadline</p>
                         </div>
                     </div>
@@ -73,7 +74,7 @@
                                 <img src="./assets/icons/to-do_circle_neg.svg" alt="To-do" class="negative" draggable="false">
                             </div>
                             <div class="d-flex-col">
-                                <h2 class="txt-h2">3</h2>
+                                <h2 class="txt-h2" id="to-do">0</h2>
                                 <p>To-do</p>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
                                 <img src="./assets/icons/done_circle_neg.svg" alt="Done" class="negative" draggable="false">
                             </div>
                             <div class="d-flex-col">
-                                <h2 class="txt-h2">7</h2>
+                                <h2 class="txt-h2" id="done">0</h2>
                                 <p>Done</p>
                             </div>
                         </div>
