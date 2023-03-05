@@ -10,23 +10,26 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/login.css">
-    <script defer src="./js/login.js"></script>
+    <script defer src="./smallest_backend_ever/mini_backend.js"></script>
+    <script defer src="./js/script.js"></script>
+    <script defer src="./js/signup.js"></script>
 </head>
 
 <body>
     <main class="w-100 h-100">
         <div class="content-box">
+            <!-- Sign up -->
             <a href="./index.html" draggable="false"><img src="./assets/icons/arrow_blue.svg" alt="Back to login." class="btn-back" draggable="false"></a>
             <h1 class="txt-h1">Sign up</h1>
             <hr class="line">
-            <form action="" class="w-100 h-100">
+            <form onsubmit="return false" class="w-100 h-100">
                 <div class="input">
-                    <input type="text" name="sign-up-username" class="inp-user text-input" id="sign-up-username" placeholder="Username">
-                    <input type="email" name="sign-up-email" class="inp-email text-input" id="sign-up-email" placeholder="Email">
-                    <input type="password" name="sign-up-password" class="inp-password text-input" id="sign-up-password" placeholder="Password">
+                    <input type="text" name="sign-up-username" class="inp-user text-input" id="sign-up-username" placeholder="Username" required minlength="3">
+                    <input type="email" name="sign-up-email" class="inp-email text-input" id="sign-up-email" placeholder="Email" required>
+                    <input type="password" name="sign-up-password" class="inp-password text-input" id="sign-up-password" placeholder="Password" required minlength="6">
                 </div>
                 <div class="spacing mt-10">
-                    <button class="btn btn-primary btn-sign-up btn-emph">Sign up</button>
+                    <button class="btn btn-primary btn-sign-up btn-emph" id="sign-up">Sign up</button>
                 </div>
             </form>
         </div>
