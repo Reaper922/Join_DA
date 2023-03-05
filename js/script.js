@@ -96,12 +96,23 @@ async function loadItem(key) {
 
 
 /**
- * 
+ * Stores the items under the given key in the backend.
  * @param {string} key Name of the key under which the items should be stored.
  * @param {string[]} content Array of items that should be stored.
  */
 async function storeItem(key, content) {
     await backend.setItem(key, JSON.stringify(content));
+}
+
+
+/**
+ * Formats the date in german notation.
+ * @param {string} date Date in format yyyy-mm-dd,
+ * @returns Date in format dd.mm.yyyy,
+ */
+function formatDate(date) {
+    const [year, month, day] = date.split('-');
+    return `${day}.${month}.${year}`;
 }
 
 
