@@ -23,13 +23,8 @@ function buttonEventListener() {
     const newContactBtn = document.getElementById('new-contact');
     const closeModalBtn = document.getElementById('close-modal');
 
-    newContactBtn?.addEventListener('click', () => {
-        addContactEventListener();
-    })
-
-    closeModalBtn?.addEventListener('click', () => {
-        modal?.close();
-    })
+    newContactBtn?.addEventListener('click', () => addContactEventListener());
+    closeModalBtn?.addEventListener('click', () => modal?.close());
 }
 
 
@@ -59,11 +54,7 @@ function addContact() {
 
     if (firstnameInp.checkValidity() && lastnameInp.checkValidity() && emailInp.checkValidity() && phoneInp.checkValidity()) {
         const { id } = createContact(firstnameInp, lastnameInp, emailInp, phoneInp);
-        sortContacts();
-        storeItem('contacts', contacts);
-        renderContactList();
-        showContactDetails(id);
-        notify();
+        storeContact(id);
     }
 }
 
@@ -74,7 +65,7 @@ function addContact() {
  * @param {HTMLElement} lastnameInp Contact lastnam.
  * @param {HTMLElement} emailInp Contact email.
  * @param {HTMLElement} phoneInp contact phone.
- */ 
+ */
 function createContact(firstnameInp, lastnameInp, emailInp, phoneInp) {
     const id = Date.now().toString(36);
     const color = Math.floor(Math.random() * 355);
@@ -127,11 +118,7 @@ function editContact(id) {
         contact.email = emailInp.value;
         contact.phone = phoneInp.value;
 
-        sortContacts();
-        storeItem('contacts', contacts);
-        renderContactList();
-        showContactDetails(id);
-        notify('Succesfully saved!');
+        storeContact(id, 'Succesfully saved!');
     }
 }
 
@@ -150,11 +137,25 @@ function deleteContact(id) {
     storeItem('contacts', contacts);
     renderContactList();
     notify('Succesfully deleted!');
-    if (window.matchMedia("(max-width: 576px)")) { 
+    if (window.matchMedia("(max-width: 576px)")) {
         const contactDetails = document.getElementById('contact-details');
-        
+
         contactDetails.style.display = 'none';
     }
+}
+
+
+/**
+ * Stores the sorted contact list and renders the updated contacts.
+ * @param {string} id Id of the contact.
+ * @param {string} text Notification text.
+ */
+function storeContact(id, text = null) {
+    sortContacts();
+    storeItem('contacts', contacts);
+    renderContactList();
+    showContactDetails(id);
+    text ? notify(text) : notify();;
 }
 
 
@@ -183,15 +184,23 @@ function showContactDetails(id) {
     phoneEl.href = `tel:${contact.phone}`;
     editBtn.onclick = () => editContactEventListener(id);
     deleteBtn.onclick = () => deleteContact(id);
-    if (window.matchMedia("(max-width: 576px)")) { 
-        const contactDetails = document.getElementById('contact-details');
-        const hideDetailsBtn = document.getElementById('hide-details');
-        
-        contactDetails.style.display = 'block';
-        hideDetailsBtn.addEventListener('click', () => {
-            contactDetails.style.display = 'none';
-        })
+    if (window.matchMedia("(max-width: 576px)")) {
+        hideDetailsOnMobileButton();
     }
+}
+
+
+/**
+ * Shows the hide details button on mobile view.
+ */
+function hideDetailsOnMobileButton() {
+    const contactDetails = document.getElementById('contact-details');
+    const hideDetailsBtn = document.getElementById('hide-details');
+
+    contactDetails.style.display = 'block';
+    hideDetailsBtn.addEventListener('click', () => {
+        contactDetails.style.display = 'none';
+    })
 }
 
 
@@ -249,12 +258,13 @@ function renderContactList() {
 
     for (let contact of contacts) {
         const lastnameChar = contact.lastname.toUpperCase().charAt(0);
+        const initials = `${contact.firstname.charAt(0).toUpperCase()}${contact.lastname.charAt(0).toUpperCase()}`;
 
         if (lastnameChar != char) {
             char = lastnameChar;
             contactList += contactSeparatorTemp(lastnameChar);
         }
-        contactList += contactTemp(contact);
+        contactList += contactTemp(contact, initials);
     }
     contactListEl.innerHTML = contactList;
 }
@@ -269,11 +279,11 @@ function renderContactList() {
  * @param {string} id Unique id of the contact.
  * @returns HTML contact card template.
  */
-function contactTemp({ firstname, lastname, email, color, id }) {
+function contactTemp({ firstname, lastname, email, color, id }, initials) {
     return (`
         <div class="contact" onclick="showContactDetails('${id}')">
             <div class="contact-bubble" style="background: hsl(${color}, 100%, 30%);">
-                <p class="contact-initials txt-h7">${firstname.charAt(0).toUpperCase()}${lastname.charAt(0).toUpperCase()}</p>
+                <p class="contact-initials txt-h7">${initials}</p>
             </div>
             <div>
                 <h5 class="contact-full-name txt-h5">${firstname} ${lastname}</h5>

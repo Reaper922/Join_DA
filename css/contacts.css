@@ -168,6 +168,8 @@ dialog::backdrop {
     backdrop-filter: blur(3px);
 }
 
+
+/* Modal */
 .modal-top {
     display: flex;
     justify-content: center;
