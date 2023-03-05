@@ -1,6 +1,10 @@
 'use strict';
 
 
+/**
+ * Displays a notification.
+ * @param {string} message Message that should be displayed in the notification box.
+ */
 function notify(message = 'Succesfully created!') {
     const notifyEl = document.getElementById('notification');
 
