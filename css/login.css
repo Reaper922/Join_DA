@@ -217,6 +217,10 @@ p {
         white-space: normal;
     }
 
+    .txt-h1 {
+        text-align: center;
+    }
+
 
     @keyframes logo-animation {
         0% {

@@ -1,25 +1,62 @@
 'use strict';
 
 
+let users = [];
+
+
+/**
+ * Initial function that gets executed after the document has loaded.
+*/
+async function init() {
+    await downloadFromServer();
+    users = await loadItem('users');
+    buttonEventListener();
+}
+
+
+/**
+ * Sets up event listeners for all buttons.
+ */
 function buttonEventListener() {
     const signupBtn = document.getElementById('signup');
     const loginBtn = document.getElementById('login');
     const guestLoginBtn = document.getElementById('guest-login');
 
-    signupBtn?.addEventListener('click', () => {
-        window.location.href = 'sign-up.html';
-    });
-
-    loginBtn?.addEventListener('click', e => {
-        e.preventDefault();
-        window.location.href = 'summary.html';
-    });
-
-    guestLoginBtn?.addEventListener('click', e => {
-        e.preventDefault();
-        window.location.href = 'summary.html';
-    });
+    signupBtn?.addEventListener('click', () => window.location.href = 'sign-up.html');
+    loginBtn?.addEventListener('click', () => loginUser());
+    guestLoginBtn?.addEventListener('click', () => loginGuest());
 }
 
 
-if (location.pathname === '/index.html' || location.pathname === '/' || location.pathname === '/Join_DA/') { buttonEventListener() }
+/**
+ * Logs the user in if the login credentials are correct.
+ */
+function loginUser() {
+    const loginInp = document.getElementById('login-email');
+    const passwordInp = document.getElementById('login-password');
+    const user = users.find(user => user.email === loginInp.value);
+    const isCredentialsCorrect = user?.password === passwordInp.value;
+
+    if (user && isCredentialsCorrect) {
+        const currentUser = { username: user.username }
+
+        sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+        window.location.href = 'summary.html';
+    } else {
+        alert('Wrong credentials!');
+    }
+}
+
+
+/**
+ * Logs the user in with the guest account.
+ */
+function loginGuest() {
+    const currentUser = { username: 'Guest' }
+
+    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+    window.location.href = 'summary.html';
+}
+
+
+init();
