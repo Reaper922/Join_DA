@@ -1,7 +1,7 @@
 'use strict';
 
 
-let tasks =  [];
+let tasks = [];
 let contacts = [];
 
 
@@ -14,7 +14,6 @@ async function init() {
     tasks = await loadItem('tasks');
     buttonEventListener();
     renderAssignees();
-    console.log(tasks);
 }
 
 
@@ -26,19 +25,18 @@ function buttonEventListener() {
     const clearTaskBtn = document.getElementById('clear-task');
     const assigneeMenu = document.getElementById('assignee');
 
-    addTaskBtn?.addEventListener('click', (e) => {
-        addTask();
-    })
-
+    assigneeMenu.addEventListener('click', toggleDropdown);
+    addTaskBtn?.addEventListener('click', () => addTask());
     clearTaskBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         clearInputFields();
     })
-
-    assigneeMenu.addEventListener('click', toggleDropdown);
 }
 
 
+/**
+ * Adds and stores the new task to the database.
+ */
 async function addTask() {
     const titleInp = document.getElementById('title');
     const descriptionInp = document.getElementById('description');
@@ -48,25 +46,43 @@ async function addTask() {
     const priorityInp = document.querySelector('input[name="priority"]:checked');
     const priority = priorityInp != null ? priorityInp.value : 'low';
     const assignees = [];
-    const assigneeInp = document.querySelectorAll('input[type="checkbox"]:checked');
+    const assigneeInp = document.querySelectorAll('.assignee input[type="checkbox"]:checked');
     assigneeInp.forEach(assignee => assignees.push(assignee.value));
 
-    const task = {
-        id: id,
-        title: titleInp.value,
-        description: descriptionInp.value,
-        category: categoryInp.value,
-        assignees: assignees,
-        date: dateInp.value,
-        priority: priority,
-        status: 'todo',
-    }
+    if (isInputValid(assignees)) {
+        const task = {
+            id: id,
+            title: titleInp.value,
+            description: descriptionInp.value,
+            category: categoryInp.value,
+            assignees: assignees,
+            date: dateInp.value,
+            priority: priority,
+            status: 'todo',
+        }
 
-    tasks.push(task);
-    await storeItem('tasks', tasks);
-    clearInputFields();
-    console.log(tasks);
-    window.location.pathname = '/board.html';
+        tasks.push(task);
+        await storeItem('tasks', tasks);
+        clearInputFields();
+        window.location.pathname = '/board.html';
+    }
+}
+
+
+function isInputValid(assignees) {
+    const titleInp = document.getElementById('title');
+    const categoryInp = document.getElementById('category');
+    const dateInp = document.getElementById('date');
+    const assigneeCheck = document.getElementById('assignee-check');
+    const isInputValid = titleInp.checkValidity() && categoryInp.checkValidity() && dateInp.checkValidity() && assignees.length > 0;
+    assigneeCheck.checked = false;
+
+    if (assignees.length === 0) { 
+        assigneeCheck.reportValidity()
+    } else {
+        assigneeCheck.checked = true;
+    }
+    return isInputValid;
 }
 
 
@@ -114,7 +130,7 @@ function renderAssignees() {
     assigneeContainer.innerHTML = '';
     contacts.forEach(contact => {
         assigneeContainer.innerHTML += assigneeTemp(contact);
-    })
+    });
 }
 
 
@@ -125,8 +141,8 @@ function renderAssignees() {
  */
 function assigneeTemp(contact) {
     return `
-        <label for="${contact.id}">${contact.firstname} ${contact.lastname}
-            <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
+        <label for="${contact.id}" class="assignee">${contact.firstname} ${contact.lastname}
+            <input type="checkbox" name="${contact.id}"id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;
 }

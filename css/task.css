@@ -14,6 +14,10 @@ form>div {
     gap: 18px;
 }
 
+.form-col {
+    min-width: 400px;
+}
+
 .dividing-line {
     border-left: 2px solid var(--light-gray);
 }
@@ -133,6 +137,10 @@ form>div {
     cursor: pointer;
 }
 
+#assignee {
+    margin-top: 8px;
+}
+
 /* Custom radio buttons for priority selection */
 #priority {
     display: grid;
@@ -215,6 +223,8 @@ form>div {
     transform: scale(105%);
 }
 
+
+/* Buttons */
 .task-btn {
     display: flex;
     justify-content: center;
@@ -225,10 +235,6 @@ form>div {
     height: 15px;
 }
 
-.form-col {
-    width: 400px;
-}
-
 .button-container {
     display: flex;
     justify-content: end;
@@ -236,7 +242,7 @@ form>div {
 }
 
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 1024px) {
     form {
         flex-direction: column;
         gap: 8px;
@@ -245,7 +251,7 @@ form>div {
 
     .form-col {
         gap: 8px;
-        width: auto;
+        min-width: auto;
     }
 
     .dividing-line {
@@ -260,5 +266,6 @@ form>div {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-top: 20px;
     }
 }
