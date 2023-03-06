@@ -20,7 +20,7 @@
 /* Drag and Drop */
 .board-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 24px;
     margin-top: 40px;
 }
@@ -75,7 +75,7 @@
     width: max-content;
     padding: 4px 25px;
     color: var(--white);
-    background: var(--secondary);
+    background: var(--primary);
     border-radius: var(--border-radius-sm);
 }
 
@@ -97,7 +97,7 @@
     display: flex;
 }
 
-.assignee {
+.assignee-task {
     position: relative;
     display: flex;
     justify-content: center;
@@ -128,6 +128,12 @@ dialog {
     transform: translate(-50%, -50%);
 }
 
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+}
+
+
 .modal-content {
     display: flex;
     flex-direction: column;
@@ -139,7 +145,7 @@ dialog {
     padding: 4px 25px;
     color: var(--white);
     font-weight: 700;
-    background: var(--secondary);
+    background: var(--primary);
     border-radius: var(--border-radius-sm);
 }
 
@@ -189,6 +195,36 @@ dialog {
     background: blue;
 }
 
+#modal-edit {
+    position: absolute;
+    right: 80px;
+    bottom: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+}
+
+#modal-edit img {
+    width: 12px;
+}
+
+#modal-delete {
+    position: absolute;
+    right: 28px;
+    bottom: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+}
+
+#modal-delete img {
+    width: 12px;
+}
+
 #modal-close {
     position: absolute;
     top: 32px;
@@ -197,6 +233,20 @@ dialog {
     cursor: pointer;
 }
 
+#modal-task-close {
+    position: absolute;
+    top: 32px;
+    right:28px;
+    width: 16px;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1080px) {
+    .search-container {
+        position: relative;
+    }
+}
 
 @media screen and (max-width: 576px) {
     .board-container {
@@ -209,5 +259,11 @@ dialog {
 
     .task-button {
         width: 20px;
+    }
+
+    .search-container {
+        flex-direction: column-reverse;
+        gap: 12px;
+        width: 100%;
     }
 }

@@ -12,8 +12,11 @@
     <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./css/task.css">
     <script defer src="./smallest_backend_ever/mini_backend.js"></script>
+    <script defer src="./js/notification.js"></script>
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/task-form.js"></script>
     <script defer src="./js/board.js"></script>
 </head>
 
@@ -33,7 +36,7 @@
                     <h1 class="txt-h1">Board</h1>
                     <div class="search-container">
                         <input type="text" name="search-task" id="search-task" class="text-input" placeholder="Find Task">
-                        <button class="btn btn-primary">Add Task
+                        <button class="btn btn-primary" id="new-task-btn">Add Task
                             <img src="./assets/icons/add_white.svg">
                         </button>
                     </div>
@@ -50,6 +53,96 @@
             <dialog id="modal">
                 <div class="modal-content" id="modal-content"></div>
                 <img src="./assets/icons/close_black.svg" alt="Close Icon" id="modal-close">
+            </dialog>
+            <dialog id="add-task-form">
+                <!-- Header -->
+                <div class="task-header">
+                    <h1 class="txt-h1">Add Task</h1>
+                    <img src="./assets/icons/close_black.svg" alt="Close Icon" id="modal-task-close">
+                </div>
+                <form onsubmit="return false" id="form">
+                    <div class="form-col">
+                        <!-- Title -->
+                        <div class="d-flex-col">
+                            <label for="title" class="label">Title</label>
+                            <input type="text" name="title" class="text-input" id="title" placeholder="Enter a title" required>
+                        </div>
+                        <!-- Desctiption -->
+                        <div class="d-flex-col">
+                            <label for="description" class="label">Description</label>
+                            <textarea name="description" class="text-input" id="description" cols="1" rows="3"
+                                placeholder="Enter a description" style="resize: none;"></textarea>
+                        </div>
+                        <!-- Assignee -->
+                        <div>
+                            <label for="assignee-check" class="label">Assigned to</label>
+                            <div name="assignee" id="assignee">
+                                <input type="checkbox" id="assignee-check" required>
+                                <span>Select contacts to assign</span>
+                                <div>
+                                    <div class="assignee-background d-none" id="assignee-background"></div>
+                                    <div class="assignee-container d-none" id="assignee-container">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Category -->
+                        <div class="d-flex-col">
+                            <label for="category" class="label">Category</label>
+                            <select name="category" id="category" required>
+                                <option value="" disabled selected hidden>Select task category</option>
+                                <option value="Accounting/Finance">Accounting/Finance</option>
+                                <option value="Research">Research</option>
+                                <option value="Management">Management</option>
+                                <option value="IT and EDP">IT and EDP</option>
+                                <option value="Customer Service">Customer Service</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Human Resource">Human Resource</option>
+                                <option value="Production">Production</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Legal">Legal</option>
+                                <option value="Backoffice">Backoffice</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="dividing-line"></div>
+                    <div class="form-col">
+                        <!-- Due Date -->
+                        <div class="d-flex-col">
+                            <label for="date" class="label">Due date</label>
+                            <input type="date" name="date" id="date" required>
+                        </div>
+                        <!-- Priority -->
+                        <div id="priority">
+                            <input type="radio" name="priority" id="urgent" value="urgent" required>
+                            <label for="urgent">
+                                <span class="checkmark">Urgent</span>
+                                <i class="icon icon-urgent"></i>
+                            </label>
+                            <input type="radio" name="priority" id="medium" value="medium" required>
+                            <label for="medium">
+                                <span class="checkmark">Medium</span>
+                                <i class="icon icon-medium"></i>
+                            </label>
+                            <input type="radio" name="priority" id="low" value="low" required>
+                            <label for="low">
+                                <span class="checkmark">Low</span>
+                                <i class="icon icon-low"></i>
+                            </label>
+                        </div>
+
+                        <div class="button-container">
+                            <button class="add-task btn btn-primary task-btn" id="add-task">
+                                Create Task
+                                <img src="./assets/icons/check_white.svg" class="btn-icon">
+                            </button>
+                            <button class="clear-task btn btn-secondary task-btn" id="clear-task">
+                                Clear
+                                <img src="./assets/icons/close_black.svg" class="btn-icon">
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </dialog>
         </div>
     </section>

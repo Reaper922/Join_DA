@@ -1,3 +1,10 @@
+'use strict';
+
+
+let contacts = [];
+let tasks = [];
+
+
 /**
  * Initial function that gets executed after the document is loaded.
  */
@@ -7,7 +14,9 @@ async function init() {
     tasks = await loadItem('tasks');
     renderTaskItems(tasks);
     addSeachBarEventListener();
+    addNewTaskEventListener();
     addModalCloseEventListener();
+    initTask();
 }
 
 
@@ -40,7 +49,7 @@ function itemClickEvent(item) {
     const modalContent = document.getElementById('modal-content');
     const task = tasks.find(task => task.id === item.dataset.id);
     let assignees = '';
-    
+
     task.assignees.forEach(assignee => {
         const contact = contacts.find(contact => contact.id === assignee);
         const firstnameChar = contact.firstname.charAt(0).toUpperCase();
@@ -104,6 +113,31 @@ function addSeachBarEventListener() {
     });
 }
 
+
+function addNewTaskEventListener() {
+    const newTaskBtn = document.getElementById('new-task-btn');
+    const toDoTaskBtn = document.getElementById('todo-btn');
+    const inProgressTaskBtn = document.getElementById('progress-btn');
+    const awaitingTaskBtn = document.getElementById('awaiting-btn');
+    const doneTaskBtn = document.getElementById('done-btn');
+    const modalAddTask = document.getElementById('add-task-form');
+    const modalTaskClose = document.getElementById('modal-task-close');
+
+    newTaskBtn.addEventListener('click', () => openAddTaskModal('todo', modalAddTask));
+    toDoTaskBtn.addEventListener('click', () => openAddTaskModal('todo', modalAddTask));
+    inProgressTaskBtn.addEventListener('click', () => openAddTaskModal('progress', modalAddTask));
+    awaitingTaskBtn.addEventListener('click', () => openAddTaskModal('awaiting', modalAddTask));
+    doneTaskBtn.addEventListener('click', () => openAddTaskModal('done', modalAddTask));
+    modalTaskClose.addEventListener('click', () => modalAddTask.close());
+}
+
+
+function openAddTaskModal(status, modal) {
+    modal.showModal();
+    modal.dataset.status = status;
+}
+
+
 function addModalCloseEventListener() {
     const modalClose = document.getElementById('modal-close');
     const modal = document.getElementById('modal');
@@ -141,8 +175,8 @@ function renderTaskItems(tasksArr) {
 
     clearElementsInnerHTML(toDoEl, inProgressEl, awaitingFeedbackEl, doneEl);
 
-    for (task of tasksArr) {
-        const assignees = renderAssignees(task.assignees);
+    for (let task of tasksArr) {
+        const assignees = renderTaskAssignees(task);
         switch (task.status) {
             case 'todo':
                 toDoEl.innerHTML += taskItemHTMLTemp(task, assignees);
@@ -163,22 +197,25 @@ function renderTaskItems(tasksArr) {
 
     addDragItemEventListener();
     addDragContainerEventListener();
+    addNewTaskEventListener();
 }
 
 
 function clearElementsInnerHTML(toDoEl, inProgressEl, awaitingFeedbackEl, doneEl) {
-    toDoEl.innerHTML = taskColHeaderTemp('To Do');
-    inProgressEl.innerHTML = taskColHeaderTemp('In Progress');
-    awaitingFeedbackEl.innerHTML = taskColHeaderTemp('Awaiting Feedback');
-    doneEl.innerHTML = taskColHeaderTemp('Done');
+    toDoEl.innerHTML = taskColHeaderTemp('To Do', 'todo-btn');
+    inProgressEl.innerHTML = taskColHeaderTemp('In Progress', 'progress-btn');
+    awaitingFeedbackEl.innerHTML = taskColHeaderTemp('Awaiting Feedback', 'awaiting-btn');
+    doneEl.innerHTML = taskColHeaderTemp('Done', 'done-btn');
 }
 
 
-function renderAssignees(assignees) {
+function renderTaskAssignees(task) {
+    const assignees = task.assignees;
     let assigneesHTML = '';
 
     for (let i = 0; i < assignees.length; i++) {
         const contact = contacts.find(contact => contact.id === assignees[i]);
+        if (!contact) { removeAssignee(task, assignees[i]); continue }
         const firstnameChar = contact.firstname.charAt(0).toUpperCase();
         const lastnameChar = contact.lastname.charAt(0).toUpperCase();
         const initials = `${firstnameChar}${lastnameChar}`;
@@ -195,17 +232,50 @@ function renderAssignees(assignees) {
 }
 
 
-function formatDate(date) {
-    const [year, month, day] = date.split('-');
-    return `${day}.${month}.${year}`;
+async function removeAssignee(task, assignee) {
+    const assigneeIndex = task.assignees.indexOf(assignee);
+    task.assignees.splice(assigneeIndex, 1);
+    await storeItem('tasks', tasks);
 }
 
 
-function taskColHeaderTemp(title) {
+// function editTask(id) {
+//     const modal = document.getElementById('modal');
+//     const addTaskForm = document.getElementById('add-task-form');
+//     const editedTask = tasks.find(task => task.id === id);
+
+//     modal.close();
+//     addTaskForm.showModal();
+// }
+
+
+function deleteTask(id) {
+    const modal = document.getElementById('modal');
+    const delTask = tasks.find(task => task.id === id);
+    const delTaskIndex = tasks.indexOf(delTask);
+
+    tasks.splice(delTaskIndex, 1);
+    storeItem('tasks', tasks);
+    renderTaskItems(tasks);
+    notify('Successfully deleted!');
+    modal.close();
+}
+
+
+// -------------------
+// Templates
+// -------------------
+
+/**
+ * 
+ * @param {*} title 
+ * @returns 
+ */
+function taskColHeaderTemp(title, id) {
     return (`
         <div class="task-col-header">
             <h5 class="txt-h5">${title}</h5>
-            <img src="./assets/icons/task_button.svg" alt="" class="task-button" id="task-button" draggable="false">
+            <img src="./assets/icons/task_button.svg" alt="Add Task Icon" class="task-button" id="${id}" draggable="false">
         </div>
     `);
 }
@@ -232,7 +302,7 @@ function taskItemHTMLTemp(task, assignees) {
 
 function assigneeHTMLTemp(initials, color, offset) {
     return (`
-        <div class="assignee" style="right:${offset}px; background: hsl(${color}, 100%, 30%)">${initials}</div>
+        <div class="assignee-task" style="right:${offset}px; background: hsl(${color}, 100%, 30%)">${initials}</div>
     `);
 }
 
@@ -252,6 +322,9 @@ function modalItemHTMLTemp(task, assignees) {
         </div>
         <div class="modal-assignees"><b>Assigned to:</b>
             <div class="modal-assignee-container d-flex-col">${assignees}</div>
+        </div>
+        <div>
+            <button class="btn btn-primary" id="modal-delete" onclick="deleteTask('${task.id}')"><img src="./assets/icons/trash_white.svg"></button>
         </div>
     `);
 }
