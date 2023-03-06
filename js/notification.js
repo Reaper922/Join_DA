@@ -20,5 +20,5 @@ function notify(message = 'Succesfully created!') {
 
     setTimeout(() => {
         notifyEl.style.display = 'none';
-    }, 5000);
+    }, 4990);
 }
