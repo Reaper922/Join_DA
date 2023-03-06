@@ -20,6 +20,9 @@ async function init() {
 }
 
 
+/**
+ * Adds the event listener for the board item.
+ */
 function addDragItemEventListener() {
     const draggableItems = document.querySelectorAll('.task-item');
     const dropContainers = document.querySelectorAll('.task-col');
@@ -32,18 +35,33 @@ function addDragItemEventListener() {
 }
 
 
+/**
+ * Marks the dragging item and the drop containers.
+ * @param {object} item Task object.
+ * @param {array} dropContainers Array of drop containers.
+ */
 function itemDragStartEvent(item, dropContainers) {
     item.classList.add('dragging');
     dropContainers.forEach(container => container.classList.add('mark-drop'));
 }
 
 
+/**
+ * Removes the marking and updates the item.
+ * @param {object} item Task object.
+ * @param {array} dropContainers Array of drop containers.
+ */
 function itemDragEndEvent(item, dropContainers) {
     item.classList.remove('dragging');
     dropContainers.forEach(container => container.classList.remove('mark-drop'));
     updateItem(item);
 }
 
+
+/**
+ * Opens the board item modal on click.
+ * @param {object} item Task object.
+ */
 function itemClickEvent(item) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
@@ -63,6 +81,9 @@ function itemClickEvent(item) {
 }
 
 
+/**
+ * Adds the dragover event to each board column.
+ */
 function addDragContainerEventListener() {
     const dropContainers = document.querySelectorAll('.task-col');
     dropContainers.forEach(container => {
@@ -71,6 +92,11 @@ function addDragContainerEventListener() {
 }
 
 
+/**
+ * Dragover function for the board colums.
+ * @param {object} event Dragover event object.
+ * @param {HTMLElement} container Board column container.
+ */
 function containerDragOverEvent(event, container) {
     event.preventDefault();
     const afterElement = getDragAfterElement(container, event.clientY);
@@ -84,6 +110,12 @@ function containerDragOverEvent(event, container) {
 }
 
 
+/**
+ * Gets the drag after element.
+ * @param {HTMLElement} container Board column container.
+ * @param {number} y Y mouse position.
+ * @returns 
+ */
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.task-item:not(.dragging')];
 
@@ -103,6 +135,9 @@ function getDragAfterElement(container, y) {
 }
 
 
+/**
+ * Adds the keydown event listener to the search bar.
+ */
 function addSeachBarEventListener() {
     const searchBarInp = document.getElementById('search-task');
 
@@ -114,6 +149,9 @@ function addSeachBarEventListener() {
 }
 
 
+/**
+ * Adds the click event to every button that should create a new task.
+ */
 function addNewTaskEventListener() {
     const newTaskBtn = document.getElementById('new-task-btn');
     const toDoTaskBtn = document.getElementById('todo-btn');
@@ -132,12 +170,20 @@ function addNewTaskEventListener() {
 }
 
 
+/**
+ * Shows the add task modal and sets a data property with the desired status.
+ * @param {string} status Status of the task.
+ * @param {HTMLElement} modal Add task modal.
+ */
 function openAddTaskModal(status, modal) {
     modal.showModal();
     modal.dataset.status = status;
 }
 
 
+/**
+ * Adds the click event listener to close the modal.
+ */
 function addModalCloseEventListener() {
     const modalClose = document.getElementById('modal-close');
     const modal = document.getElementById('modal');
@@ -148,6 +194,11 @@ function addModalCloseEventListener() {
 }
 
 
+/**
+ * Filters the tasks array with the given promt and return a new array that contains the filtered tasks.
+ * @param {string} searchBarInp Search input.
+ * @returns Filtered tasks array.
+ */
 function filterTasks(searchBarInp) {
     const filteredTasks = tasks.filter(task => {
         const taskTitle = task.title.toLowerCase();
@@ -159,6 +210,10 @@ function filterTasks(searchBarInp) {
 }
 
 
+/**
+ * Updates the task in the database.
+ * @param {HTMLElement} item Board item.
+ */
 async function updateItem(item) {
     const task = tasks.find(task => task.id === item.dataset.id);
 
@@ -167,6 +222,10 @@ async function updateItem(item) {
 }
 
 
+/**
+ * Renders the tasks in the correct board column.
+ * @param {array} tasksArr Array of task objects.
+ */
 function renderTaskItems(tasksArr) {
     const toDoEl = document.getElementById('todo');
     const inProgressEl = document.getElementById('in-progress');
@@ -201,6 +260,13 @@ function renderTaskItems(tasksArr) {
 }
 
 
+/**
+ * Clears the column elements and renders the headers.
+ * @param {HTMLElement} toDoEl To do col element.
+ * @param {HTMLElement} inProgressEl In progress col element.
+ * @param {HTMLElement} awaitingFeedbackEl Awaiting feedback col element.
+ * @param {HTMLElement} doneEl Done col element.
+ */
 function clearElementsInnerHTML(toDoEl, inProgressEl, awaitingFeedbackEl, doneEl) {
     toDoEl.innerHTML = taskColHeaderTemp('To Do', 'todo-btn');
     inProgressEl.innerHTML = taskColHeaderTemp('In Progress', 'progress-btn');
@@ -209,6 +275,11 @@ function clearElementsInnerHTML(toDoEl, inProgressEl, awaitingFeedbackEl, doneEl
 }
 
 
+/**
+ * Renders the assignees of the board object.
+ * @param {object} task Task object.
+ * @returns String with rendered assignees.
+ */
 function renderTaskAssignees(task) {
     const assignees = task.assignees;
     let assigneesHTML = '';
@@ -232,6 +303,11 @@ function renderTaskAssignees(task) {
 }
 
 
+/**
+ * Removes the assignee from a task.
+ * @param {object} task Task object.
+ * @param {string} assignees Assignee HTML template string.
+ */
 async function removeAssignee(task, assignee) {
     const assigneeIndex = task.assignees.indexOf(assignee);
     task.assignees.splice(assigneeIndex, 1);
@@ -239,16 +315,10 @@ async function removeAssignee(task, assignee) {
 }
 
 
-// function editTask(id) {
-//     const modal = document.getElementById('modal');
-//     const addTaskForm = document.getElementById('add-task-form');
-//     const editedTask = tasks.find(task => task.id === id);
-
-//     modal.close();
-//     addTaskForm.showModal();
-// }
-
-
+/**
+ * Deletes the task with the given id from the database.
+ * @param {string} id Id of the task.
+ */
 function deleteTask(id) {
     const modal = document.getElementById('modal');
     const delTask = tasks.find(task => task.id === id);
@@ -267,8 +337,9 @@ function deleteTask(id) {
 // -------------------
 
 /**
- * 
- * @param {*} title 
+ * Returns the HTML template for the board column header.
+ * @param {string} title Title of the board column.
+ * @param {string} id Id of the img element.
  * @returns 
  */
 function taskColHeaderTemp(title, id) {
@@ -281,6 +352,12 @@ function taskColHeaderTemp(title, id) {
 }
 
 
+/**
+ * Returns the HTML template for the board item.
+ * @param {object} task Task object.
+ * @param {string} assignees Assignee HTML template string.
+ * @returns 
+ */
 function taskItemHTMLTemp(task, assignees) {
     return (`
         <div class="task-item" data-id="${task.id}" draggable="true">
@@ -300,6 +377,13 @@ function taskItemHTMLTemp(task, assignees) {
 }
 
 
+/**
+ * Return the HTML template for the board item assignee.
+ * @param {string} initials Initials of the contact.
+ * @param {string} color Color for the initials bubble.
+ * @param {number} offset Osset for the initials bubble.
+ * @returns HTML assignee template.
+ */
 function assigneeHTMLTemp(initials, color, offset) {
     return (`
         <div class="assignee-task" style="right:${offset}px; background: hsl(${color}, 100%, 30%)">${initials}</div>
@@ -307,6 +391,12 @@ function assigneeHTMLTemp(initials, color, offset) {
 }
 
 
+/**
+ * Returns the HTML template for the item modal.
+ * @param {object} task Task object.
+ * @param {string} assignees Assignee HTML template string.
+ * @returns HTML item template.
+ */
 function modalItemHTMLTemp(task, assignees) {
     return (`
         <div class="modal-category">${task.category}</div>
@@ -330,6 +420,12 @@ function modalItemHTMLTemp(task, assignees) {
 }
 
 
+/**
+ * Returns the HTML template for the assignee dropdown.
+ * @param {string} initials Initials of the contact.
+ * @param {object} contact Contact object.
+ * @returns HTML assignee template
+ */
 function modalAssigneHTMLTemp(initials, contact) {
     return (`
         <div class="modal-assignee d-flex">
