@@ -211,7 +211,7 @@ dialog::backdrop {
 }
 
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 1024px) {
     .contact-details-header {
         align-items: start;
         flex-direction: column;
@@ -234,7 +234,7 @@ dialog::backdrop {
 
     .contacts {
         position: relative;
-        height: calc(100% - 70px - 80px);
+        height: calc(100% - 89px);
     }
 
     .contacts-container {
@@ -308,5 +308,13 @@ dialog::backdrop {
         display: block;
         width: 32px;
         height: 32px;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .contacts {
+        position: relative;
+        height: calc(100% - 70px - 80px);
     }
 }
