@@ -254,6 +254,11 @@ function prefillTaskForm(task) {
 }
 
 
+/**
+ * Adjusts the modal to the corresponding action.
+ * @param {string} type Type of action that should be performed.
+ * @param {*} id Id of the task.
+ */
 function adjustModal(type, id) {
     const modalTitle = document.getElementById('modal-title');
     const addTaskBtn = document.getElementById('add-task');
@@ -265,6 +270,10 @@ function adjustModal(type, id) {
 }
 
 
+/**
+ * Edits the task and stores it in the database.
+ * @param {string} id Id of the task.
+ */
 function editTask(id) {
     const taskForm = document.getElementById('add-task-form');
     const assignees = [];
@@ -280,6 +289,10 @@ function editTask(id) {
 }
 
 
+/**
+ * Updates the edited task in the local database.
+ * @param {string} id Id of the task.
+ */
 function updateTask(id) {
     let updatedTask = tasks.find(task => task.id === id);
     const titleInp = document.getElementById('title');
@@ -320,6 +333,11 @@ function deleteTask(id) {
 }
 
 
+/**
+ * Gets the color of the category element.
+ * @param {object} task Task object.
+ * @returns String of hex color.
+ */
 function getCategoryColor(task) {
     switch (task.category) {
         case 'Accounting/Finance':
