@@ -69,6 +69,7 @@ function addNewTaskEventListener() {
 function openAddTaskModal(status, modal) {
     clearInputFields();
     adjustModal('add');
+    renderAssigneesBubbles();
     modal.showModal();
     modal.dataset.status = status;
 }
@@ -225,10 +226,21 @@ function openEditTaskModal(id) {
     const editTask = tasks.find(task => task.id === id);
 
     modal.close();
+    uncheckAssignees();
     prefillTaskForm(editTask, id);
     adjustModal('edit', id);
+    renderAssigneesBubbles();
     taskForm.showModal();
 
+}
+
+
+function uncheckAssignees() {
+    const selectedAssignees = document.querySelectorAll('#assignee-container input[type="checkbox"]:checked');
+    
+    selectedAssignees.forEach(assignee => {
+        assignee.checked = false;
+    })
 }
 
 
@@ -265,6 +277,7 @@ function adjustModal(type, id) {
 
     modalTitle.innerHTML = type === 'add' ? 'Add Task' : 'Edit Task';
     addTaskBtn.innerHTML = type === 'add' ? 'Create Task' : 'Save Task';
+    addTaskBtn.innerHTML += '<img src="./assets/icons/check_white.svg" class="btn-icon">';
     addTaskBtn.onclick = type === 'add' ? addTask : () => editTask(id);
     type === 'add' ? addTaskBtn.removeEventListener('click', () => editTask(id)) : addTaskBtn.removeEventListener('click', addTask)
 }
