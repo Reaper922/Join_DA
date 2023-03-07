@@ -44,7 +44,7 @@ function loginUser(event) {
         sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
         window.location.href = 'summary.html';
     } else {
-        alert('Wrong credentials!');
+        notify('Wrong credentials!');
     }
 }
 
