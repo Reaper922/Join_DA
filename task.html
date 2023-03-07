@@ -47,19 +47,6 @@
                             <textarea name="description" class="text-input" id="description" cols="1" rows="3"
                                 placeholder="Enter a description" style="resize: none;"></textarea>
                         </div>
-                        <!-- Assignee -->
-                        <div>
-                            <label for="assignee-check" class="label">Assigned to</label>
-                            <div name="assignee" id="assignee">
-                                <input type="checkbox" id="assignee-check" required>
-                                <span>Select contacts to assign</span>
-                                <div>
-                                    <div class="assignee-background d-none" id="assignee-background"></div>
-                                    <div class="assignee-container d-none" id="assignee-container">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- Category -->
                         <div class="d-flex-col">
                             <label for="category" class="label">Category</label>
@@ -77,6 +64,20 @@
                                 <option value="Legal">Legal</option>
                                 <option value="Backoffice">Backoffice</option>
                             </select>
+                        </div>
+                        <!-- Assignee -->
+                        <div>
+                            <label for="assignee-check" class="label">Assigned to</label>
+                            <div name="assignee" id="assignee">
+                                <input type="checkbox" id="assignee-check" required>
+                                <span>Select contacts to assign</span>
+                                <div>
+                                    <div class="assignee-background d-none" id="assignee-background"></div>
+                                    <div class="assignee-container d-none" id="assignee-container">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex" id="assignee-bubbles"></div>
                         </div>
                     </div>
                     <div class="dividing-line"></div>
@@ -106,11 +107,11 @@
                         </div>
 
                         <div class="button-container">
-                            <button class="add-task btn btn-primary task-btn" id="add-task">
+                            <button class="add-task btn btn-primary" id="add-task">
                                 Create Task
                                 <img src="./assets/icons/check_white.svg" class="btn-icon">
                             </button>
-                            <button class="clear-task btn btn-secondary task-btn" id="clear-task">
+                            <button class="clear-task btn btn-secondary" id="clear-task">
                                 Clear
                                 <img src="./assets/icons/close_black.svg" class="btn-icon">
                             </button>
