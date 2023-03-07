@@ -14,12 +14,10 @@ function initTask() {
  * Adds click event listeners to all listed elements
  */
 function buttonEventListener() {
-    const addTaskBtn = document.getElementById('add-task');
     const clearTaskBtn = document.getElementById('clear-task');
     const assigneeMenu = document.getElementById('assignee');
 
     assigneeMenu.addEventListener('click', toggleDropdown);
-    addTaskBtn?.addEventListener('click', () => addTask());
     clearTaskBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         clearInputFields();
@@ -30,20 +28,18 @@ function buttonEventListener() {
 /**
  * Adds and stores the new task to the database.
  */
-async function addTask() {
+function addTask() {
     const createdWithStatus = document.getElementById('add-task-form').dataset.status;
+    const id = Date.now().toString(36);
     const titleInp = document.getElementById('title');
     const descriptionInp = document.getElementById('description');
     const categoryInp = document.getElementById('category');
     const dateInp = document.getElementById('date');
-    const id = Date.now().toString(36);
     const priorityInp = document.querySelector('input[name="priority"]:checked');
     const priority = priorityInp != null ? priorityInp.value : 'low';
     const assignees = [];
     const assigneeInp = document.querySelectorAll('.assignee input[type="checkbox"]:checked');
     assigneeInp.forEach(assignee => assignees.push(assignee.value));
-
-    console.log(createdWithStatus)
 
     if (isInputValid(assignees)) {
         const task = {
@@ -57,14 +53,16 @@ async function addTask() {
             status: createdWithStatus,
         }
 
-        tasks.push(task);
-        await storeItem('tasks', tasks);
-        clearInputFields();
-        window.location.pathname = '/board.html';
+        storeTasks(task);
     }
 }
 
 
+/**
+ * Validates the user input.
+ * @param {array} assignees Array of assignees.
+ * @returns 
+ */
 function isInputValid(assignees) {
     const titleInp = document.getElementById('title');
     const categoryInp = document.getElementById('category');
@@ -102,6 +100,18 @@ function clearInputFields() {
     if (priority) {
         priority.checked = false;
     }
+}
+
+
+/**
+ * Stores the task in the database and clears the input fields.
+ * @param {object} task Task object.
+ */
+async function storeTasks(task) {
+    tasks.push(task);
+    await storeItem('tasks', tasks);
+    clearInputFields();
+    window.location.pathname = '/board.html';
 }
 
 

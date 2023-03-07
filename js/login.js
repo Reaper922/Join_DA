@@ -23,7 +23,7 @@ function buttonEventListener() {
     const guestLoginBtn = document.getElementById('guest-login');
 
     signupBtn?.addEventListener('click', () => window.location.href = 'sign-up.html');
-    loginBtn?.addEventListener('click', () => loginUser());
+    loginBtn?.addEventListener('click', (event) => loginUser(event));
     guestLoginBtn?.addEventListener('click', () => loginGuest());
 }
 
@@ -31,7 +31,8 @@ function buttonEventListener() {
 /**
  * Logs the user in if the login credentials are correct.
  */
-function loginUser() {
+function loginUser(event) {
+    event.preventDefault();
     const loginInp = document.getElementById('login-email');
     const passwordInp = document.getElementById('login-password');
     const user = users.find(user => user.email === loginInp.value);
