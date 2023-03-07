@@ -17,6 +17,7 @@
     <script defer src="./js/notification.js"></script>
     <script defer src="./js/script.js"></script>
     <script defer src="./js/task-form.js"></script>
+    <script defer src="./js/board-templates.js"></script>
     <script defer src="./js/board.js"></script>
 </head>
 
@@ -57,7 +58,7 @@
             <dialog id="add-task-form">
                 <!-- Header -->
                 <div class="task-header">
-                    <h1 class="txt-h1">Add Task</h1>
+                    <h1 class="txt-h1" id="modal-title">Add Task</h1>
                     <img src="./assets/icons/close_black.svg" alt="Close Icon" id="modal-task-close">
                 </div>
                 <form onsubmit="return false" id="form">
@@ -77,7 +78,7 @@
                         <div>
                             <label for="assignee-check" class="label">Assigned to</label>
                             <div name="assignee" id="assignee">
-                                <input type="checkbox" id="assignee-check" required>
+                                <input type="checkbox" name="assignee-check" id="assignee-check" required>
                                 <span>Select contacts to assign</span>
                                 <div>
                                     <div class="assignee-background d-none" id="assignee-background"></div>
