@@ -37,6 +37,7 @@ function addContactEventListener() {
 
     modalHeader.innerHTML = 'Add Contact';
     modalSubmitBtn.innerHTML = 'Create Contact';
+    modalSubmitBtn.innerHTML += '<img src="./assets/icons/check_white.svg" class="btn-icon">';
     modalSubmitBtn.onclick = addContact;
     clearInputFields();
     modal?.showModal();
@@ -95,6 +96,7 @@ function editContactEventListener(id) {
 
     modalHeader.innerHTML = 'Edit Contact';
     modalSubmitBtn.innerHTML = 'Save Contact';
+    modalSubmitBtn.innerHTML += '<img src="./assets/icons/check_white.svg" class="btn-icon">';
     modalSubmitBtn.onclick = () => editContact(id);
     prefillInputFields(contact);
     modal?.showModal();
