@@ -111,7 +111,7 @@ async function storeTasks(task) {
     tasks.push(task);
     await storeItem('tasks', tasks);
     clearInputFields();
-    window.location.pathname = '/board.html';
+    window.location.pathname = '/join/board.html';
 }
 
 
