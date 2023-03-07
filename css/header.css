@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 26px;
+    gap: 18px;
     margin-left: auto;
 }
 
@@ -32,6 +32,10 @@
     border: 3px solid var(--primary);
     border-radius: 100%;
     cursor: pointer;
+}
+
+.legal-icon {
+    display: none;
 }
 
 .logout-modal {
@@ -113,6 +117,11 @@
         width: 30px;
         height: 30px;
     }
+
+    .legal-icon {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -123,6 +132,10 @@
     .profile-picture {
         width: 38px;
         height: 38px;
+    }
+
+    .legal-icon {
+        display: inline;
     }
 
     .logout-modal {

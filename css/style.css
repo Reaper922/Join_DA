@@ -137,6 +137,15 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+.btn-icon {
+    position: relative;
+    top: 2px;
+    height: 17px;
+    margin-left: 6px;
+}
+
+
+/* Link */
 .link {
     color: var(--secondary);
     text-decoration: none;
@@ -196,6 +205,11 @@ body {
 .d-flex-col {
     display: flex;
     flex-direction: column;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
 }
 
 .w-100 {

@@ -5,6 +5,10 @@ main {
     padding: 0 32px;
 }
 
+h1 {
+    text-align: center;
+}
+
 .content-box {
     position: relative;
     display: flex;

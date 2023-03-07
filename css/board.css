@@ -109,7 +109,6 @@
     font-size: var(--h7-font-size);
     border: 3px solid white;
     border-radius: 50px;
-    background: blue;
 }
 
 .priority {
@@ -192,7 +191,6 @@ dialog::backdrop {
     color: var(--white);
     font-size: var(--h7-font-size);
     border-radius: 100%;
-    background: blue;
 }
 
 #modal-edit {

@@ -87,10 +87,10 @@ form>div {
 
 .assignee-container {
     position: absolute;
-    top: 44px;
+    bottom: 44px;
     left: 0;
     width: 100%;
-    max-height: 110px;
+    max-height: 160px;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     box-shadow: var(--shadow-md);
@@ -139,6 +139,24 @@ form>div {
 
 #assignee {
     margin-top: 8px;
+}
+
+.assignee-task {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    padding: 10px;
+    color: var(--white);
+    font-size: var(--h7-font-size);
+    border: 3px solid white;
+    border-radius: 50px;
+}
+
+#assignee-bubbles {
+    padding: 6px;
 }
 
 /* Custom radio buttons for priority selection */
@@ -225,16 +243,6 @@ form>div {
 
 
 /* Buttons */
-.task-btn {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.btn-icon {
-    height: 15px;
-}
-
 .button-container {
     display: flex;
     justify-content: end;
