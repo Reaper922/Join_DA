@@ -24,7 +24,7 @@ function buttonEventListener() {
 
     signupBtn?.addEventListener('click', () => window.location.href = 'sign-up.html');
     loginBtn?.addEventListener('click', (event) => loginUser(event));
-    guestLoginBtn?.addEventListener('click', () => loginGuest());
+    guestLoginBtn?.addEventListener('click', (event) => loginGuest(event));
 }
 
 
@@ -52,7 +52,8 @@ function loginUser(event) {
 /**
  * Logs the user in with the guest account.
  */
-function loginGuest() {
+function loginGuest(event) {
+    event.preventDefault();
     const currentUser = { username: 'Guest' }
 
     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
