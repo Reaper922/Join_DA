@@ -7,6 +7,7 @@
 function initTask() {
     buttonEventListener();
     renderAssignees();
+    setMinTaskDate();
 }
 
 
@@ -22,6 +23,19 @@ function buttonEventListener() {
         e.preventDefault();
         clearInputFields();
     })
+}
+
+
+function setMinTaskDate() {
+    const date = document.getElementById('date');
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const monthTwoDigit = month < 10 ? `0${month}` : month;
+    const day = currentDate.getDate();
+    const dayTwoDigit = day < 10 ? `0${day}` : day;
+
+    date.min = `${year}-${monthTwoDigit}-${dayTwoDigit}`;
 }
 
 
@@ -141,6 +155,36 @@ function renderAssignees() {
 
 
 /**
+ * Renders the assignees bubbles of the selected assignees.
+ * @returns undefined
+ */
+function renderAssigneesBubbles() {
+    const assigneeBubblesEl = document.getElementById('assignee-bubbles');
+    const selectedAssignees = document.querySelectorAll('#assignee-container input[type="checkbox"]:checked');
+    let assigneesHTML = '';
+    assigneeBubblesEl.innerHTML = '';
+
+    for (let i = 0; i < selectedAssignees.length; i++) {
+        const contact = contacts.find(contact => contact.id === selectedAssignees[i].id);
+        const firstnameChar = contact.firstname.charAt(0).toUpperCase();
+        const lastnameChar = contact.lastname.charAt(0).toUpperCase();
+        const initials = `${firstnameChar}${lastnameChar}`;
+        const assigneeOffset = i * 12;
+
+        // if (!contact) { removeAssignee(task, assignees[i]); continue }
+        if (i == 10) {
+            assigneesHTML += assigneeHTMLTemp(`+${selectedAssignees.length - i}`, contact.color, assigneeOffset);
+            assigneeBubblesEl.innerHTML = assigneesHTML;
+            return;
+        } else {
+            assigneesHTML += assigneeHTMLTemp(initials, contact.color, assigneeOffset);
+            assigneeBubblesEl.innerHTML = assigneesHTML;
+        }
+    }
+}
+
+
+/**
  * HTML template for rendering the assignee.
  * @param {Object} contact Conact that should be rendered
  * @returns HTML assignee template
@@ -148,7 +192,21 @@ function renderAssignees() {
 function assigneeTemp(contact) {
     return `
         <label for="${contact.id}" class="assignee">${contact.firstname} ${contact.lastname}
-            <input type="checkbox" name="${contact.id}"id="${contact.id}" value="${contact.id}">
+            <input type="checkbox" name="${contact.id}"id="${contact.id}" value="${contact.id}"  onchange="renderAssigneesBubbles()">
             <span class="checkmark"></span>
         </label>`;
+}
+
+
+/**
+ * Return the HTML template for the assignees bubble.
+ * @param {string} initials Initials of the contact.
+ * @param {string} color Color for the initials bubble.
+ * @param {number} offset Osset for the initials bubble.
+ * @returns HTML assignee template.
+ */
+function assigneeHTMLTemp(initials, color, offset) {
+    return (`
+        <div class="assignee-task" style="right:${offset}px; background: hsl(${color}, 100%, 30%)">${initials}</div>
+    `);
 }
