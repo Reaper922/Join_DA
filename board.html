@@ -116,24 +116,36 @@
                             <input type="date" name="date" id="date" required>
                         </div>
                         <!-- Priority -->
-                        <div id="priority">
-                            <input type="radio" name="priority" id="urgent" value="urgent" required>
-                            <label for="urgent">
-                                <span class="checkmark">Urgent</span>
-                                <i class="icon icon-urgent"></i>
-                            </label>
-                            <input type="radio" name="priority" id="medium" value="medium" required>
-                            <label for="medium">
-                                <span class="checkmark">Medium</span>
-                                <i class="icon icon-medium"></i>
-                            </label>
-                            <input type="radio" name="priority" id="low" value="low" required>
-                            <label for="low">
-                                <span class="checkmark">Low</span>
-                                <i class="icon icon-low"></i>
-                            </label>
+                        <div>
+                            <label for="priority" class="label">Priority</label>
+                            <div id="priority">
+                                <input type="radio" name="priority" id="urgent" value="urgent" required>
+                                <label for="urgent">
+                                    <span class="checkmark">Urgent</span>
+                                    <i class="icon icon-urgent"></i>
+                                </label>
+                                <input type="radio" name="priority" id="medium" value="medium" required>
+                                <label for="medium">
+                                    <span class="checkmark">Medium</span>
+                                    <i class="icon icon-medium"></i>
+                                </label>
+                                <input type="radio" name="priority" id="low" value="low" required>
+                                <label for="low">
+                                    <span class="checkmark">Low</span>
+                                    <i class="icon icon-low"></i>
+                                </label>
+                            </div>
                         </div>
-
+                        <!-- Subtasks -->
+                        <div>
+                            <label for="subtasks" class="label">Subtasks</label>
+                            <div class="d-flex">
+                                <input type="text" name="subtasks" id="subtask-input" placeholder="Add new subtask" required><button type="button" id="subtask-add">
+                                <img src="./assets/icons/add_black.svg" class="btn-icon"></button>
+                            </div>
+                            <div id="subtask-container"></div>
+                        </div>
+                        <!-- Buttons -->
                         <div class="button-container">
                             <button class="add-task btn btn-primary" id="add-task">
                                 Create Task
