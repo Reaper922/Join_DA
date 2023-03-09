@@ -24,7 +24,7 @@ function taskColHeaderTemp(title, id) {
  * @param {string} assignees Assignee HTML template string.
  * @returns 
  */
-function taskItemHTMLTemp(task, assignees) {
+function taskItemHTMLTemp(task, assignees, progress) {
     return (`
         <div class="task-item" data-id="${task.id}" draggable="true">
             <div class="category" style="background:${getCategoryColor(task)}">${task.category}</div>
@@ -32,6 +32,7 @@ function taskItemHTMLTemp(task, assignees) {
                 <div class="task-title">${task.title}</div>
                 <div class="task-description">${task.description}</div>
             </div>
+            ${progress}
             <div class="task-footer">
                 <div class="assignees">${assignees}</div>
                 <div class="d-flex">
@@ -63,7 +64,14 @@ function assigneeHTMLTemp(initials, color, offset) {
  * @param {string} assignees Assignee HTML template string.
  * @returns HTML item template.
  */
-function modalItemHTMLTemp(task, assignees) {
+function modalItemHTMLTemp(task, assignees, subtasks) {
+    let subtaskEl = '<div class="modal-subtask-container subtask-container subtask-container d-flex-col" id="subtask-item-container"></div>';
+    if (subtasks) {
+        subtaskEl = `
+            <div><b>Subtasks:</b>
+                <div class="modal-subtask-container subtask-container subtask-container d-flex-col" id="subtask-item-container">${subtasks}</div>
+            </div>`;
+    }
     return (`
         <div class="modal-category"  style="background:${getCategoryColor(task)}">${task.category}</div>
         <div>
@@ -79,6 +87,7 @@ function modalItemHTMLTemp(task, assignees) {
         <div class="modal-assignees"><b>Assigned to:</b>
             <div class="modal-assignee-container d-flex-col">${assignees}</div>
         </div>
+        ${subtaskEl}
         <div>
             <button class="btn btn-primary" id="modal-edit" onclick="openEditTaskModal('${task.id}')"><img src="./assets/icons/edit.svg"></button>
             <button class="btn btn-primary" id="modal-delete" onclick="deleteTask('${task.id}')"><img src="./assets/icons/trash_white.svg"></button>
@@ -98,6 +107,23 @@ function modalAssigneHTMLTemp(initials, contact) {
         <div class="modal-assignee d-flex">
             <div class="modal-assignee-initials" style="background:hsl(${contact.color}, 100%, 30%)">${initials}</div>
             <div>${contact.firstname} ${contact.lastname}</div>
+        </div>
+    `);
+}
+
+
+/**
+ * Returns the HTML template for the subtask progress.
+ * @param {number} progress Progress of the subtasks.
+ * @param {number} total Total number of subtasks.
+ * @param {number} completed Number of completed subtasks.
+ * @returns HTML assignee template
+ */
+function subtaskProgressHTMLTemp(progress, total, completed) {
+    return (`
+        <div class="d-flex flex-center">
+            <div id="subtask-progress-bar"><div id="subtask-progress" style="width: ${progress}%"></div></div>
+            <div>${completed}/${total}</div>
         </div>
     `);
 }

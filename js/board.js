@@ -137,27 +137,43 @@ function renderTaskItems(tasksArr) {
 
     for (let task of tasksArr) {
         const assignees = renderTaskAssignees(task);
+        const taskProgress = getTaskProgress(task);
         switch (task.status) {
             case 'todo':
-                toDoEl.innerHTML += taskItemHTMLTemp(task, assignees);
+                toDoEl.innerHTML += taskItemHTMLTemp(task, assignees, taskProgress);
                 break;
             case 'progress':
-                inProgressEl.innerHTML += taskItemHTMLTemp(task, assignees);
+                inProgressEl.innerHTML += taskItemHTMLTemp(task, assignees, taskProgress);
                 break;
             case 'awaiting':
-                awaitingFeedbackEl.innerHTML += taskItemHTMLTemp(task, assignees);
+                awaitingFeedbackEl.innerHTML += taskItemHTMLTemp(task, assignees, taskProgress);
                 break;
             case 'done':
-                doneEl.innerHTML += taskItemHTMLTemp(task, assignees);
+                doneEl.innerHTML += taskItemHTMLTemp(task, assignees, taskProgress);
                 break;
             default:
-                toDoEl.innerHTML += taskItemHTMLTemp(task, assignees);
+                toDoEl.innerHTML += taskItemHTMLTemp(task, assignees, taskProgress);
         }
     }
 
     addDragItemEventListener();
     addDragContainerEventListener();
     addNewTaskEventListener();
+}
+
+
+/**
+ * Calculates the progress of the subtasks.
+ * @param {object} task Task object.
+ * @returns HTML progress bar.
+ */
+function getTaskProgress(task) {
+    const totalSubtasks = task.subtasks.length;
+    const completedSubtasks = task.subtasks.filter(subtask => subtask.isChecked === true).length;
+    const subtaskProgress = ((completedSubtasks / totalSubtasks) * 100).toFixed(2);
+
+    if (totalSubtasks === 0) { return '' }
+    return subtaskProgressHTMLTemp(subtaskProgress, totalSubtasks, completedSubtasks);
 }
 
 
@@ -230,17 +246,62 @@ function openEditTaskModal(id) {
     prefillTaskForm(editTask, id);
     adjustModal('edit', id);
     renderAssigneesBubbles();
+    clearSubtaskItemContainer();
+    renderEditSubtasks(editTask);
     taskForm.showModal();
 
 }
 
 
+/**
+ * Uncheck all selected assignees.
+ */
 function uncheckAssignees() {
     const selectedAssignees = document.querySelectorAll('#assignee-container input[type="checkbox"]:checked');
-    
+
     selectedAssignees.forEach(assignee => {
         assignee.checked = false;
     })
+}
+
+
+/**
+ * Clears the subtask board item container.
+ */
+function clearSubtaskItemContainer() {
+    const subtaskItemContainer = document.getElementById('subtask-item-container');
+
+    subtaskItemContainer.innerHTML = '';
+}
+
+
+/**
+ * Renders the subtask to the edit modal.
+ * @param {object} task Task object.
+ */
+function renderEditSubtasks(task) {
+    let subtaskContainerEl = document.getElementById('subtask-container');
+    subtaskContainerEl.innerHTML = '';
+    
+    task.subtasks.forEach(subtask => {
+        subtaskContainerEl.innerHTML += subtaskEditHTMLTemp(subtask.title, subtask.id, subtask.isChecked);
+    })
+}
+
+
+/**
+ * Updates the subtask in the database.
+ * @param {string} taskId Id of the task.
+ * @param {string} subtaskId Id of the subtask.
+ */
+async function updateSubtasks(taskId, subtaskId) {
+    const task = tasks.find(task => task.id === taskId);
+    const subtask = task.subtasks.find(subtask => subtask.id === subtaskId);
+    const subtaskIsChecked = document.getElementById(subtaskId).checked;
+
+    subtask.isChecked = subtaskIsChecked;
+    storeItem('tasks', tasks);
+    renderTaskItems(tasks);
 }
 
 
@@ -326,6 +387,7 @@ function updateTask(id) {
     updatedTask.date = dateInp.value;
     updatedTask.priority = priority;
     updatedTask.status = updatedTask.status;
+    updatedTask.subtasks = getSubtasks();
 }
 
 

@@ -44,6 +44,7 @@ function itemClickEvent(item) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const task = tasks.find(task => task.id === item.dataset.id);
+    const subtasks = renderSubtasks(task);
     let assignees = '';
 
     task.assignees.forEach(assignee => {
@@ -54,7 +55,7 @@ function itemClickEvent(item) {
         assignees += modalAssigneHTMLTemp(initials, contact);
     })
 
-    modalContent.innerHTML = modalItemHTMLTemp(task, assignees);
+    modalContent.innerHTML = modalItemHTMLTemp(task, assignees, subtasks);
     modal.showModal()
 }
 

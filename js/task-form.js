@@ -17,17 +17,32 @@ function initTask() {
 function buttonEventListener() {
     const clearTaskBtn = document.getElementById('clear-task');
     const assigneeMenu = document.getElementById('assignee');
+    const subtaskBtn = document.getElementById('subtask-add');
 
     assigneeMenu.addEventListener('click', toggleDropdown);
     clearTaskBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         clearInputFields();
     })
+    subtaskBtn.addEventListener('click', addSubtaskToTask);
 }
 
 
+/**
+ * Sets the min date for the datepicker.
+ */
 function setMinTaskDate() {
     const date = document.getElementById('date');
+
+    date.min = getCurrentFormattedDate();
+}
+
+
+/**
+ * Return the current date in the yyyy-mm-dd format.
+ * @returns Formated date yyyy-mm-dd.
+ */
+function getCurrentFormattedDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
@@ -35,7 +50,7 @@ function setMinTaskDate() {
     const day = currentDate.getDate();
     const dayTwoDigit = day < 10 ? `0${day}` : day;
 
-    date.min = `${year}-${monthTwoDigit}-${dayTwoDigit}`;
+    return `${year}-${monthTwoDigit}-${dayTwoDigit}`;
 }
 
 
@@ -54,6 +69,7 @@ function addTask() {
     const assignees = [];
     const assigneeInp = document.querySelectorAll('.assignee input[type="checkbox"]:checked');
     assigneeInp.forEach(assignee => assignees.push(assignee.value));
+    const subtasks = getSubtasks();
 
     if (isInputValid(assignees)) {
         const task = {
@@ -65,10 +81,32 @@ function addTask() {
             date: dateInp.value,
             priority: priority,
             status: createdWithStatus,
+            subtasks: subtasks
         }
 
         storeTasks(task);
     }
+}
+
+
+/**
+ * Gets all subtask that have been added to the form.
+ * @returns Array of subtasks.
+ */
+function getSubtasks() {
+    const subtasksEl = document.querySelectorAll('label.subtask');
+    const subtaskArr = [];
+
+    subtasksEl.forEach(label => {
+        const subtaskTitle = label.innerText;
+        const isSubtaskChecked = label.children.namedItem(label.htmlFor).checked;
+        subtaskArr.push({
+            id: label.htmlFor,
+            title: subtaskTitle,
+            isChecked: isSubtaskChecked
+        });
+    })
+    return subtaskArr;
 }
 
 
@@ -104,12 +142,14 @@ function clearInputFields() {
     const dateInp = document.getElementById('date');
     const assigneeInp = document.querySelectorAll('input[type="checkbox"]:checked');
     const priority = document.querySelector('input[name="priority"]:checked');
+    const subtaskContainer = document.getElementById('subtask-container');
 
     titleInp.value = '';
     descriptionInp.value = '';
     categoryInp.value = '';
     assigneeInp.forEach(assignee => assignee.checked = false);
     dateInp.value = '';
+    subtaskContainer.innerHTML = '';
 
     if (priority) {
         priority.checked = false;
@@ -125,7 +165,7 @@ async function storeTasks(task) {
     tasks.push(task);
     await storeItem('tasks', tasks);
     clearInputFields();
-    window.location.pathname = '/join/board.html';
+    window.location.pathname = '/board.html';
 }
 
 
@@ -171,7 +211,6 @@ function renderAssigneesBubbles() {
         const initials = `${firstnameChar}${lastnameChar}`;
         const assigneeOffset = i * 12;
 
-        // if (!contact) { removeAssignee(task, assignees[i]); continue }
         if (i == 10) {
             assigneesHTML += assigneeHTMLTemp(`+${selectedAssignees.length - i}`, contact.color, assigneeOffset);
             assigneeBubblesEl.innerHTML = assigneesHTML;
@@ -181,6 +220,49 @@ function renderAssigneesBubbles() {
             assigneeBubblesEl.innerHTML = assigneesHTML;
         }
     }
+}
+
+
+/**
+ * Adds a subtask to the task form.
+ */
+function addSubtaskToTask() {
+    const subtaskInp = document.getElementById('subtask-input');
+    const subtaskContainerEl = document.getElementById('subtask-container');
+    const inputValue = subtaskInp.value.trim();
+    const id = Date.now().toString(36);
+
+    if (inputValue.length > 0) {
+        subtaskContainerEl.innerHTML += subtaskEditHTMLTemp(subtaskInp.value, id);
+        subtaskInp.value = '';
+    }
+}
+
+
+/**
+ * Renders the subtasks.
+ * @param {object} task Task object.
+ * @returns 
+ */
+function renderSubtasks(task) {
+    let subtasksHTML = '';
+
+    task.subtasks.forEach(subtask => {
+        subtasksHTML += subtaskHTMLTemp(task.id, subtask.title, subtask.id, subtask.isChecked);
+    })
+
+    return subtasksHTML
+}
+
+
+/**
+ * Deletes the subtask from the task form.
+ * @param {string} id Id of the subtask.
+ */
+function deleteSubtaskFromTask(id) {
+    const subtaskEl = document.getElementById(`subtask-item-${id}`);
+
+    subtaskEl.remove();
 }
 
 
@@ -208,5 +290,42 @@ function assigneeTemp(contact) {
 function assigneeHTMLTemp(initials, color, offset) {
     return (`
         <div class="assignee-task" style="right:${offset}px; background: hsl(${color}, 100%, 30%)">${initials}</div>
+    `);
+}
+
+
+/**
+ * Returns the HTML template for the subtask.
+ * @param {string} subtaskText Text of the subtask.
+ * @param {string} id Id of the subtask.
+ * @returns  HTML subtask template.
+ */
+function subtaskHTMLTemp(taskId, subtaskText, id, isChecked=false) {
+    return (`
+        <div class="d-flex subtask-item" id="subtask-item-${id}" data-id="${id}">
+            <label for="${id}" class="subtask">${subtaskText}
+                <input type="checkbox" name="${id}" id="${id}" value="${id}" onchange="updateSubtasks('${taskId}', '${id}')" ${isChecked ? 'checked' : ''}>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    `);
+}
+
+
+/**
+ * Returns the HTML template for the subtask.
+ * @param {string} subtaskText Text of the subtask.
+ * @param {string} id Id of the subtask.
+ * @returns  HTML subtask template.
+ */
+function subtaskEditHTMLTemp(subtaskText, id, isChecked=false) {
+    return (`
+        <div class="d-flex subtask-item" id="subtask-item-${id}" data-id="${id}">
+            <label for="${id}" class="subtask">${subtaskText}
+                <input type="checkbox" name="${id}" id="${id}" value="${id}" ${isChecked ? 'checked' : ''}>
+                <span class="checkmark"></span>
+            </label>
+            <img src="./assets/icons/trash.svg" class="subtask-delete" onclick="deleteSubtaskFromTask('${id}')">
+        </div>
     `);
 }

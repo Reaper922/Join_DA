@@ -115,6 +115,21 @@
     align-self: center;
 }
 
+
+/* Subtasks */
+#subtask-progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    margin-right: 8px;
+    background: var(--light-gray);
+}
+
+#subtask-progress {
+    height: 8px;
+    background: var(--secondary);
+}
+
+
 /* Modal */
 dialog {
     position: fixed;

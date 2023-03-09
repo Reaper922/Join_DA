@@ -274,11 +274,11 @@ form>div {
     background: var(--light-gray);
 }
 
-#subtask-container {
+.subtask-container {
     margin-top: 8px;
 }
 
-#subtask-container label {
+.subtask-container label {
     position: relative;
     display: flex;
     width: max-content;
@@ -286,11 +286,11 @@ form>div {
     cursor: pointer;
 }
 
-#subtask-container input {
+.subtask-container input {
     appearance: none;
 }
 
-#subtask-container .checkmark {
+.subtask-container .checkmark {
     position: absolute;
     top: 20%;
     left: 4px;
@@ -300,7 +300,7 @@ form>div {
 
 }
 
-#subtask-container input:checked ~ .checkmark {
+.subtask-container input:checked ~ .checkmark {
     background: url(./../assets/icons/checked.svg) no-repeat;
 }
 
