@@ -1,0 +1,55 @@
+/* Logo */
+.sidenav-logo {
+    width: 100px;
+}
+
+
+/* Sidenav */
+nav {
+    flex-grow: 1;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    height: 100%;
+    list-style: none;
+}
+
+.nav-link  {
+    opacity: 0.7;
+    transition: all var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link:focus-within,
+.active {
+    opacity: 1;
+    background: var(--color-active);
+    text-decoration: none;
+}
+
+.nav-link a {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    height: 46px;
+    padding-left: 54px;
+    color: var(--color-text-white);
+}
+
+.nav-link a:hover {
+    text-decoration: none;
+}
+
+.nav-link a img {
+    width: 24px;
+    height: 24px;
+}
+
+.nav-link:last-child {
+    margin-top: auto;
+}
