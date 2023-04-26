@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join | Contacts</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/contacts.css">
+    <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <section class="side-section" template-html="./assets/templates/sidebar.html"></section>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <!-- Header -->
+        <header class="page-header" template-html="./assets/templates/header.html"></header>
+
+        <div class="flex-row">
+            <!-- Contact List -->
+            <contact-list>
+                <div class="contact-letter">
+                    <h5>A</h5>
+                </div>
+                <div class="contact" tabindex="0">
+                    <div class="contact-initials">
+                        <span>DA</span>
+                    </div>
+                    <div>
+                        <h5>Ammen, Dennis</h5>
+                        <span>dennisammen@mail.de</span>
+                    </div>
+                </div>
+            </contact-list>
+
+            <!-- Main Content -->
+            <main class="main-container">
+                <!-- Heading -->
+                <div class="heading-container">
+                    <h1>Contacts</h1>
+                    <div class="heading-line"></div>
+                    <span>Better with a team.</span>
+                </div>
+
+                <!-- Contact Details -->
+                <contact-details class="flex-col">
+                    <!-- Details Header -->
+                    <div class="details-header flex-row">
+                        <div class="details-initials">
+                            <span class="medium">DA</span>
+                        </div>
+                        <div>
+                            <h2 class="medium">Dennis Ammen</h2>
+                            <div class="actions-container flex-row">
+                                <!-- Edit -->
+                                <div class="contact-action flex-row" tabindex="0">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M14.9908 30C14.4803 30 14.0545 29.8272 13.7131 29.4815C13.3719 29.1357 13.2012 28.709 13.2012 28.2012V16.7988H1.7988C1.29103 16.7988 0.864274 16.625 0.518544 16.2776C0.172848 15.9301 0 15.5011 0 14.9908C0 14.4803 0.172848 14.0545 0.518544 13.7131C0.864274 13.3719 1.29103 13.2012 1.7988 13.2012H13.2012V1.7988C13.2012 1.29103 13.3749 0.864274 13.7224 0.518544C14.0699 0.172848 14.4989 0 15.0092 0C15.5197 0 15.9455 0.172848 16.2869 0.518544C16.6281 0.864274 16.7988 1.29103 16.7988 1.7988V13.2012H28.2012C28.709 13.2012 29.1357 13.375 29.4815 13.7224C29.8272 14.0699 30 14.4989 30 15.0092C30 15.5197 29.8272 15.9455 29.4815 16.2869C29.1357 16.6281 28.709 16.7988 28.2012 16.7988H16.7988V28.2012C16.7988 28.709 16.6251 29.1357 16.2776 29.4815C15.9301 29.8272 15.5011 30 14.9908 30Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                    <span>Edit</span>
+                                </div>
+                                <!-- Delete -->
+                                <div class="contact-action" tabindex="0">
+                                    <svg width="28" height="30" viewBox="0 0 28 30" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4.62057 30C3.86842 30 3.21623 29.7248 2.66399 29.1745C2.11176 28.6242 1.83564 27.9743 1.83564 27.2248V4.1725H1.38758C0.995886 4.1725 0.666708 4.03848 0.400041 3.77043C0.133348 3.50238 0 3.17149 0 2.77776C0 2.38406 0.133348 2.05556 0.400041 1.79226C0.666708 1.52896 0.995886 1.39731 1.38758 1.39731H8.08644C8.08644 0.998859 8.21978 0.666354 8.48648 0.399796C8.75314 0.133266 9.08232 0 9.47401 0H17.7641C18.155 0 18.4856 0.135166 18.7559 0.405499C19.0263 0.675832 19.1614 1.00644 19.1614 1.39731H25.8506C26.2422 1.39731 26.5714 1.53135 26.8381 1.79943C27.1048 2.06748 27.2381 2.39836 27.2381 2.79206C27.2381 3.18578 27.1048 3.51428 26.8381 3.77756C26.5714 4.04086 26.2422 4.1725 25.8506 4.1725H25.4025V27.2248C25.4025 27.9743 25.1264 28.6242 24.5741 29.1745C24.0219 29.7248 23.3697 30 22.6176 30H4.62057ZM4.62057 4.1725V27.2248H22.6176V4.1725H4.62057ZM8.88957 22.4998C8.88957 22.8637 9.01612 23.1713 9.26921 23.4227C9.52227 23.674 9.83204 23.7997 10.1985 23.7997C10.565 23.7997 10.8734 23.674 11.1237 23.4227C11.374 23.1713 11.4992 22.8637 11.4992 22.4998V8.85682C11.4992 8.49288 11.371 8.18362 11.1147 7.92904C10.8584 7.67446 10.547 7.54717 10.1805 7.54717C9.814 7.54717 9.50722 7.67446 9.26016 7.92904C9.0131 8.18362 8.88957 8.49288 8.88957 8.85682V22.4998ZM15.7389 22.4998C15.7389 22.8637 15.8671 23.1713 16.1234 23.4227C16.3797 23.674 16.6911 23.7997 17.0576 23.7997C17.4241 23.7997 17.7325 23.674 17.9828 23.4227C18.2331 23.1713 18.3583 22.8637 18.3583 22.4998V8.85682C18.3583 8.49288 18.2311 8.18362 17.9767 7.92904C17.7223 7.67446 17.4109 7.54717 17.0425 7.54717C16.6741 7.54717 16.3647 7.67446 16.1144 7.92904C15.8641 8.18362 15.7389 8.49288 15.7389 8.85682V22.4998Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                    <span>Delete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Details Body -->
+                    <div>
+                        <h5>Contact Information</h5>
+                    </div>
+                    <div class="details-body flex-col">
+                        <div class="flex-col">
+                            <span class="bold">Email:</span>
+                            <a href="mailto:dennisammen@mail.de" draggable="false">dennisammen@mail.de</a>
+                        </div>
+                        <div class="flex-col">
+                            <span class="bold">Phone:</span>
+                            <a href="tel:01734234345" draggable="false">01734234345</a>
+                        </div>
+                    </div>
+                </contact-details>
+
+                <!-- Add Contact -->
+                <button type="button" class="btn btn-primary add-contact">
+                    <span>Add Contact</span>
+                    <img src="./assets/icons/add_user.svg" class="btn-icon">
+                </button>
+            </main>
+        </div>
+    </section>
+</body>
+
+</html>

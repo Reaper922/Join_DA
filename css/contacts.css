@@ -1,0 +1,139 @@
+.main-section > div {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Contact List */
+contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px 48px;
+    min-width: 450px;
+    width: 450px;
+    box-shadow: var(--box-shadow-sm);
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.contact-letter {
+    margin-inline: 20px;
+    padding: 20px;
+    border-bottom: 2px solid var(--color-light-gray);
+    user-select: none;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 15px 25px;
+    height: 80px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    user-select: none;
+    transition: all var(--transition-fast);
+}
+
+.contact:hover {
+    color: var(--color-text-white);
+    background: var(--color-primary);
+}
+
+.contact:active,
+.active-contact {
+    color: var(--color-text-white);
+    background: var(--color-active);
+}
+
+.contact h5 {
+    margin-bottom: 6px;
+}
+
+.contact span:nth-child(2) {
+    color: var(--color-secondary);
+}
+
+.contact-initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    color: var(--color-text-white);
+    background: orange;
+    border: 2px solid white;
+    box-shadow: var(--box-shadow-sm);
+    border-radius: 100%;
+}
+
+
+/* Contact Details */
+contact-details {
+    gap: 45px;
+}
+
+.details-header {
+    gap: 54px;
+    align-items: center;
+}
+
+.details-initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    color: var(--color-text-white);
+    font-size: var(--font-size-h2);
+    background: orange;
+    border: 3px solid white;
+    border-radius: 100%;
+    box-shadow: var(--box-shadow-sm);
+    user-select: none;
+}
+
+.actions-container {
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.contact-action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-secondary);
+    cursor: pointer;
+    user-select: none;
+}
+
+.contact-action svg {
+    width: 16px;
+    height: 16px;
+}
+
+.details-body {
+    gap: 21px;
+}
+
+.details-body div {
+    gap: 12px;
+}
+
+.details-body a {
+    width: max-content;
+}
+
+.details-body a:hover {
+    text-decoration: none;
+}
+
+
+/* Add Contact Button */
+.add-contact {
+    position: absolute;
+    right: 48px;
+    bottom: 64px;
+}
