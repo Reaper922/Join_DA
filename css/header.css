@@ -3,7 +3,7 @@
     position: relative;
     height: 89px;
     box-shadow: var(--box-shadow-md);
-    z-index: 1;
+    z-index: 2;
 }
 
 .page-header-content {
@@ -12,7 +12,7 @@
     align-items: center;
     height: inherit;
     padding: 0 35px 0 100px;
-    font-size: var(--font-size-h6);
+    font-size: var(--font-size-h5);
     user-select: none;
 }
 

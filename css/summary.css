@@ -16,7 +16,7 @@ summary-grid {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--box-shadow-sm);
     background: white;
-    font-size: var(--font-size-h6);
+    font-size: var(--font-size-h5);
     text-align: center;
     white-space: nowrap;
     cursor: pointer;

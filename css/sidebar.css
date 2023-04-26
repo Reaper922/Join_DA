@@ -26,7 +26,7 @@ nav ul {
 
 .nav-link:hover,
 .nav-link:focus-within,
-.active {
+.active-nav {
     opacity: 1;
     background: var(--color-active);
     text-decoration: none;
