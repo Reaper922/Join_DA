@@ -37,7 +37,8 @@
     --color-prio-low: #7AE229;
     --color-background: #F6F7F8;
     --color-text-white: #ffffff;
-    --color-light-gray: #D1D1D1;
+    --color-text-placeholder: #D1D1D1;
+    --color-light-gray: #F4F4F4;
     --color-medium-gray: #A8A8A8;
 
     --border-radius-sm: 8px;

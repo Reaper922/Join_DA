@@ -20,6 +20,7 @@ a:focus-visible {
     padding: 0 16px;
     font-weight: 700;
     font-size: var(--font-size-h5);
+    white-space: nowrap;
     border-radius: var(--border-radius-sm);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -98,6 +99,7 @@ a:focus-visible {
     --padding-x: 21px;
     position: relative;
     display: block;
+    background: white;
 }
 
 .inp label {
@@ -137,7 +139,7 @@ a:focus-visible {
     margin-bottom: 20px;
     padding-inline: var(--padding-x);
     font-size: var(--font-size-h5);
-    border: 2px solid var(--color-light-gray);
+    border: 2px solid var(--color-medium-gray);
     border-radius: var(--border-radius-md);
 }
 
@@ -148,11 +150,11 @@ a:focus-visible {
 
 .inp-background {
     background: url('./../assets/icons/mail.svg') no-repeat right var(--padding-x) center;
-    background-size: var(--font-size-h5) var(--font-size-h6);
+    background-size: var(--font-size-h5) var(--font-size-h5);
 }
 
 ::placeholder {
-    color: var(--color-light-gray);
+    color: var(--color-text-placeholder);
 }
 
 
