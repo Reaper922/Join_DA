@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join | Board</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/board.css">
+    <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <section class="side-section" template-html="./assets/templates/sidebar.html"></section>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <!-- Header -->
+        <header class="page-header" template-html="./assets/templates/header.html"></header>
+
+        <!-- Main Content -->
+        <main class="main-container">
+            <!-- Heading -->
+            <div class="heading-container">
+                <h1>Board</h1>
+                <div class="board-actions-container">
+                    <!-- Searchbar -->
+                    <input-text class="inp search-bar">
+                        <input type="text" id="search-bar" placeholder="Find Task" class="search-bar-background">
+                    </input-text>
+
+                    <!-- Add Task -->
+                    <button type="button" class="btn btn-primary add-contact">
+                        <span>Add Task</span>
+                        <img src="./assets/icons/add.svg" class="btn-icon">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Board -->
+            <board-container>
+                <div class="flex-col">
+                    <!-- Column Header -->
+                    <div class="board-column-header">
+                        <h5 class="bold">To-Do</h5>
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+                            <path
+                                d="M14.9918 22.5C14.531 22.5 14.1562 22.35 13.8676 22.05C13.579 21.75 13.4347 21.3783 13.4347 20.9348V16.5652H9.0652C8.60674 16.5652 8.23125 16.4145 7.93875 16.1129C7.64625 15.8113 7.5 15.4376 7.5 14.9918C7.5 14.531 7.64625 14.1562 7.93875 13.8676C8.23125 13.5791 8.60674 13.4348 9.0652 13.4348H13.4347V9.06525C13.4347 8.60675 13.5818 8.23125 13.8759 7.93875C14.1699 7.64625 14.543 7.5 14.995 7.5C15.4469 7.5 15.8217 7.64625 16.1191 7.93875C16.4165 8.23125 16.5652 8.60675 16.5652 9.06525V13.4348H20.9348C21.3783 13.4348 21.75 13.5818 22.05 13.8759C22.35 14.17 22.5 14.543 22.5 14.995C22.5 15.447 22.35 15.8217 22.05 16.1191C21.75 16.4165 21.3783 16.5652 20.9348 16.5652H16.5652V20.9348C16.5652 21.3783 16.4144 21.75 16.1129 22.05C15.8113 22.35 15.4376 22.5 14.9918 22.5Z"
+                                fill="currentColor" />
+                            <path
+                                d="M10 1.5H20C24.6944 1.5 28.5 5.30558 28.5 10V20C28.5 24.6944 24.6944 28.5 20 28.5H10C5.30558 28.5 1.5 24.6944 1.5 20V10C1.5 5.30558 5.30558 1.5 10 1.5Z"
+                                stroke="currentColor" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <!-- Task Container -->
+                    <div class="board-task-container">
+                        <board-task class="flex-col" tabindex="0">
+                            <div class="board-task-category">
+                                <span>Design</span>
+                            </div>
+                            <div class="board-task-preview flex-col">
+                                <span class="bold">Website redesign</span>
+                                <p>Mofify the contents of the main website...</p>
+                            </div>
+                            <div class="board-task-progress">
+                                <div>
+                                    <div></div>
+                                </div>
+                                <span>1/2 Done</span>
+                            </div>
+                            <div class="board-task-assignees">
+                                <div>
+                                    <div class="board-assignee">
+                                        <span>SM</span>
+                                    </div>
+                                    <div class="board-assignee" style="left: -10px; background: green;">
+                                        <span>KL</span>
+                                    </div>
+                                    <div class="board-assignee" style="left: -20px; background: blue">
+                                        <span>TC</span>
+                                    </div>
+                                </div>
+                                <img src="./assets/icons/prio_low.svg" alt="Priority" draggable="false">
+                            </div>
+                        </board-task>
+                    </div>
+                </div>
+                <div>
+                    <!-- Column Header -->
+                    <div class="board-column-header">
+                        <h5 class="bold">In Progress</h5>
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+                            <path
+                                d="M14.9918 22.5C14.531 22.5 14.1562 22.35 13.8676 22.05C13.579 21.75 13.4347 21.3783 13.4347 20.9348V16.5652H9.0652C8.60674 16.5652 8.23125 16.4145 7.93875 16.1129C7.64625 15.8113 7.5 15.4376 7.5 14.9918C7.5 14.531 7.64625 14.1562 7.93875 13.8676C8.23125 13.5791 8.60674 13.4348 9.0652 13.4348H13.4347V9.06525C13.4347 8.60675 13.5818 8.23125 13.8759 7.93875C14.1699 7.64625 14.543 7.5 14.995 7.5C15.4469 7.5 15.8217 7.64625 16.1191 7.93875C16.4165 8.23125 16.5652 8.60675 16.5652 9.06525V13.4348H20.9348C21.3783 13.4348 21.75 13.5818 22.05 13.8759C22.35 14.17 22.5 14.543 22.5 14.995C22.5 15.447 22.35 15.8217 22.05 16.1191C21.75 16.4165 21.3783 16.5652 20.9348 16.5652H16.5652V20.9348C16.5652 21.3783 16.4144 21.75 16.1129 22.05C15.8113 22.35 15.4376 22.5 14.9918 22.5Z"
+                                fill="currentColor" />
+                            <path
+                                d="M10 1.5H20C24.6944 1.5 28.5 5.30558 28.5 10V20C28.5 24.6944 24.6944 28.5 20 28.5H10C5.30558 28.5 1.5 24.6944 1.5 20V10C1.5 5.30558 5.30558 1.5 10 1.5Z"
+                                stroke="currentColor" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <!-- Task Container -->
+                    <div class="board-task-container">
+
+                    </div>
+                </div>
+                <div>
+                    <!-- Column Header -->
+                    <div class="board-column-header">
+                        <h5 class="bold">Awaiting Feedback</h5>
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+                            <path
+                                d="M14.9918 22.5C14.531 22.5 14.1562 22.35 13.8676 22.05C13.579 21.75 13.4347 21.3783 13.4347 20.9348V16.5652H9.0652C8.60674 16.5652 8.23125 16.4145 7.93875 16.1129C7.64625 15.8113 7.5 15.4376 7.5 14.9918C7.5 14.531 7.64625 14.1562 7.93875 13.8676C8.23125 13.5791 8.60674 13.4348 9.0652 13.4348H13.4347V9.06525C13.4347 8.60675 13.5818 8.23125 13.8759 7.93875C14.1699 7.64625 14.543 7.5 14.995 7.5C15.4469 7.5 15.8217 7.64625 16.1191 7.93875C16.4165 8.23125 16.5652 8.60675 16.5652 9.06525V13.4348H20.9348C21.3783 13.4348 21.75 13.5818 22.05 13.8759C22.35 14.17 22.5 14.543 22.5 14.995C22.5 15.447 22.35 15.8217 22.05 16.1191C21.75 16.4165 21.3783 16.5652 20.9348 16.5652H16.5652V20.9348C16.5652 21.3783 16.4144 21.75 16.1129 22.05C15.8113 22.35 15.4376 22.5 14.9918 22.5Z"
+                                fill="currentColor" />
+                            <path
+                                d="M10 1.5H20C24.6944 1.5 28.5 5.30558 28.5 10V20C28.5 24.6944 24.6944 28.5 20 28.5H10C5.30558 28.5 1.5 24.6944 1.5 20V10C1.5 5.30558 5.30558 1.5 10 1.5Z"
+                                stroke="currentColor" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <!-- Task Container -->
+                    <div class="board-task-container">
+
+                    </div>
+                </div>
+                <div>
+                    <!-- Column Header -->
+                    <div class="board-column-header">
+                        <h5 class="bold">Done</h5>
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+                            <path
+                                d="M14.9918 22.5C14.531 22.5 14.1562 22.35 13.8676 22.05C13.579 21.75 13.4347 21.3783 13.4347 20.9348V16.5652H9.0652C8.60674 16.5652 8.23125 16.4145 7.93875 16.1129C7.64625 15.8113 7.5 15.4376 7.5 14.9918C7.5 14.531 7.64625 14.1562 7.93875 13.8676C8.23125 13.5791 8.60674 13.4348 9.0652 13.4348H13.4347V9.06525C13.4347 8.60675 13.5818 8.23125 13.8759 7.93875C14.1699 7.64625 14.543 7.5 14.995 7.5C15.4469 7.5 15.8217 7.64625 16.1191 7.93875C16.4165 8.23125 16.5652 8.60675 16.5652 9.06525V13.4348H20.9348C21.3783 13.4348 21.75 13.5818 22.05 13.8759C22.35 14.17 22.5 14.543 22.5 14.995C22.5 15.447 22.35 15.8217 22.05 16.1191C21.75 16.4165 21.3783 16.5652 20.9348 16.5652H16.5652V20.9348C16.5652 21.3783 16.4144 21.75 16.1129 22.05C15.8113 22.35 15.4376 22.5 14.9918 22.5Z"
+                                fill="currentColor" />
+                            <path
+                                d="M10 1.5H20C24.6944 1.5 28.5 5.30558 28.5 10V20C28.5 24.6944 24.6944 28.5 20 28.5H10C5.30558 28.5 1.5 24.6944 1.5 20V10C1.5 5.30558 5.30558 1.5 10 1.5Z"
+                                stroke="currentColor" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <!-- Task Container -->
+                    <div class="board-task-container">
+
+                    </div>
+                </div>
+            </board-container>
+        </main>
+    </section>
+</body>
+
+</html>
