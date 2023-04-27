@@ -50,7 +50,7 @@ a:focus-visible {
 
 .btn-primary:active {
     background: var(--color-active);
-    transition: all 0s;
+    transition: all 0.08s ease-in-out;
 }
 
 .btn-secondary {
@@ -68,14 +68,13 @@ a:focus-visible {
 .btn-secondary:active {
     color: var(--color-active);
     border: 2px solid var(--color-active);
-    transition: all 0s;
+    transition: all 0.08s ease-in-out;
 }
 
 .btn-secondary svg {
     width: var(--font-size-h5);
     height: var(--font-size-h5);
     stroke: var(--color-primary);
-    transition: all var(--transition-fast);
 }
 
 .btn-secondary:hover svg,
@@ -85,7 +84,7 @@ a:focus-visible {
 
 .btn-secondary:active svg {
     stroke: var(--color-active);
-    transition: all 0s;
+    transition: all 0.08s ease-in-out;
 }
 
 .btn-icon {
@@ -99,7 +98,6 @@ a:focus-visible {
     --padding-x: 21px;
     position: relative;
     display: block;
-    background: white;
 }
 
 .inp label {
@@ -139,6 +137,7 @@ a:focus-visible {
     margin-bottom: 20px;
     padding-inline: var(--padding-x);
     font-size: var(--font-size-h5);
+    background: white;
     border: 2px solid var(--color-medium-gray);
     border-radius: var(--border-radius-md);
 }
