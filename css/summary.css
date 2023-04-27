@@ -32,6 +32,13 @@ summary-grid {
     transform: scale(1.05);
 }
 
+.box:active {
+    color: var(--color-text-white);
+    background: var(--color-active);
+    box-shadow: var(--box-shadow-md);
+    transform: scale(1.05);
+}
+
 .box-medium {
     display: flex;
     gap: 18px;

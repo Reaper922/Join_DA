@@ -74,12 +74,12 @@ contact-details {
     gap: 45px;
 }
 
-.details-header {
+.contact-details-header {
     gap: 54px;
     align-items: center;
 }
 
-.details-initials {
+.contact-details-initials {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +95,7 @@ contact-details {
     user-select: none;
 }
 
-.actions-container {
+.contact-actions-container {
     gap: 16px;
     margin-top: 16px;
 }
@@ -107,6 +107,11 @@ contact-details {
     color: var(--color-secondary);
     cursor: pointer;
     user-select: none;
+    transition: color var(--transition-fast);
+}
+
+.contact-action:active {
+    color: var(--color-active);
 }
 
 .contact-action svg {
