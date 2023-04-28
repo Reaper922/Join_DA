@@ -119,19 +119,20 @@ contact-details {
     height: 16px;
 }
 
-.details-body {
+.contact-details-body {
     gap: 21px;
+    font-size: var(--font-size-h5);
 }
 
-.details-body div {
+.contact-details-body div {
     gap: 12px;
 }
 
-.details-body a {
+.contact-details-body a {
     width: max-content;
 }
 
-.details-body a:hover {
+.contact-details-body a:hover {
     text-decoration: none;
 }
 
@@ -141,4 +142,81 @@ contact-details {
     position: absolute;
     right: 48px;
     bottom: 64px;
+}
+
+
+/* Dialog */
+.dialog-content > div:first-child {
+    justify-content: center;
+    gap: 25px;
+    padding: 48px;
+    color: var(--color-text-white);
+    background: var(--color-primary);
+    user-select: none;
+}
+
+.dialog-content > div:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 25px;
+    padding: 80px 56px;
+}
+
+.dialog-content > div > img {
+    width: 50px;
+}
+
+.dialog-content h3 {
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.dialog-content h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    height: 3px;
+    width: 90px;
+    border-radius: 2px;
+    background: var(--color-secondary);
+}
+
+.dialog-content h5 {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dialog-content input {
+    margin-top: 0;
+}
+
+.dialog-firstname {
+    background: white url('../assets/icons/person_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+.dialog-lastname {
+    background: white url('../assets/icons/person_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+.dialog-email {
+    background: white url('../assets/icons/mail_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+.dialog-phone {
+    background: white url('../assets/icons/phone_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+.dialog-contact-actions-container {
+    gap: 25px;
+}
+
+.dialog-contact-action {
+    width: max-content;
 }

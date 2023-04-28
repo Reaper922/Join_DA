@@ -86,9 +86,9 @@
                     </div>
                     <!-- Details Body -->
                     <div>
-                        <h5>Contact Information</h5>
+                        <h4>Contact Information</h4>
                     </div>
-                    <div class="details-body flex-col">
+                    <div class="contact-details-body flex-col">
                         <div class="flex-col">
                             <span class="bold">Email:</span>
                             <a href="mailto:dennisammen@mail.de" draggable="false">dennisammen@mail.de</a>
@@ -107,6 +107,101 @@
                 </button>
             </main>
         </div>
+
+        <!-- Dialog -->
+        <dialog-box class="d-none">
+            <div class="dialog-content">
+                <!-- Left -->
+                <div class="flex-col">
+                    <img src="./assets/img/logo_white.svg" draggable="false">
+                    <h3 class="bold">Add Contact</h3>
+                </div>
+                <!-- Right -->
+                <div>
+                    <!-- Close -->
+                    <div class="dialog-close" tabindex="0">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15 17.7015L3.27854 29.4231C2.89388 29.8077 2.44361 30 1.92773 30C1.41186 30 0.961595 29.8077 0.576934 29.4231C0.192312 29.0384 0 28.5881 0 28.0723C0 27.5564 0.192312 27.1061 0.576934 26.7215L12.2985 15L0.576934 3.27854C0.192312 2.89388 0 2.44361 0 1.92773C0 1.41186 0.192312 0.961595 0.576934 0.576934C0.961595 0.192312 1.41186 0 1.92773 0C2.44361 0 2.89388 0.192312 3.27854 0.576934L15 12.2985L26.7215 0.576934C27.1061 0.192312 27.5564 0 28.0723 0C28.5881 0 29.0384 0.192312 29.4231 0.576934C29.8077 0.961595 30 1.41186 30 1.92773C30 2.44361 29.8077 2.89388 29.4231 3.27854L17.7015 15L29.4231 26.7215C29.8077 27.1061 30 27.5564 30 28.0723C30 28.5881 29.8077 29.0384 29.4231 29.4231C29.0384 29.8077 28.5881 30 28.0723 30C27.5564 30 27.1061 29.8077 26.7215 29.4231L15 17.7015Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+
+                    <!-- Firstname -->
+                    <input-text class="inp">
+                        <input type="text" name="dialog-firstname" id="dialog-firstname" placeholder="Firstname*"
+                            class="dialog-firstname">
+                        <span>Warning</span>
+                    </input-text>
+                    <!-- Lastname -->
+                    <input-text class="inp">
+                        <input type="text" name="dialog-lastname" id="dialog-lastname" placeholder="Lastname*"
+                            class="dialog-lastname">
+                        <!-- <span>Warning</span> -->
+                    </input-text>
+                    <!-- Email -->
+                    <input-text class="inp">
+                        <input type="text" name="dialog-email" id="dialog-email" placeholder="Email*"
+                            class="dialog-email">
+                        <!-- <span>Warning</span> -->
+                    </input-text>
+                    <!-- Phone -->
+                    <input-text class="inp">
+                        <input type="text" name="dialog-phone" id="dialog-phone" placeholder="Phone"
+                            class="dialog-phone">
+                        <!-- <span>Warning</span> -->
+                    </input-text>
+
+                    <!-- Add/Save Contact -->
+                    <button type="button" class="btn btn-primary dialog-contact-action">
+                        <span>Create Contact</span>
+                        <img src="./assets/icons/check.svg" class="btn-icon">
+                    </button>
+                </div>
+            </div>
+        </dialog-box>
+
+        <dialog-box class="d-none">
+            <div class="dialog-content">
+                <!-- Left -->
+                <div class="flex-col">
+                    <img src="./assets/img/logo_white.svg" draggable="false">
+                    <h3 class="bold">Delete Contact</h3>
+                </div>
+                <!-- Right -->
+                <div>
+                    <!-- Close -->
+                    <div class="dialog-close" tabindex="0">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15 17.7015L3.27854 29.4231C2.89388 29.8077 2.44361 30 1.92773 30C1.41186 30 0.961595 29.8077 0.576934 29.4231C0.192312 29.0384 0 28.5881 0 28.0723C0 27.5564 0.192312 27.1061 0.576934 26.7215L12.2985 15L0.576934 3.27854C0.192312 2.89388 0 2.44361 0 1.92773C0 1.41186 0.192312 0.961595 0.576934 0.576934C0.961595 0.192312 1.41186 0 1.92773 0C2.44361 0 2.89388 0.192312 3.27854 0.576934L15 12.2985L26.7215 0.576934C27.1061 0.192312 27.5564 0 28.0723 0C28.5881 0 29.0384 0.192312 29.4231 0.576934C29.8077 0.961595 30 1.41186 30 1.92773C30 2.44361 29.8077 2.89388 29.4231 3.27854L17.7015 15L29.4231 26.7215C29.8077 27.1061 30 27.5564 30 28.0723C30 28.5881 29.8077 29.0384 29.4231 29.4231C29.0384 29.8077 28.5881 30 28.0723 30C27.5564 30 27.1061 29.8077 26.7215 29.4231L15 17.7015Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+
+                    <h5>Are you sure you want to delete the contact?</h5>
+
+                    <div class="dialog-contact-actions-container flex-row">
+                        <!-- Delete Contact -->
+                        <button type="button" class="btn btn-secondary dialog-contact-action">
+                            <span>Cancel</span>
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15 17.7015L3.27854 29.4231C2.89388 29.8077 2.44361 30 1.92773 30C1.41186 30 0.961595 29.8077 0.576934 29.4231C0.192312 29.0384 0 28.5881 0 28.0723C0 27.5564 0.192312 27.1061 0.576934 26.7215L12.2985 15L0.576934 3.27854C0.192312 2.89388 0 2.44361 0 1.92773C0 1.41186 0.192312 0.961595 0.576934 0.576934C0.961595 0.192312 1.41186 0 1.92773 0C2.44361 0 2.89388 0.192312 3.27854 0.576934L15 12.2985L26.7215 0.576934C27.1061 0.192312 27.5564 0 28.0723 0C28.5881 0 29.0384 0.192312 29.4231 0.576934C29.8077 0.961595 30 1.41186 30 1.92773C30 2.44361 29.8077 2.89388 29.4231 3.27854L17.7015 15L29.4231 26.7215C29.8077 27.1061 30 27.5564 30 28.0723C30 28.5881 29.8077 29.0384 29.4231 29.4231C29.0384 29.8077 28.5881 30 28.0723 30C27.5564 30 27.1061 29.8077 26.7215 29.4231L15 17.7015Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+
+                        <!-- Delete Contact -->
+                        <button type="button" class="btn btn-primary dialog-contact-action">
+                            <span>Delete Contact</span>
+                            <img src="./assets/icons/delete.svg" class="btn-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </dialog-box>
     </section>
 </body>
 
