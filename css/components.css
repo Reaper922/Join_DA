@@ -23,6 +23,7 @@ a:focus-visible {
     white-space: nowrap;
     border-radius: var(--border-radius-sm);
     cursor: pointer;
+    user-select: none;
     transition: all var(--transition-fast);
 }
 
@@ -90,6 +91,7 @@ a:focus-visible {
 .btn-icon {
     width: var(--font-size-h5);
     height: var(--font-size-h5);
+    object-fit: contain;
 }
 
 
@@ -105,6 +107,7 @@ a:focus-visible {
     top: 2px;
     left: 6px;
     font-size: var(--font-size-h5);
+    user-select: none;
 }
 
 .inp span {
@@ -113,6 +116,7 @@ a:focus-visible {
     bottom: 2px;
     color: red;
     font-size: var(--font-size-info);
+    user-select: none;
 }
 
 /* Input Text/Textarea */
@@ -128,6 +132,7 @@ a:focus-visible {
 
 .inp textarea~span {
     bottom: 6px;
+    background: white;
 }
 
 .inp input,
@@ -137,7 +142,6 @@ a:focus-visible {
     margin-bottom: 20px;
     padding-inline: var(--padding-x);
     font-size: var(--font-size-h5);
-    background: white;
     border: 2px solid var(--color-medium-gray);
     border-radius: var(--border-radius-md);
 }
@@ -148,12 +152,57 @@ a:focus-visible {
 }
 
 .inp-background {
-    background: url('./../assets/icons/mail.svg') no-repeat right var(--padding-x) center;
+    background: white url('./../assets/icons/mail.svg') no-repeat right var(--padding-x) center;
     background-size: var(--font-size-h5) var(--font-size-h5);
 }
 
 ::placeholder {
     color: var(--color-text-placeholder);
+    user-select: none;
+}
+
+
+/* Dialog */
+dialog-box {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+    z-index: 10;
+}
+
+.dialog-content {
+    position: relative;
+    display: flex;
+    border-radius: var(--border-radius-lg);
+    background: white;
+    overflow: clip;
+}
+
+.dialog-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    display: flex;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.dialog-close:hover {
+    color: var(--color-secondary);
+}
+
+.dialog-close:active{
+    color: var(--color-active);
+}
+
+.dialog-close svg {
+    width: 21px;
+    height: 21px;
 }
 
 
