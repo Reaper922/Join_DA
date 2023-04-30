@@ -104,7 +104,11 @@ board-task {
 }
 
 .board-task-preview p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     color: var(--color-medium-gray);
+    overflow: hidden;
 }
 
 .board-task-progress {
@@ -157,4 +161,72 @@ board-task {
     border: 1px solid white;
     border-radius: 100%;
     box-shadow: var(--box-shadow-sm);
+}
+
+.dialog-content {
+    gap: 25px;
+    padding: 50px;
+    max-width: 620px;
+    font-size: var(--font-size-h5);
+    overflow-y: auto;
+}
+
+.dialog-content h2 {
+    color: var(--color-primary);
+}
+
+.dialog-task-category {
+    width: max-content;
+    padding: 6px 35px;
+    font-size: var(--font-size-h4);
+    color: var(--color-text-white);
+    background: orange;
+    border-radius: var(--border-radius-sm);
+    user-select: none;
+}
+
+.dialog-task-priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 18px;
+    border-radius: var(--border-radius-md);
+    color: var(--color-text-white);
+    background: orange;
+}
+
+.dialog-task-priority img {
+    width: var(--font-size-h5);
+    height: var(--font-size-h5);
+}
+
+.dialog-assignee-container {
+    gap: 10px;
+}
+
+.dialog-attribute {
+    gap: 25px;
+}
+
+.dialog-assignee {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.dialog-assignee > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-body);
+    color: var(--color-text-white);
+    background: orange;
+    border-radius: 100%;
+}
+
+.align-center {
+    align-items: center;
 }
