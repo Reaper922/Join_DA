@@ -162,6 +162,34 @@ a:focus-visible {
 }
 
 
+/* Checkbox */
+.check {
+    position: relative;
+}
+
+.check label {
+    cursor: pointer;
+}
+
+.check input {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.check span::before {
+    content: url(../assets/icons/check_unchecked.svg);
+    position: absolute;
+    left: -8px;
+    top: 0;
+    width: 18px;
+    height: 18px;
+}
+
+.check input:checked ~ span::before {
+    content: url(../assets/icons/check1_checked.svg);
+}
+
+
 /* Dialog */
 dialog-box {
     position: fixed;
