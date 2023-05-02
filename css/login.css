@@ -1,0 +1,132 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    position: absolute;
+    top: 80px;
+    left: 75px;
+    width: 100px;
+    animation: logo-anim 1.5s ease-in-out forwards;
+}
+
+.sign-in {
+    position: absolute;
+    top: 80px;
+    right: 75px;
+    align-items: center;
+    gap: 35px;
+    font-size: var(--font-size-h5);
+    opacity: 0;
+}
+
+.sign-in button {
+    font-size: var(--font-size-body);
+}
+
+log-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 650px;
+    padding: 35px 115px;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-md);
+    opacity: 0;
+}
+
+h1 {
+    position: relative;
+    width: max-content;
+    margin-bottom: 50px;
+    user-select: none;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    height: 4px;
+    width: 150px;
+    background: var(--color-secondary);
+    border-radius: 2px;
+    transform: translateX(-50%);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+form [type = 'text'] {
+    margin-top: 0;
+}
+
+.login-email {
+    background: white url('../assets/icons/mail_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+.login-password {
+    background: white url('../assets/icons/lock_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+.remember {
+    justify-content: center;
+    gap: 25px;
+    user-select: none;
+}
+
+.login-actions-container {
+    justify-content: center;
+    gap: 25px;
+}
+
+.login-actions-container .btn {
+    width: 165px;
+}
+
+.login {
+    justify-content: center;
+}
+
+.fade-in-delayed {
+    animation: fade-in 2s forwards;
+    animation-delay: 1s;
+}
+
+
+@keyframes logo-anim {
+    from {
+        top: 50%;
+        left: 50%;
+        transform:
+            translate(-50%, -50%)
+            scale(2);
+    }
+
+    to {
+        top: 80px;
+        left: 75px;
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

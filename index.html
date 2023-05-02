@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+    <!-- Main Content -->
+    <main>
+        <!-- Logo -->
+        <img src="./assets/img/logo_blue.svg" alt="Logo" class="logo logo-anim" draggable="false">
+
+        <!-- Not a Join User -->
+        <div class="sign-in flex-row fade-in-delayed">
+            <span>Not a Join user?</span>
+            <button type="button" class="btn btn-primary">Sign up</button>
+        </div>
+
+        <log-in class="fade-in-delayed">
+            <h1>Log in</h1>
+            <form action="">
+                <!-- Email -->
+                <input-text class="inp">
+                    <input type="text" id="login-email" placeholder="Email" class="login-email">
+                    <!-- <span>Warning</span> -->
+                </input-text>
+
+                <!-- Password -->
+                <input-text class="inp">
+                    <input type="text" id="login-password" placeholder="Password" class="login-password">
+                    <!-- <span>Warning</span> -->
+                </input-text>
+
+                <!-- Remember me -->
+                <div class="flex-row remember">
+                    <input-checkbox class="check">
+                        <label for="remember-me">
+                            <input type="checkbox" name="remember-me" id="remember-me">
+                            <span>Remember me</span>
+                        </label>
+                    </input-checkbox>
+                    <a href="" draggable="false">Forgot Password</a>
+                </div>
+
+                <!-- Log in Actions -->
+                <div class="login-actions-container flex-row">
+                    <button type="button" class="btn btn-primary login">Log in</button>
+                    <a href="/summary.html"><button type="button" class="btn btn-secondary guest-login">Guest Log in</button></a>
+                </div>
+            </form>
+        </log-in>
+    </main>
+</body>
+
+</html>
