@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/contacts.css">
     <script src="./js/script.js" defer></script>
+    <script src="./js/contacts.js" type="module" defer></script>
 </head>
 
 <body>
@@ -27,20 +28,7 @@
 
         <div class="flex-row">
             <!-- Contact List -->
-            <contact-list>
-                <div class="contact-letter">
-                    <h5>A</h5>
-                </div>
-                <div class="contact" tabindex="0">
-                    <div class="contact-initials">
-                        <span>DA</span>
-                    </div>
-                    <div>
-                        <h5>Ammen, Dennis</h5>
-                        <span>dennisammen@mail.de</span>
-                    </div>
-                </div>
-            </contact-list>
+            <contact-list id="contact-list"></contact-list>
 
             <!-- Main Content -->
             <main class="main-container">
@@ -52,17 +40,17 @@
                 </div>
 
                 <!-- Contact Details -->
-                <contact-details class="flex-col">
+                <contact-details class="d-none" id="contact-details">
                     <!-- Details Header -->
                     <div class="contact-details-header flex-row">
-                        <div class="contact-details-initials">
+                        <div class="contact-details-initials" id="details-initials">
                             <span class="medium">DA</span>
                         </div>
                         <div>
-                            <h2 class="medium">Dennis Ammen</h2>
+                            <h2 class="medium" id="details-name">Dennis Ammen</h2>
                             <div class="contact-actions-container flex-row">
                                 <!-- Edit -->
-                                <div class="contact-action flex-row" tabindex="0">
+                                <div class="contact-action flex-row" id="edit-contact" tabindex="0">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -72,7 +60,7 @@
                                     <span>Edit</span>
                                 </div>
                                 <!-- Delete -->
-                                <div class="contact-action" tabindex="0">
+                                <div class="contact-action" id="delete-contact" tabindex="0">
                                     <svg width="28" height="30" viewBox="0 0 28 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -91,35 +79,36 @@
                     <div class="contact-details-body flex-col">
                         <div class="flex-col">
                             <span class="bold">Email:</span>
-                            <a href="mailto:dennisammen@mail.de" draggable="false">dennisammen@mail.de</a>
+                            <a href="mailto:dennisammen@mail.de" id="details-email"
+                                draggable="false">dennisammen@mail.de</a>
                         </div>
                         <div class="flex-col">
                             <span class="bold">Phone:</span>
-                            <a href="tel:01734234345" draggable="false">01734234345</a>
+                            <a href="tel:01734234345" id="details-phone" draggable="false">01734234345</a>
                         </div>
                     </div>
                 </contact-details>
 
                 <!-- Add Contact -->
-                <button type="button" class="btn btn-primary add-contact">
+                <button type="button" class="btn btn-primary add-contact" id="add-contact">
                     <span>Add Contact</span>
                     <img src="./assets/icons/add_user.svg" class="btn-icon">
                 </button>
             </main>
         </div>
 
-        <!-- Dialog -->
-        <dialog-box class="d-none">
-            <div class="dialog-content">
+        <!-- Dialog Add/Edit -->
+        <dialog id="dialog-contact">
+            <div class="dialog-content flex-row">
                 <!-- Left -->
                 <div class="flex-col">
                     <img src="./assets/img/logo_white.svg" draggable="false">
-                    <h3 class="bold">Add Contact</h3>
+                    <h3 class="bold" id="dialog-contact-header">Add Contact</h3>
                 </div>
                 <!-- Right -->
                 <div>
                     <!-- Close -->
-                    <div class="dialog-close" tabindex="0">
+                    <div class="dialog-close" id="dialog-contact-close" tabindex="0">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15 17.7015L3.27854 29.4231C2.89388 29.8077 2.44361 30 1.92773 30C1.41186 30 0.961595 29.8077 0.576934 29.4231C0.192312 29.0384 0 28.5881 0 28.0723C0 27.5564 0.192312 27.1061 0.576934 26.7215L12.2985 15L0.576934 3.27854C0.192312 2.89388 0 2.44361 0 1.92773C0 1.41186 0.192312 0.961595 0.576934 0.576934C0.961595 0.192312 1.41186 0 1.92773 0C2.44361 0 2.89388 0.192312 3.27854 0.576934L15 12.2985L26.7215 0.576934C27.1061 0.192312 27.5564 0 28.0723 0C28.5881 0 29.0384 0.192312 29.4231 0.576934C29.8077 0.961595 30 1.41186 30 1.92773C30 2.44361 29.8077 2.89388 29.4231 3.27854L17.7015 15L29.4231 26.7215C29.8077 27.1061 30 27.5564 30 28.0723C30 28.5881 29.8077 29.0384 29.4231 29.4231C29.0384 29.8077 28.5881 30 28.0723 30C27.5564 30 27.1061 29.8077 26.7215 29.4231L15 17.7015Z"
@@ -127,42 +116,45 @@
                         </svg>
                     </div>
 
-                    <!-- Firstname -->
-                    <input-text class="inp">
-                        <input type="text" name="dialog-firstname" id="dialog-firstname" placeholder="Firstname*"
-                            class="dialog-firstname">
-                        <span>Warning</span>
-                    </input-text>
-                    <!-- Lastname -->
-                    <input-text class="inp">
-                        <input type="text" name="dialog-lastname" id="dialog-lastname" placeholder="Lastname*"
-                            class="dialog-lastname">
-                        <!-- <span>Warning</span> -->
-                    </input-text>
-                    <!-- Email -->
-                    <input-text class="inp">
-                        <input type="text" name="dialog-email" id="dialog-email" placeholder="Email*"
-                            class="dialog-email">
-                        <!-- <span>Warning</span> -->
-                    </input-text>
-                    <!-- Phone -->
-                    <input-text class="inp">
-                        <input type="text" name="dialog-phone" id="dialog-phone" placeholder="Phone"
-                            class="dialog-phone">
-                        <!-- <span>Warning</span> -->
-                    </input-text>
+                    <form method="dialog">
+                        <!-- Firstname -->
+                        <input-text class="inp">
+                            <input type="text" name="dialog-firstname" id="dialog-firstname" placeholder="Firstname*"
+                                class="dialog-firstname" required>
+                            <span id="dialog-firstname-validity"></span>
+                        </input-text>
+                        <!-- Lastname -->
+                        <input-text class="inp">
+                            <input type="text" name="dialog-lastname" id="dialog-lastname" placeholder="Lastname*"
+                                class="dialog-lastname" required>
+                            <span id="dialog-lastname-validity"></span>
+                        </input-text>
+                        <!-- Email -->
+                        <input-text class="inp">
+                            <input type="text" name="dialog-email" id="dialog-email" placeholder="Email*"
+                                class="dialog-email" required>
+                            <span id="dialog-email-validity"></span>
+                        </input-text>
+                        <!-- Phone -->
+                        <input-text class="inp">
+                            <input type="text" name="dialog-phone" id="dialog-phone" placeholder="Phone"
+                                class="dialog-phone">
+                            <span id="dialog-phone-validity"></span>
+                        </input-text>
 
-                    <!-- Add/Save Contact -->
-                    <button type="button" class="btn btn-primary dialog-contact-action">
-                        <span>Create Contact</span>
-                        <img src="./assets/icons/check.svg" class="btn-icon">
-                    </button>
+                        <!-- Add/Save Contact -->
+                        <button type="submit" formnovalidate class="btn btn-primary dialog-contact-action" id="dialog-create-contact">
+                            <span>Create Contact</span>
+                            <img src="./assets/icons/check.svg" class="btn-icon">
+                        </button>
+                    </form>
                 </div>
             </div>
-        </dialog-box>
+        </dialog>
 
-        <dialog-box class="d-none">
-            <div class="dialog-content">
+        <!-- Dialog Delete -->
+        <dialog id="dialog-contact-delete">
+            <div class="dialog-content flex-row">
                 <!-- Left -->
                 <div class="flex-col">
                     <img src="./assets/img/logo_white.svg" draggable="false">
@@ -171,7 +163,7 @@
                 <!-- Right -->
                 <div>
                     <!-- Close -->
-                    <div class="dialog-close" tabindex="0">
+                    <div class="dialog-close" id="dialog-contact-delete-close" tabindex="0">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15 17.7015L3.27854 29.4231C2.89388 29.8077 2.44361 30 1.92773 30C1.41186 30 0.961595 29.8077 0.576934 29.4231C0.192312 29.0384 0 28.5881 0 28.0723C0 27.5564 0.192312 27.1061 0.576934 26.7215L12.2985 15L0.576934 3.27854C0.192312 2.89388 0 2.44361 0 1.92773C0 1.41186 0.192312 0.961595 0.576934 0.576934C0.961595 0.192312 1.41186 0 1.92773 0C2.44361 0 2.89388 0.192312 3.27854 0.576934L15 12.2985L26.7215 0.576934C27.1061 0.192312 27.5564 0 28.0723 0C28.5881 0 29.0384 0.192312 29.4231 0.576934C29.8077 0.961595 30 1.41186 30 1.92773C30 2.44361 29.8077 2.89388 29.4231 3.27854L17.7015 15L29.4231 26.7215C29.8077 27.1061 30 27.5564 30 28.0723C30 28.5881 29.8077 29.0384 29.4231 29.4231C29.0384 29.8077 28.5881 30 28.0723 30C27.5564 30 27.1061 29.8077 26.7215 29.4231L15 17.7015Z"
@@ -183,25 +175,15 @@
 
                     <div class="dialog-contact-actions-container flex-row">
                         <!-- Delete Contact -->
-                        <button type="button" class="btn btn-secondary dialog-contact-action">
-                            <span>Cancel</span>
-                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M15 17.7015L3.27854 29.4231C2.89388 29.8077 2.44361 30 1.92773 30C1.41186 30 0.961595 29.8077 0.576934 29.4231C0.192312 29.0384 0 28.5881 0 28.0723C0 27.5564 0.192312 27.1061 0.576934 26.7215L12.2985 15L0.576934 3.27854C0.192312 2.89388 0 2.44361 0 1.92773C0 1.41186 0.192312 0.961595 0.576934 0.576934C0.961595 0.192312 1.41186 0 1.92773 0C2.44361 0 2.89388 0.192312 3.27854 0.576934L15 12.2985L26.7215 0.576934C27.1061 0.192312 27.5564 0 28.0723 0C28.5881 0 29.0384 0.192312 29.4231 0.576934C29.8077 0.961595 30 1.41186 30 1.92773C30 2.44361 29.8077 2.89388 29.4231 3.27854L17.7015 15L29.4231 26.7215C29.8077 27.1061 30 27.5564 30 28.0723C30 28.5881 29.8077 29.0384 29.4231 29.4231C29.0384 29.8077 28.5881 30 28.0723 30C27.5564 30 27.1061 29.8077 26.7215 29.4231L15 17.7015Z"
-                                    fill="currentColor" />
-                            </svg>
-                        </button>
-
-                        <!-- Delete Contact -->
-                        <button type="button" class="btn btn-primary dialog-contact-action">
+                        <button type="button" class="btn btn-primary dialog-contact-action"
+                            id="dialog-contact-delete-delete">
                             <span>Delete Contact</span>
                             <img src="./assets/icons/delete.svg" class="btn-icon">
                         </button>
                     </div>
                 </div>
             </div>
-        </dialog-box>
+        </dialog>
     </section>
 </body>
 

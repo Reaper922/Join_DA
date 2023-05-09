@@ -62,7 +62,6 @@ contact-list {
     width: 40px;
     height: 40px;
     color: var(--color-text-white);
-    background: orange;
     border: 2px solid white;
     box-shadow: var(--box-shadow-sm);
     border-radius: 100%;
@@ -71,6 +70,8 @@ contact-list {
 
 /* Contact Details */
 contact-details {
+    display: flex;
+    flex-direction: column;
     gap: 45px;
 }
 
@@ -146,6 +147,10 @@ contact-details {
 
 
 /* Dialog */
+dialog {
+    width: 762px;
+}
+
 .dialog-content > div:first-child {
     justify-content: center;
     gap: 25px;
@@ -162,6 +167,14 @@ contact-details {
     align-items: flex-end;
     gap: 25px;
     padding: 80px 56px;
+}
+
+.dialog-content form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 25px;
 }
 
 .dialog-content > div > img {
