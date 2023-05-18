@@ -60,7 +60,7 @@ function highlightActiveMenuItem() {
 
 
 /**
- * Adds the class .active to the given element.
+ * Adds the active class to the given element.
  * @param {string} element Name of the page.
  */
 function addActiveClass(element) {
