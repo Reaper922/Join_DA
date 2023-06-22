@@ -1,7 +1,6 @@
 'use strict';
 
-
-import { storeUser, loadUser } from './storage.js';
+import { storeUser, loadUser, findUser } from './storage.js';
 import { notify } from './notification.js';
 
 
@@ -12,7 +11,7 @@ let users = [];
  * Initial function that gets executed after the document is loaded.
  */
 async function init() {
-    addSignUpBtnEventListener();
+    addSignUpFormEventListener();
     addInputEventListener();
     users = await loadUser();
 }
@@ -20,10 +19,10 @@ async function init() {
 /**
  * Add the submit event listener to the form element and validates the input fields on submit.
  */
-function addSignUpBtnEventListener() {
+function addSignUpFormEventListener() {
     const signUpFormEl = document.getElementById('submit-sign-up');
 
-    signUpFormEl.addEventListener('submit', event => validateInputFields(event, event.target));
+    signUpFormEl?.addEventListener('submit', event => validateInputFields(event, event.target));
 }
 
 /**
@@ -35,12 +34,12 @@ function addInputEventListener() {
     inputElements.forEach(element => {
         const inputEl = document.getElementById(`login-${element}`);
 
-        inputEl.addEventListener('focusout', () => {
+        inputEl?.addEventListener('focusout', () => {
             setWarnVisibility(element, false);
             validateElementValue(inputEl);
         });
 
-        inputEl.addEventListener('invalid', event => {
+        inputEl?.addEventListener('invalid', event => {
             event.preventDefault();
             setWarnVisibility(element, true);
         });
@@ -84,7 +83,7 @@ function validateElementValue(element) {
             break;
         case 'login-email':
             setEmailWarnText('Please enter a valid email address.');
-            isValid = Boolean(element.value.match("^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,4}$"));
+            isValid = Boolean(element.value.match(/^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/g));
             element.setCustomValidity(false);
             break;
         case 'login-password':
@@ -124,8 +123,8 @@ function setEmailWarnText(text) {
  * @returns {Boolean} Boolean if the user is already registered.
  */
 function checkUserRegistration(email) {
-    const existingUser = users.filter(user => user.email === email);
-    return Boolean(existingUser.length);
+    const existingUser = findUser(users, email);
+    return Boolean(existingUser?.length);
 }
 
 /**
@@ -167,7 +166,7 @@ function createUser([usernameEl, emailEl, passwordEl]) {
  * @param {HTMLElement[]} inputElements Array of the input elements.
  */
 function clearInputFields(inputElements) {
-    inputElements.forEach(element => element.value = '');
+    inputElements?.forEach(element => element.value = '');
 }
 
 

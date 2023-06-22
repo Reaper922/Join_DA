@@ -10,7 +10,6 @@ async function init() {
     logoutMenuEventListener();
 }
 
-
 /**
  * Inserts the HTML from the template files into the referenced file.
  */
@@ -28,7 +27,6 @@ async function includeHTML() {
         }
     }
 }
-
 
 /**
  * Highlights the active menu item after the page is loaded. The marking takes place on the basis of the current path.
@@ -58,10 +56,9 @@ function highlightActiveMenuItem() {
     }
 }
 
-
 /**
  * Adds the active class to the given element.
- * @param {string} element Name of the page.
+ * @param {String} element Name of the page.
  */
 function addActiveClass(element) {
     const desktopEl = document.getElementById(`${element}-desktop`);
@@ -70,7 +67,6 @@ function addActiveClass(element) {
     desktopEl?.classList.add('active-nav');
     mobileEl?.classList.add('active-nav');
 }
-
 
 /**
  * Adds an event listener to the profile picture to toggle the logout menu.
