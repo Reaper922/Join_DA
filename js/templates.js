@@ -16,7 +16,6 @@ export function contactSeparatorHTMLTemplate(char) {
     `;
 }
 
-
 /**
  * 
  * @param {Object} contact Object of the contact.
