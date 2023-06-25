@@ -36,6 +36,7 @@ nav ul {
     display: flex;
     align-items: center;
     gap: 21px;
+    width: 100%;
     height: 46px;
     padding-left: 54px;
     color: var(--color-text-white);
@@ -50,6 +51,41 @@ nav ul {
     height: 24px;
 }
 
+.nav-link a span {
+    white-space: nowrap;
+}
+
 .nav-link:last-child {
     margin-top: auto;
+}
+
+
+@media screen and (max-width: 700px) {
+    nav {
+        height: 100%;
+    }
+
+    nav ul {
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(4, 1fr);
+        height: 100%;
+    }
+
+    .nav-link a {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        height: 100%;
+        padding-left: unset;
+    }
+
+    .sidenav-logo {
+        display: none;
+    }
+
+    #legal {
+        display: none;
+    }
 }

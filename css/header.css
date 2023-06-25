@@ -3,7 +3,7 @@
     position: relative;
     height: 89px;
     box-shadow: var(--box-shadow-md);
-    z-index: 2;
+    z-index: 5;
 }
 
 .page-header-content {
@@ -41,6 +41,11 @@
     border: 2px solid var(--color-primary);
     object-fit: contain;
     cursor: pointer;
+}
+
+.header-logo {
+    display: none;
+    height: 40px;
 }
 
 
@@ -81,4 +86,29 @@
 
 .menu-link a:hover {
     text-decoration: none;
+}
+
+
+@media screen and (max-width: 700px) {
+    .page-header-content {
+        height: 80px;
+        padding: 0 25px;
+    }
+
+    .page-header-content > span {
+        display: none;
+    }
+
+    .header-logo {
+        display: inline;
+    }
+
+    .profile {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logout-menu {
+        top: 62px;
+    }
 }
