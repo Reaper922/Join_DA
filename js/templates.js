@@ -1,7 +1,7 @@
 'use strict';
 
 
-//-------------- Contact Templates --------------// 
+//-------------- Contact Templates --------------//
 
 /**
  * 
@@ -33,4 +33,14 @@ export function contactHTMLTemplate(contact) {
             </div>
         </div>
     `;
+}
+
+//-------------- Task Templates --------------//
+
+export function assigneeHTMLTemplate(contact) {
+    return /*html*/`
+        <label for="${contact.id}" class="assignee">${contact.lastname}, ${contact.firstname}
+            <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
+            <span class="checkmark"></span>
+        </label>`;
 }
