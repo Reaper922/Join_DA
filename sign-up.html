@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join | Sign up</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/sign-up.js" type="module" defer></script>
+</head>
+
+<body>
+    <!-- Main Content -->
+    <main>
+        <!-- Logo -->
+        <img src="./assets/img/logo_blue.svg" alt="Logo" class="logo" draggable="false">
+
+        <sign-up>
+            <div class="notification" id="notification"></div>
+
+            <h1>Sign up</h1>
+            <a href="./index.html">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="back">
+                    <path
+                        d="M7.1775 13.0715H28.0715C29.1366 13.0715 30 13.9349 30 15V15C30 16.0651 29.1366 16.9285 28.0715 16.9285H7.1775L15.9467 25.948C16.664 26.6858 16.664 27.8604 15.9467 28.5982V28.5982C15.2002 29.3659 13.9673 29.3659 13.2208 28.5982L1.35549 16.3942C0.60078 15.6179 0.600782 14.3821 1.35549 13.6058L13.2208 1.40182C13.9673 0.634079 15.2002 0.63408 15.9467 1.40182V1.40182C16.664 2.13961 16.664 3.31424 15.9467 4.05202L7.1775 13.0715Z"
+                        fill="currentColor" />
+                </svg>
+            </a>
+
+            <form id="submit-sign-up" novalidate>
+                <!-- Name -->
+                <input-text class="inp">
+                    <input type="text" id="login-name" placeholder="Name*" class="login-name">
+                    <span class="warn" id="login-name-warn">Please enter a username longer than 2 characters.</span>
+                </input-text>
+
+                <!-- Email -->
+                <input-text class="inp">
+                    <input type="text" id="login-email" placeholder="Email*" class="login-email">
+                    <span class="warn" id="login-email-warn">Please enter a valid email address.</span>
+                </input-text>
+
+                <!-- Password -->
+                <input-text class="inp">
+                    <input type="password" id="login-password" placeholder="Password*" class="login-password">
+                    <span class="warn" id="login-password-warn">Please enter a password longer than 5 characters.</span>
+                </input-text>
+
+                <!-- Log in actions -->
+                <div class="login-actions-container flex-row">
+                    <button type="submit" class="btn btn-primary login">Sign up</button>
+                </div>
+            </form>
+        </sign-up>
+    </main>
+</body>
+
+</html>
