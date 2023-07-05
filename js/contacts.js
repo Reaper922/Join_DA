@@ -1,6 +1,5 @@
 'use strict';
 
-
 import { storeContacts, loadContacts } from './storage.js';
 import { contactSeparatorHTMLTemplate, contactHTMLTemplate } from './templates.js';
 
@@ -14,14 +13,13 @@ let contacts = [];
 async function init() {
     contacts = await loadContacts();
     renderContacts();
-    setAllButtonEventListeners();
+    setAllButtonEventListener();
 }
 
-
 /**
- * 
+ * Sets the click event listener for all buttons on the page.
  */
-function setAllButtonEventListeners() {
+function setAllButtonEventListener() {
     const addContactBtn = document.getElementById('add-contact');
     const editContactBtn = document.getElementById('edit-contact');
     const dialogContactCloseBtn = document.getElementById('dialog-contact-close');
@@ -29,7 +27,8 @@ function setAllButtonEventListeners() {
     const deleteContactBtn = document.getElementById('delete-contact');
     const dialogDeleteCloseBtn = document.getElementById('dialog-contact-delete-close');
     const dialogDeleteDeleteBtn = document.getElementById('dialog-contact-delete-delete');
-    
+    const backBtn = document.getElementById('back');
+
     addContactBtn.onclick = () => showContactDialog('add');
     editContactBtn.onclick = () => showContactDialog('edit');
     dialogContactCloseBtn.onclick = closeContactDialog;
@@ -37,12 +36,16 @@ function setAllButtonEventListeners() {
     deleteContactBtn.onclick = showDeleteDialog;
     dialogDeleteCloseBtn.onclick = closeDeleteDialog;
     dialogDeleteDeleteBtn.onclick = deleteContactFunctions;
+    backBtn.onclick = () => {
+        const mainDetailsEl = document.getElementById('main-contact-details');
+        mainDetailsEl.style.display = 'none';
+
+    }
     setContactEventListeners();
 }
 
-
 /**
- * 
+ * Sets the event listener for the contacts in the contact list.
  */
 function setContactEventListeners() {
     document.querySelectorAll('.contact').forEach(contactEl => {
@@ -53,7 +56,6 @@ function setContactEventListeners() {
         })
     })
 }
-
 
 /**
  * 
@@ -75,7 +77,6 @@ async function createContactFunctions(event) {
         reportFormValidity();
     }
 }
-
 
 /**
  * 
@@ -99,7 +100,6 @@ async function editContactFunctions(event, contact) {
     }
 }
 
-
 /**
  * 
  */
@@ -115,7 +115,6 @@ async function deleteContactFunctions() {
     await storeContacts(contacts);
 }
 
-
 /**
  * 
  * @returns {Boolean}
@@ -125,7 +124,6 @@ function isFirstnameValid() {
 
     return dialogFirstnameEl.value.length > 0;
 }
-
 
 /**
  * 
@@ -137,7 +135,6 @@ function isLastnameValid() {
     return dialogLastnameEl.value.length > 0;
 }
 
-
 /**
  * 
  * @returns {Array | Null}  
@@ -147,7 +144,6 @@ function isEmailValid() {
 
     return dialogEmailEl.value.match('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 }
-
 
 /**
  * 
@@ -159,7 +155,6 @@ function isFormValid() {
         isEmailValid();
 }
 
-
 /**
  * 
  */
@@ -169,16 +164,18 @@ function reportFormValidity() {
     const dialogEmailValidityEl = document.getElementById('dialog-email-validity');
 
     if (!isFirstnameValid()) {
+        dialogFirstnameValidityEl.style.display = 'inline';
         dialogFirstnameValidityEl.innerHTML = 'Please provide a firstname.';
     }
     if (!isLastnameValid()) {
+        dialogLastnameValidityEl.style.display = 'inline';
         dialogLastnameValidityEl.innerHTML = 'Please provide a lastname.';
     }
     if (!isEmailValid()) {
+        dialogEmailValidityEl.style.display = 'inline';
         dialogEmailValidityEl.innerHTML = 'Please provide a valid email.';
     }
 }
-
 
 /**
  * 
@@ -192,7 +189,6 @@ function resetValidityMessages() {
     dialogLastnameValidityEl.innerHTML = '';
     dialogEmailValidityEl.innerHTML = '';
 }
-
 
 /**
  * 
@@ -221,7 +217,6 @@ function addContact() {
     return contact;
 }
 
-
 /**
  * 
  * @param {Object} contact Object of the contact.
@@ -241,7 +236,6 @@ function updateContact(contact) {
     return contact;
 }
 
-
 /**
  * 
  * @param {String} contactId Contact ID.
@@ -254,7 +248,6 @@ function deleteContact(contactId) {
     return contacts.splice(contactIndex, 1);
 }
 
-
 /**
  * 
  * @param {String} contactId Contact ID.
@@ -263,7 +256,6 @@ function deleteContact(contactId) {
 function findContact(contactId) {
     return contacts.find(contact => contact.id === contactId);
 }
-
 
 /**
  * 
@@ -275,7 +267,6 @@ function sortContacts() {
     });
 }
 
-
 /**
  * 
  */
@@ -285,7 +276,6 @@ function unmarkAllContacts() {
     });
 }
 
-
 /**
  * 
  * @param {String} contactId Contact ID.
@@ -294,16 +284,19 @@ function markActiveContact(contactId) {
     const contactEl = document.querySelector(`[data-id="${contactId}"]`);
 
     contactEl?.classList.add('active-contact');
-    contactEl?.scrollIntoView({block: 'center', behavior: 'smooth'});
+    contactEl?.scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
-
 
 /**
  * 
  */
 function renderContacts() {
     const contactListEl = document.getElementById('contact-list');
-    let htmlContactList = '';
+    let htmlContactList = /*html*/`
+        <button type = "button" class="btn btn-primary add-contact" id = "add-contact" >
+            <span>Add Contact</span>
+            <img src="./assets/icons/add_user.svg" class="btn-icon">
+        </button>`;
     let char = '';
 
     if (contacts.length > 0) {
@@ -324,13 +317,13 @@ function renderContacts() {
     contactListEl.innerHTML = htmlContactList;
 }
 
-
 /**
  * 
  * @param {String} contactId Contact ID.
  */
 function showContactDetails(contactId) {
     const contact = findContact(contactId);
+    const mainDetailsEl = document.getElementById('main-contact-details');
     const detailsInitialsEl = document.getElementById('details-initials');
     const detailsNameEl = document.getElementById('details-name');
     const detailsEmailEl = document.getElementById('details-email');
@@ -339,6 +332,7 @@ function showContactDetails(contactId) {
     const contactDeleteEl = document.getElementById('dialog-contact-delete-delete');
     const contactDetailsEl = document.getElementById('contact-details');
 
+    mainDetailsEl.style.display = 'block';
     detailsInitialsEl.style.background = `hsl(${contact?.color}, 100%, 50%)`;
     detailsInitialsEl.children[0].innerHTML = contact?.initials;
     detailsNameEl.innerHTML = `${contact?.firstname} ${contact?.lastname}`;
@@ -351,7 +345,6 @@ function showContactDetails(contactId) {
     contactDetailsEl?.classList.remove('d-none');
 }
 
-
 /**
  * 
  */
@@ -361,7 +354,6 @@ function hideContactDetails() {
     contactDetailsEl?.classList.add('d-none');
 }
 
-
 /**
  * 
  * @param {String} mode Dialog mode (add or edit contact).
@@ -369,7 +361,7 @@ function hideContactDetails() {
 function showContactDialog(mode) {
     const dialogContact = document.getElementById('dialog-contact');
 
-    switch(mode) {
+    switch (mode) {
         case 'add':
             setUpDialogAdd();
             break;
@@ -380,7 +372,6 @@ function showContactDialog(mode) {
 
     dialogContact?.showModal();
 }
-
 
 /**
  * 
@@ -395,7 +386,6 @@ function setUpDialogAdd() {
     clearContactDialogInputs();
     resetValidityMessages();
 }
-
 
 /**
  * 
@@ -414,9 +404,8 @@ function setUpDialogEdit() {
     resetValidityMessages();
 }
 
-
 /**
- * 
+ * Closes the contact dialog.
  */
 function closeContactDialog() {
     const dialogContact = document.getElementById('dialog-contact');
@@ -424,42 +413,35 @@ function closeContactDialog() {
     dialogContact?.close();
 }
 
-
 /**
- * 
+ * Prefills the input fields of the add/edit dialog with the contact data.
  * @param {Object} contact Object of the contact.
  */
 function prefillContactDialogInputs(contact) {
-    const dialogFirstnameEl = document.getElementById('dialog-firstname');
-    const dialogLastnameEl = document.getElementById('dialog-lastname');
-    const dialogEmailEl = document.getElementById('dialog-email');
-    const dialogPhoneEl = document.getElementById('dialog-phone');
+    const inputNames = ['firstname', 'lastname', 'email', 'phone'];
 
-    dialogFirstnameEl.value = contact.firstname;
-    dialogLastnameEl.value = contact.lastname;
-    dialogEmailEl.value = contact.email;
-    dialogPhoneEl.value = contact.phone;
+    inputNames.forEach(name => {
+        const inputEl = document.getElementById(`dialog-${name}`);
+
+        inputEl.value = contact[name];
+    })
 }
 
-
 /**
- * 
+ * Clear the input fields of the add/edit dialog.
  */
 function clearContactDialogInputs() {
-    const dialogFirstnameEl = document.getElementById('dialog-firstname');
-    const dialogLastnameEl = document.getElementById('dialog-lastname');
-    const dialogEmailEl = document.getElementById('dialog-email');
-    const dialogPhoneEl = document.getElementById('dialog-phone');
+    const inputFields = ['dialog-firstname', 'dialog-lastname', 'dialog-email', 'dialog-phone'];
 
-    dialogFirstnameEl.value = '';
-    dialogLastnameEl.value = '';
-    dialogEmailEl.value = '';
-    dialogPhoneEl.value = '';
+    inputFields.forEach(input => {
+        const inputEl = document.getElementById(input);
+
+        inputEl.value = '';
+    });
 }
 
-
 /**
- * 
+ * Opens the delete dialog.
  */
 function showDeleteDialog() {
     const dialogDelete = document.getElementById('dialog-contact-delete');
@@ -467,9 +449,8 @@ function showDeleteDialog() {
     dialogDelete?.showModal();
 }
 
-
 /**
- * 
+ * Closes the delete dialog.
  */
 function closeDeleteDialog() {
     const dialogDelete = document.getElementById('dialog-contact-delete');
@@ -478,4 +459,4 @@ function closeDeleteDialog() {
 }
 
 
-onload = init();
+init();
