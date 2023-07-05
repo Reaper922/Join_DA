@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Join</title>
+    <title>Join | Log in</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/components.css">
     <link rel="stylesheet" href="./css/login.css">
-    <script src="./js/script.js" defer></script>
+    <script src="./js/login.js" type="module" defer></script>
 </head>
 
 <body>
@@ -25,22 +25,21 @@
         <!-- Not a Join User -->
         <div class="sign-in flex-row fade-in-delayed">
             <span>Not a Join user?</span>
-            <button type="button" class="btn btn-primary">Sign up</button>
+            <button type="button" class="btn btn-primary" id="sign-up">Sign up</button>
         </div>
 
         <log-in class="fade-in-delayed">
             <h1>Log in</h1>
-            <form action="">
+            <form id="submit-login" novalidate>
                 <!-- Email -->
                 <input-text class="inp">
                     <input type="text" id="login-email" placeholder="Email" class="login-email">
-                    <!-- <span>Warning</span> -->
+                    <span class="warn" id="login-email-warn">Combination of email and password is incorrect.</span>
                 </input-text>
 
                 <!-- Password -->
                 <input-text class="inp">
-                    <input type="text" id="login-password" placeholder="Password" class="login-password">
-                    <!-- <span>Warning</span> -->
+                    <input type="password" id="login-password" placeholder="Password" class="login-password">
                 </input-text>
 
                 <!-- Remember me -->
@@ -51,13 +50,13 @@
                             <span>Remember me</span>
                         </label>
                     </input-checkbox>
-                    <a href="" draggable="false">Forgot Password</a>
+                    <a href="./forgot-password.html" draggable="false">Forgot Password</a>
                 </div>
 
-                <!-- Log in Actions -->
+                <!-- Log in actions -->
                 <div class="login-actions-container flex-row">
-                    <button type="button" class="btn btn-primary login">Log in</button>
-                    <a href="/summary.html"><button type="button" class="btn btn-secondary guest-login">Guest Log in</button></a>
+                    <button type="submit" class="btn btn-primary login">Log in</button>
+                    <button type="button" class="btn btn-secondary guest-login" id="guest-login">Guest Log in</button>
                 </div>
             </form>
         </log-in>
