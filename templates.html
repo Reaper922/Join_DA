@@ -1,37 +1,69 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/components.css">
+</head>
+<body class="flex-col" style="width: 400px; margin: 10px; gap:10px;">
+    
 <!-- Anchor -->
-    <a href="#">This is a Link</a>
+<a href="#">This is a Link</a>
 
 <!-- Buttons -->
-    <!-- Simple -->
-    <button type="button" class="btn btn-primary">Primary</button>
-    <button type="button" class="btn btn-secondary">Secondary</button><br><br>
+<!-- Simple -->
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+    
+<!-- With Icons -->
+<button type="button" class="btn btn-primary">
+    <span>Primary</span>
+    <img src="./assets/icons/check.svg" class="btn-icon">
+</button>
 
-    <!-- With Icons -->
-    <button type="button" class="btn btn-primary">
-        <span>Primary</span>
-        <img src="./assets/icons/check_white.svg" class="btn-icon">
-    </button>
-
-    <button type="button" class="btn btn-secondary">
-        <span>Secondary</span>
-        <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M6.50106 6.50008L11.7441 11.7431M1.25806 11.7431L6.50106 6.50008L1.25806 11.7431ZM11.7441 1.25708L6.50006 6.50008L11.7441 1.25708ZM6.50006 6.50008L1.25806 1.25708L6.50006 6.50008Z"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-    </button>
+<button type="button" class="btn btn-secondary">
+    <span>Secondary</span>
+    <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+        d="M6.50106 6.50008L11.7441 11.7431M1.25806 11.7431L6.50106 6.50008L1.25806 11.7431ZM11.7441 1.25708L6.50006 6.50008L11.7441 1.25708ZM6.50006 6.50008L1.25806 1.25708L6.50006 6.50008Z"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+</button>
 
 <!-- Inputs -->
-    <!-- Input Text -->
-    <input-text class="inp">
-        <label for="input-text">Label</label>
-        <input type="text" name="input-text" id="input-text" placeholder="Input Text" class="inp-background">
-        <span>Warning</span>
-    </input-text>
+<!-- Input Text -->
+<input-text class="inp">
+<label for="input-text">Label</label>
+<input type="text" name="input-text" id="input-text" placeholder="Input Text" class="inp-background">
+<span>Warning</span>
+</input-text>
 
-    <!-- Input Textarea -->
-    <input-textarea class="inp">
-        <label for="input-textarea">Label</label>
-        <textarea name="input-textarea" id="input-textarea" rows="5" placeholder="Input Textarea"></textarea>
-        <span>Warning</span>
-    </input-textarea>
+<!-- Input Textarea -->
+<input-textarea class="inp">
+<label for="input-textarea">Label</label>
+<textarea name="input-textarea" id="input-textarea" rows="5" placeholder="Input Textarea"></textarea>
+<span>Warning</span>
+</input-textarea>
+
+<!-- Input Checkbox -->
+<input-checkbox class="check">
+<label for="input-checkbox">
+    <input type="checkbox" name="input-checkbox" id="input-checkbox">
+    <span>Checkbox</span>
+</label>
+</input-checkbox>
+
+<!-- Select -->
+<div class="inp">
+    <label for="category" class="label">Label</label>
+    <select name="category" id="category" required="">
+        <option value="" disabled="" selected="" hidden="">Select task category</option>
+        <option value="Test">Test</option>
+
+    </select>
+</div>
+
+</body>
