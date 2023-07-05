@@ -32,3 +32,11 @@ ol li::marker {
     font-size: var(--font-size-h5);
     font-weight: 700;
 }
+
+
+@media screen and (max-width: 700px) {
+    .help-images {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
