@@ -28,10 +28,23 @@
 
         <div class="flex-row">
             <!-- Contact List -->
-            <contact-list id="contact-list"></contact-list>
+            <contact-list id="contact-list">
+                <!-- Add Contact -->
+                <button type="button" class="btn btn-primary add-contact" id="add-contact">
+                    <span>Add Contact</span>
+                    <img src="./assets/icons/add_user.svg" class="btn-icon">
+                </button>
+            </contact-list>
 
             <!-- Main Content -->
-            <main class="main-container">
+            <main class="main-container main-contact-details" id="main-contact-details">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="back" id="back">
+                    <path
+                        d="M7.1775 13.0715H28.0715C29.1366 13.0715 30 13.9349 30 15V15C30 16.0651 29.1366 16.9285 28.0715 16.9285H7.1775L15.9467 25.948C16.664 26.6858 16.664 27.8604 15.9467 28.5982V28.5982C15.2002 29.3659 13.9673 29.3659 13.2208 28.5982L1.35549 16.3942C0.60078 15.6179 0.600782 14.3821 1.35549 13.6058L13.2208 1.40182C13.9673 0.634079 15.2002 0.63408 15.9467 1.40182V1.40182C16.664 2.13961 16.664 3.31424 15.9467 4.05202L7.1775 13.0715Z"
+                        fill="currentColor" />
+                </svg>
+
                 <!-- Heading -->
                 <div class="heading-container">
                     <h1>Contacts</h1>
@@ -88,12 +101,6 @@
                         </div>
                     </div>
                 </contact-details>
-
-                <!-- Add Contact -->
-                <button type="button" class="btn btn-primary add-contact" id="add-contact">
-                    <span>Add Contact</span>
-                    <img src="./assets/icons/add_user.svg" class="btn-icon">
-                </button>
             </main>
         </div>
 
@@ -121,29 +128,30 @@
                         <input-text class="inp">
                             <input type="text" name="dialog-firstname" id="dialog-firstname" placeholder="Firstname*"
                                 class="dialog-firstname" required>
-                            <span id="dialog-firstname-validity"></span>
+                            <span class="warn" id="dialog-firstname-validity"></span>
                         </input-text>
                         <!-- Lastname -->
                         <input-text class="inp">
                             <input type="text" name="dialog-lastname" id="dialog-lastname" placeholder="Lastname*"
                                 class="dialog-lastname" required>
-                            <span id="dialog-lastname-validity"></span>
+                            <span class="warn" id="dialog-lastname-validity"></span>
                         </input-text>
                         <!-- Email -->
                         <input-text class="inp">
                             <input type="text" name="dialog-email" id="dialog-email" placeholder="Email*"
                                 class="dialog-email" required>
-                            <span id="dialog-email-validity"></span>
+                            <span class="warn" id="dialog-email-validity"></span>
                         </input-text>
                         <!-- Phone -->
                         <input-text class="inp">
                             <input type="text" name="dialog-phone" id="dialog-phone" placeholder="Phone"
                                 class="dialog-phone">
-                            <span id="dialog-phone-validity"></span>
+                            <span class="warn" id="dialog-phone-validity"></span>
                         </input-text>
 
                         <!-- Add/Save Contact -->
-                        <button type="submit" formnovalidate class="btn btn-primary dialog-contact-action" id="dialog-create-contact">
+                        <button type="submit" formnovalidate class="btn btn-primary dialog-contact-action"
+                            id="dialog-create-contact">
                             <span>Create Contact</span>
                             <img src="./assets/icons/check.svg" class="btn-icon">
                         </button>
