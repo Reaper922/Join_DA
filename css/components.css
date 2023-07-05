@@ -1,5 +1,6 @@
 /* Anchor */
 a {
+    width: max-content;
     color: var(--color-secondary);
     text-decoration: none;
 }
@@ -110,16 +111,17 @@ a:focus-visible {
     user-select: none;
 }
 
-.inp span {
+.inp .warn {
     position: absolute;
     left: 6px;
     bottom: 2px;
+    display: none;
     color: red;
     font-size: var(--font-size-info);
     user-select: none;
 }
 
-/* Input Text/Textarea */
+/* Input Text/Textarea/Date/select */
 .inp input {
     height: 52px;
 }
@@ -132,17 +134,19 @@ a:focus-visible {
 
 .inp textarea~span {
     bottom: 6px;
-    background: white;
 }
 
-.inp input,
-.inp textarea {
+.inp > input,
+.inp > textarea,
+.inp > select,
+.inp > select-assignee {
+    position: relative;
     width: 100%;
     margin-top: 32px;
     margin-bottom: 20px;
     padding-inline: var(--padding-x);
     font-size: var(--font-size-h5);
-    border: 2px solid var(--color-medium-gray);
+    border: 2px solid var(--color-text-placeholder);
     border-radius: var(--border-radius-md);
 }
 
@@ -151,14 +155,232 @@ a:focus-visible {
     border: 2px solid var(--color-active);
 }
 
+.inp input[type="date"] {
+    cursor: text;
+}
+
+.inp input[type="date"]::-webkit-calendar-picker-indicator {
+    width: 20px;
+    height: 20px;
+    background: url(./../assets/icons/calendar.svg) no-repeat right center;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+.inp input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+}
+
 .inp-background {
-    background: white url('./../assets/icons/mail.svg') no-repeat right var(--padding-x) center;
+    background: white url('./../assets/icons/mail_gray.svg') no-repeat right var(--padding-x) center;
     background-size: var(--font-size-h5) var(--font-size-h5);
 }
 
 ::placeholder {
     color: var(--color-text-placeholder);
     user-select: none;
+}
+
+
+/* Select */
+select {
+    height: 52px;
+    background: white url(./../assets/icons/dropdown.svg) no-repeat right 24px center;
+    cursor: pointer;
+    appearance: none;
+}
+
+select-assignee {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    background: white url(./../assets/icons/dropdown.svg) no-repeat right 24px center;
+}
+
+select-assignee:focus-within {
+    border: 2px solid black;
+}
+
+select-assignee > span {
+    white-space: nowrap;
+}
+
+
+/* Priority Select */
+input-priority {
+    position: relative;
+    user-select: none;
+}
+
+input-priority > label {
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    font-size: var(--font-size-h5);
+}
+
+input-priority > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding-top: 32px;
+    padding-bottom: 20px;
+    font-size: var(--font-size-h5);
+}
+
+input-priority > div > label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-block: 12px;
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+input-priority > div > label:hover {
+    box-shadow: var(--box-shadow-md);
+    transform: scale(1.05);
+}
+
+input-priority input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+input-priority svg {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    transition: color var(--transition-fast);
+}
+
+input-priority [for="priority-urgent"] svg {
+    color: var(--color-prio-high);
+}
+
+input-priority [for="priority-medium"] svg {
+    color: var(--color-prio-medium);
+}
+
+input-priority [for="priority-low"] svg {
+    color: var(--color-prio-low);
+}
+
+input-priority input[type="radio"]:checked + label[for="priority-urgent"] svg {
+    color: var(--color-text-white);
+}
+
+input-priority input[type="radio"]:checked + label[for="priority-medium"] svg {
+    color: var(--color-text-white);
+}
+
+input-priority input[type="radio"]:checked + label[for="priority-low"] svg {
+    color: var(--color-text-white);
+}
+
+input-priority input[type="radio"]:checked + label[for="priority-urgent"] {
+    color: var(--color-text-white);
+    background: var(--color-prio-high);
+}
+
+input-priority input[type="radio"]:checked + label[for="priority-medium"] {
+    color: var(--color-text-white);
+    background: var(--color-prio-medium);
+}
+
+input-priority input[type="radio"]:checked + label[for="priority-low"] {
+    color: var(--color-text-white);
+    background: var(--color-prio-low);
+}
+
+
+/* Subtasks */
+input-subtasks {
+    position: relative;
+}
+
+input-subtasks > label {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    font-size: var(--font-size-h5);
+    user-select: none;
+}
+
+input-subtasks .subtask-input-container input {
+    flex-grow: 1;
+    height: 52px;
+    padding-inline: 21px;
+    font-size: var(--font-size-h5);
+    border: 2px solid var(--color-text-placeholder);
+    border-right: none;
+    border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); 
+}
+
+input-subtasks input:focus {
+    outline: none;
+}
+
+input-subtasks button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 52px;
+    padding-inline: 21px;
+    font-size: var(--font-size-h5);
+    background: white;
+    border: 2px solid var(--color-text-placeholder);
+    border-left: none;
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+input-subtasks button:hover,
+input-subtasks button:focus-visible {
+    color: var(--color-secondary);
+}
+
+input-subtasks button:focus {
+    outline: none;
+}
+
+input-subtasks button:active {
+    color: var(--color-active);
+    transition: all 0.08s ease-in-out;
+}
+
+input-subtasks button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.subtask-input-container {
+    margin-top: 32px;
+    margin-bottom: 20px;
+}
+
+.subtask-input-container:focus-within input {
+    border: 2px solid black;
+    border-right: none;
+}
+
+.subtask-input-container:focus-within button {
+    border: 2px solid black;
+    border-left: none;
 }
 
 
@@ -172,6 +394,7 @@ a:focus-visible {
 }
 
 .check input {
+    margin-left: 8px;
     opacity: 0;
     cursor: pointer;
 }
@@ -179,7 +402,7 @@ a:focus-visible {
 .check span::before {
     content: url(../assets/icons/check_unchecked.svg);
     position: absolute;
-    left: -8px;
+    left: 0px;
     top: 0;
     width: 18px;
     height: 18px;
@@ -191,23 +414,18 @@ a:focus-visible {
 
 
 /* Dialog */
-dialog-box {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(2px);
-    z-index: 10;
+dialog {
+    top: 50%;
+    left: 50%;
+    padding: 0;
+    border-radius: var(--border-radius-lg);
+    border: none;
+    transform: translate(-50%, -50%);
 }
 
-.dialog-content {
-    position: relative;
-    display: flex;
-    border-radius: var(--border-radius-lg);
-    background: white;
-    overflow: clip;
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
 }
 
 .dialog-close {
@@ -217,7 +435,7 @@ dialog-box {
     display: flex;
     color: var(--color-primary);
     cursor: pointer;
-    transition: var(--transition-fast);
+    transition: color var(--transition-fast);
 }
 
 .dialog-close:hover {
