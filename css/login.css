@@ -9,6 +9,10 @@ main {
     top: 80px;
     left: 75px;
     width: 100px;
+    z-index: 0;
+}
+
+.logo-anim {
     animation: logo-anim 1.5s ease-in-out forwards;
 }
 
@@ -26,16 +30,20 @@ main {
     font-size: var(--font-size-body);
 }
 
+
+/* Loogin */
 log-in {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 650px;
     padding: 35px 115px;
+    margin: 32;
     background: white;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--box-shadow-md);
     opacity: 0;
+    z-index: 1;
 }
 
 h1 {
@@ -57,14 +65,15 @@ h1::after {
     transform: translateX(-50%);
 }
 
-form {
+log-in form {
     display: flex;
     flex-direction: column;
     gap: 25px;
     width: 100%;
 }
 
-form [type = 'text'] {
+log-in form [type = 'text'],
+log-in form [type = 'password'] {
     margin-top: 0;
 }
 
@@ -100,6 +109,78 @@ form [type = 'text'] {
 .fade-in-delayed {
     animation: fade-in 2s forwards;
     animation-delay: 1s;
+}
+
+
+/* Sign Up */
+sign-up {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 650px;
+    padding: 35px 115px;
+    margin: 32;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-md);
+    z-index: 1;
+}
+
+sign-up form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+sign-up form [type = 'text'],
+sign-up form [type = 'password'] {
+    margin-top: 0;
+}
+
+.login-name {
+    background: white url('../assets/icons/person_gray.svg') no-repeat right var(--padding-x) center;
+    background-size: var(--font-size-h5) var(--font-size-h5);
+}
+
+
+/* Forgot Password */
+forgot-password {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 100px;
+    margin: 32;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-md);
+    z-index: 1;
+}
+
+forgot-password p {
+    font-size: var(--font-size-h5);
+    max-width: 650px;
+    text-align: center;
+}
+
+forgot-password form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+forgot-password form [type = 'text'] {
+    width: 420px;
+}
+
+.back {
+    position: absolute;
+    top: 48px;
+    left: 48px;
 }
 
 
