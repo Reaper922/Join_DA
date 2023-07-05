@@ -33,7 +33,7 @@ async function includeHTML() {
  */
 function highlightActiveMenuItem() {
     const currentPath = location.pathname;
-    const legalEl = document.getElementById('legal-desktop');
+    const legalEl = document.getElementById('legal');
 
     switch (currentPath) {
         case '/summary.html':
@@ -48,7 +48,7 @@ function highlightActiveMenuItem() {
         case '/contacts.html':
             addActiveClass('contacts');
             break;
-        case '/legal.html':
+        case '/legal-notice.html':
             legalEl?.classList.add('active-nav');
             break;
         default:
@@ -57,15 +57,13 @@ function highlightActiveMenuItem() {
 }
 
 /**
- * Adds the active class to the given element.
+ * Adds the active class to the given nav element.
  * @param {String} element Name of the page.
  */
 function addActiveClass(element) {
-    const desktopEl = document.getElementById(`${element}-desktop`);
-    const mobileEl = document.getElementById(`${element}-mobile`);
+    const navEl = document.getElementById(`${element}`);
 
-    desktopEl?.classList.add('active-nav');
-    mobileEl?.classList.add('active-nav');
+    navEl?.classList.add('active-nav');
 }
 
 /**
